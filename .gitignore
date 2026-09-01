@@ -1,0 +1,9 @@
+# Node
+node_modules/
+.DS_Store
+
+# Env / secrets — never commit real keys
+.env
+
+# Build artifacts (committed dist is intentional for os20-cli)
+*.tsbuildinfo

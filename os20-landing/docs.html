@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Docs | OS20 - Bring Your Own AI CRM</title>
+<meta name="description" content="OS20 documentation. BYOK AI, workflows, lead generation, APIs and guides.">
+<meta name="theme-color" content="#1c1c1c"><meta name="color-scheme" content="light dark">
+<link rel="preload" href="assets/fonts/twenty.com/host_grotesk_latin_variable-s.p.15va9ht5r_l-h-2850a099a5.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/twenty.com/aleo_latin_300-s.p.0g17h05gubla7-dbe0205df2.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css">
+<script>document.documentElement.dataset.theme = (localStorage.getItem('od-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));</script>
+</head>
+<body class="page-docs">
+
+<header class="site-header" data-od-id="header">
+  <div class="header-inner">
+    <a class="brand" href="index.html" aria-label="Home" data-od-id="brand"><span class="brand-mark">◈</span>&nbsp;OS20</a>
+    <nav class="nav-primary" data-od-id="nav-primary">
+      <a href="product.html">PRODUCT</a>
+      <button data-od-id="nav-command" class="nav-command" aria-label="Open command palette">COMMAND<kbd>⌘K</kbd></button>
+      <a href="docs.html" aria-current="page">DOCS</a>
+    </nav>
+  </div>
+</header>
+<div class="docs-shell">
+  <nav class="docs-nav" data-od-id="docs-nav" aria-label="Docs navigation">
+    <h4>GETTING STARTED</h4>
+    <a href="docs.html" class="active">Introduction</a>
+    <a href="#">Quickstart</a>
+    <a href="#">Bring Your Own AI</a>
+    <a href="#">Self-hosting</a>
+    <a href="#">Cloud</a>
+    <h4>USER GUIDE</h4>
+    <a href="#">Objects &amp; Fields</a>
+    <a href="#">Views &amp; Layouts</a>
+    <a href="#">Workflows</a>
+    <a href="#">AI Agents</a>
+    <a href="#">Lead Generation</a>
+    <h4>DEVELOPERS</h4>
+    <a href="#">API Reference</a>
+    <a href="#">MCP &amp; Tools</a>
+    <a href="#">Self-host Ops</a>
+  </nav>
+  <main class="docs-main" data-od-id="docs-main">
+    <div style="font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;opacity:.4;margin-bottom:12px">WHY OS20</div>
+    <h1 data-od-id="docs-title">You’ve been choosing between easy and flexible. OS20 is the third option — with your own AI on top.</h1>
+    <p class="lead">You’ve been choosing between software that’s easy to start but impossible to change, and software that’s flexible but takes months to set up. OS20 is the third option: <b style="color:var(--color-black)">a production-ready CRM you can reshape as you go — running on the AI models you already pay for.</b></p>
+
+    <h2 data-od-id="docs-different">What makes OS20 different</h2>
+    <p style="font-size:14px;opacity:.7;margin-top:8px">OS20 is a platform you can build on, not a product you configure.</p>
+    <div class="card-group" data-od-id="docs-cards">
+      <div class="card" data-od-id="card-agents"><img src="assets/images/twenty.com/familiar-interface-gradient-307ac4aab7.webp" alt="Built for Agents" loading="lazy" style="background:#4a38f5"><div class="card-body"><b>Built for Agents</b><p>AI agents operate inside your data model with real permissions. Skills, Tools, MCP — every action is permission-aware, cited, and logged.</p></div></div>
+      <div class="card" data-od-id="card-bring"><img src="assets/images/twenty.com/live-data-gradient-c45ad6ce1b.webp" alt="Bring Your Own AI" loading="lazy" style="background:#0f0f0f"><div class="card-body"><b>Bring Your Own AI</b><p>Connect OpenAI, Anthropic, Google, OpenRouter, Groq, Mistral, or local Ollama. No lock-in to one model vendor.</p></div></div>
+      <div class="card" data-od-id="card-stack"><img src="assets/images/twenty.com/fast-path-gradient-04660d7b82.webp" alt="Modern Stack" loading="lazy"><div class="card-body"><b>Modern Stack</b><p>React, TypeScript, Postgres. Your team already knows how to extend OS20. No proprietary languages, no gatekeeping.</p></div></div>
+      <div class="card" data-od-id="card-lockin"><img src="assets/images/twenty.com/environment-01a2b09040.jpg" alt="No Lock-In" loading="lazy"><div class="card-body"><b>No Lock-In</b><p>Open-source core, self-hostable, export your data anytime. Self-host or Cloud — same model, same API.</p></div></div>
+    </div>
+
+    <h2 data-od-id="docs-who">Who is OS20 for</h2>
+    <div class="who-grid">
+      <div class="who"><div class="who-icon">⬢</div><div><b>Large enterprises replacing Salesforce</b><p>Your team spends more time fighting the tool than using it. Cost rises and lock-in deepens. OS20 gives you a buildable alternative that runs on your own AI.</p></div></div>
+      <div class="who"><div class="who-icon">⚡</div><div><b>Startups with technical founders</b><p>You’ve outgrown spreadsheets and Notion. You need a CRM that scales with your ambitions — and the model keys you already hold.</p></div></div>
+      <div class="who"><div class="who-icon">◈</div><div><b>GTM teams looking for an edge</b><p>Build your own lead scoring, enrichment, and outbound workflows — directly on the CRM that holds the truth.</p></div></div>
+      <div class="who"><div class="who-icon">◉</div><div><b>Privacy-conscious organizations</b><p>Self-host and own your data end to end. Regulatory, contractual, or principle — your VPC, your Postgres.</p></div></div>
+      <div class="who"><div class="who-icon">▦</div><div><b>Salesforce partners &amp; web agencies</b><p>Know TypeScript/React/Postgres? You already know OS20. No APEX, no certifications — ship faster at lower license cost.</p></div></div>
+    </div>
+
+    <h2 data-od-id="docs-not">Who OS20 is not for</h2>
+    <div class="who-grid">
+      <div class="who" style="background:#fff8f8;border-color:#ff9a9a30"><div class="who-icon" style="background:#fff0f0">—</div><div><b>Teams that want a CRM they never have to think about</b><p>OS20 rewards teams that shape their tools over time. If you want fully managed, Pipedrive or HubSpot will serve you well.</p></div></div>
+      <div class="who" style="background:#fff8f8;border-color:#ff9a9a30"><div class="who-icon" style="background:#fff0f0">∞</div><div><b>Companies that need hundreds of pre-built integrations today</b><p>The ecosystem is growing fast but not yet Salesforce-broad. Comfortable building what’s missing? You’ll love it.</p></div></div>
+      <div class="who" style="background:#fff8f8;border-color:#ff9a9a30"><div class="who-icon" style="background:#fff0f0">◎</div><div><b>Teams that insist on one AI vendor</b><p>We’re Bring-Your-Own-Key by design. If you need OS20 to force a single model provider, it’s a fit only if that’s your own choice.</p></div></div>
+    </div>
+
+    <div class="callout" data-od-id="docs-cta"><div class="callout-icon">↗</div><div><b>Ready to get started?</b><div style="font-size:13px;opacity:.7">Set up OS20 under 5 minutes — cloud or self-hosted — then connect your AI keys.</div></div><a href="product.html" class="btn btn-dark" style="margin-left:auto">QUICKSTART →</a></div>
+
+    <div style="margin-top:32px;display:flex;gap:8px;flex-wrap:wrap"><span style="font-family:var(--font-mono);font-size:11px;padding:6px 10px;border-radius:999px;background:#fff;border:1px solid #1c1c1c10">AGPL-3.0 core</span><span style="font-family:var(--font-mono);font-size:11px;padding:6px 10px;border-radius:999px;background:#fff;border:1px solid #1c1c1c10">Postgres-native</span><span style="font-family:var(--font-mono);font-size:11px;padding:6px 10px;border-radius:999px;background:#fff;border:1px solid #1c1c1c10">BYOK AI · MCP · Skills</span></div>
+  </main>
+</div>
+
+<div id="cmd-palette" role="dialog" aria-modal="true" aria-label="Command palette" style="display:none;position:fixed;inset:0;z-index:100;background:#1c1c1c60;backdrop-filter:blur(6px);align-items:flex-start;justify-content:center;padding-top:18vh">
+  <div style="width:min(640px,92vw);background:#fff;border:1px solid #1c1c1c10;border-radius:8px;box-shadow:0 24px 64px #00000020;overflow:hidden">
+    <div style="display:flex;align-items:center;gap:10px;padding:14px;border-bottom:1px solid #1c1c1c08"><span style="font-family:var(--font-mono);font-size:11px;opacity:.6">⌘K</span><input placeholder="Search commands, docs, people…" style="flex:1;border:none;outline:none;font-size:14px" aria-label="Search commands"><span style="font-size:11px;border:1px solid #1c1c1c12;padding:3px 6px;border-radius:4px;opacity:.6">ESC</span></div>
+    <div style="padding:8px;display:grid;gap:4px">
+      <a href="docs.html" style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-radius:6px;background:#f4f4f4"><span><b style="font-size:13px">Docs — Introduction</b><span style="font-size:12px;opacity:.6;margin-left:8px">→ this page</span></span><span style="font-size:11px;opacity:.4">↵</span></a>
+      <a href="product.html" style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-radius:6px"><span><b style="font-size:13px">Go to Product</b><span style="font-size:12px;opacity:.6;margin-left:8px">→ workflows &amp; AI</span></span><span style="font-size:11px;opacity:.4">↗</span></a>
+      <a href="index.html" style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-radius:6px"><span><b style="font-size:13px">Go to Home</b><span style="font-size:12px;opacity:.6;margin-left:8px">→ BYOK AI CRM</span></span><span style="font-size:11px;opacity:.4">↵</span></a>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OS20 | Bring Your Own AI. Run a modern CRM.</title>
+<meta name="description" content="OS20 is a modern, self-hosted CRM that runs on your own AI models and your own Postgres. Workflows, lead scraping, AI agents — all yours.">
+<meta name="theme-color" content="#1c1c1c"><meta name="color-scheme" content="light dark">
+<link rel="preload" href="assets/fonts/twenty.com/host_grotesk_latin_variable-s.p.15va9ht5r_l-h-2850a099a5.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/twenty.com/aleo_latin_300-s.p.0g17h05gubla7-dbe0205df2.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css">
+<script>document.documentElement.dataset.theme = (localStorage.getItem('od-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));</script>
+</head>
+<body class="page-home">
+
+<header class="site-header" data-od-id="header">
+  <div class="header-inner">
+    <a class="brand" href="index.html" aria-label="Home" data-od-id="brand"><span class="brand-mark">◈</span>&nbsp;OS20</a>
+    <nav class="nav-primary" data-od-id="nav-primary">
+      <a href="product.html">PRODUCT</a>
+      <button data-od-id="nav-command" class="nav-command" aria-label="Open command palette">COMMAND<kbd>⌘K</kbd></button>
+      <a href="docs.html" data-od-id="nav-docs">DOCS</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- HERO -->
+<section class="hero" data-od-id="hero">
+  <canvas id="vbars" class="hero-vbars" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <div class="eyebrow">OS20 — BRING YOUR OWN AI CRM</div>
+      <h1 data-od-id="hero-title">Run your CRM<br>on your own AI.<br>Your data stays yours.</h1>
+      <p>OS20 is the modern CRM that connects to the AI models you already use — OpenAI, Anthropic, Google, OpenRouter, Groq, Ollama. Keep your records in your own Postgres. Automate with workflows, scrape leads, and ship an AI agent in minutes.</p>
+      <div class="hero-cta" data-od-id="hero-cta">
+        <a class="btn btn-dark btn-lg" href="http://localhost:3010/welcome">GET STARTED</a>
+        <a class="btn btn-ghost btn-lg" href="product.html">SEE IT WORK</a>
+      </div>
+    </div>
+    <div class="hero-stage" data-od-id="hero-visual">
+      <div class="window-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <div class="window-tabs"><span class="tab">● OS20</span><span class="tab active">Companies</span></div>
+      </div>
+      <div class="hero-grid">
+        <aside class="hero-sidebar">
+          <div class="sb-search">⌕ Search …</div>
+          <div class="sb-nav">
+            <div class="sb-item" style="opacity:.5;font-size:11px;letter-spacing:.08em">WORKSPACE</div>
+            <div class="sb-item active">◉ Dashboard</div>
+            <div class="sb-item">▦ Companies</div>
+            <div class="sb-item">◎ People</div>
+            <div class="sb-item">◆ Opportunities</div>
+            <div class="sb-item">⚡ Workflows</div>
+            <div class="sb-item">✦ AI Agents</div>
+          </div>
+        </aside>
+        <div class="hero-main">
+          <div class="hero-card">
+            <div class="hero-card-head"><b>Companies</b><span class="pill">+ New</span></div>
+            <table class="table">
+              <thead><tr><th>Company</th><th>Domain</th><th>ARR</th><th>Stage</th></tr></thead>
+              <tbody>
+                <tr><td><span class="avatar" style="display:inline-grid;place-items:center;background:#4a38f5;color:#fff">F</span> Figma</td><td>figma.com</td><td>$3.5M</td><td>Expansion</td></tr>
+                <tr><td><span class="avatar" style="display:inline-grid;place-items:center;background:#6e5494;color:#fff">G</span> GitHub</td><td>github.com</td><td>$1.0M</td><td>Outreach</td></tr>
+                <tr><td><span class="avatar" style="display:inline-grid;place-items:center;background:#3b3b3b;color:#fff">S</span> Stripe</td><td>stripe.com</td><td>$1.8M</td><td>Billing</td></tr>
+                <tr><td><span class="avatar" style="display:inline-grid;place-items:center;background:#611f69;color:#fff">N</span> Notion</td><td>notion.so</td><td>$2.3M</td><td>Renewal</td></tr>
+                <tr><td><span class="avatar" style="display:inline-grid;place-items:center;background:#611f69;color:#fff">S</span> Slack</td><td>slack.com</td><td>$2.3M</td><td>Qualified</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="margin-top:14px;display:flex;gap:8px">
+            <span style="font-size:11px;background:#1c1c1c;color:#fff;padding:4px 8px;border-radius:999px">All Companies 9</span>
+            <span style="font-size:11px;border:1px solid #1c1c1c12;padding:4px 8px;border-radius:999px">Filter</span>
+            <span style="font-size:11px;border:1px solid #1c1c1c12;padding:4px 8px;border-radius:999px">Sort</span>
+          </div>
+        </div>
+        <div class="hero-editor">
+          <div style="display:flex;gap:6px;margin-bottom:10px"><span class="tab active" style="background:#fff;color:#111">Ask AI</span><span style="margin-left:auto;font-size:11px;background:#ffffff14;padding:4px 8px;border-radius:999px">OpenAI · Anthropic · Google</span></div>
+          <div style="color:#fff;font-size:12px">"Find companies in fintech above $1M ARR — score them, draft outreach."</div>
+          <div class="code-c" style="margin-top:8px">↳ 42 leads · scored · emails drafted · workflow created</div>
+          <div style="margin-top:10px;display:grid;gap:6px">
+            <span style="background:#89fc9a;color:#1c1c1c;padding:6px 10px;border-radius:999px;font-size:11px;font-weight:700">▶ Scrape leads → enrich → score → sync</span>
+            <span style="background:#ffffff10;border:1px solid #ffffff18;padding:6px 10px;border-radius:999px;font-size:11px">◇ Build a workflow for my top 10 accounts</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUSTED -->
+<section class="trusted" data-od-id="trusted">
+  <div class="trusted-inner">
+    <div class="trusted-label">bring your own key</div>
+    <div class="logo-bar" data-od-id="logo-bar">
+      <span style="font-family:var(--font-body);font-weight:800;font-size:15px">OpenAI</span>
+      <span style="font-family:var(--font-body);font-weight:800;font-size:15px;opacity:.85">Anthropic</span>
+      <span style="font-family:var(--font-body);font-weight:800;font-size:15px;color:#4285f4">Google</span>
+      <span style="font-family:var(--font-body);font-weight:800;font-size:15px;color:#6366f1">OpenRouter</span>
+      <span style="font-family:var(--font-body);font-weight:800;font-size:15px;opacity:.85">Mistral</span>
+      <span style="font-family:var(--font-body);font-weight:800;font-size:15px;color:#f55036">Groq</span>
+      <span style="font-family:var(--font-body);font-weight:800;font-size:15px;opacity:.75">Ollama</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="section problem" data-od-id="problem">
+  <div class="section-inner">
+    <div class="kicker">THE PROBLEM</div>
+    <h2>Enterprise CRMs hold your data hostage. Build your own and you drown in maintenance.</h2>
+    <div class="problem-grid">
+      <div class="problem-card" data-od-id="problem-card-monolith">
+        <img src="assets/images/twenty.com/monolith-problem-f588e27db2.webp" alt="The Giant Monolith" loading="lazy" decoding="async">
+        <div class="pc-body">
+          <h3>The Giant Monolith</h3>
+          <p>Salesforce and its peers own your data, lock you into their roadmap, and charge a premium. Adapt your business to the CRM — not the other way around.</p>
+        </div>
+      </div>
+      <div class="problem-card" data-od-id="problem-card-burden">
+        <img src="assets/images/twenty.com/hero-bridge-507b7f628a.webp" alt="The In-house Burden" loading="lazy" decoding="async">
+        <div class="pc-body">
+          <h3>The In-house Burden</h3>
+          <p>DIY CRMs fail on the parts nobody builds first: auth, permissions, migrations, and edge cases. V1 ships fast; the next year is maintenance.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ASSEMBLE -->
+<section class="section assemble" data-od-id="solution">
+  <div class="section-inner">
+    <div class="kicker">STOP SETTLING FOR TRADE-OFFS</div>
+    <h2>The CRM that adapts to you — data and AI included</h2>
+    <p class="lead">OS20 gives you a production-grade CRM out of the box, then lets you reshape it: objects, workflows, AI agents, and scraping — all versioned and all yours.</p>
+    <div class="cards3">
+      <div class="card" data-od-id="feature-quality"><h3>Production-grade from day one</h3><p>Postgres-native, row-level permissions, audit trails, and an API for everything. No plumbing to build before you get value.</p></div>
+      <div class="card" data-od-id="feature-ai"><h3>Bring your own AI</h3><p>Connect OpenAI, Anthropic, Google, OpenRouter, Groq, Mistral, or local Ollama. Pick your model per task — 106 models across 6 providers.</p></div>
+      <div class="card" data-od-id="feature-control"><h3>Your data, your control</h3><p>Self-host on your own Postgres or let OS20 run it. Export everything, keep SSO and audit — no lock-in, ever.</p></div>
+    </div>
+    <div class="quote-row">
+      <div class="quote"><span class="avatar" style="display:inline-grid;place-items:center;background:#4a38f5;color:#fff">VP</span><div><b>VP of Engineering</b><br>W3villa Technologies</div><span style="margin-left:auto">↗</span></div>
+      <div class="quote"><span class="avatar" style="display:inline-grid;place-items:center;background:#1c1c1c;color:#fff">P</span><div><b>Principal and Founder</b><br>Alternative Partners</div><span style="margin-left:auto">↗</span></div>
+      <div class="quote"><span class="avatar" style="display:inline-grid;place-items:center;background:#4285f4;color:#fff">C</span><div><b>CRM Engineer</b><br>AC&amp;T Migration</div><span style="margin-left:auto">↗</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- STEPPER -->
+<section class="stepper" data-od-id="building-blocks">
+  <div class="stepper-grid">
+    <div class="steps">
+      <div class="step active" data-od-id="step-1">
+        <div class="step-num">01</div>
+        <div><h3>Start with production-grade building blocks</h3><p>Objects, views, and workflows — composed with a single toolkit. Your data model, layout, and automation are all versioned.</p><div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap"><span style="font-size:11px;border:1px solid #1c1c1c12;padding:4px 8px;border-radius:999px;background:#fff">Objects</span><span style="font-size:11px;border:1px solid #1c1c1c12;padding:4px 8px;border-radius:999px;background:#fff">Views</span><span style="font-size:11px;border:1px solid #1c1c1c12;padding:4px 8px;border-radius:999px;background:#fff">Workflows</span></div></div>
+      </div>
+      <div class="step" data-od-id="step-2">
+        <div class="step-num">02</div>
+        <div><h3>Connect your models, automate with AI</h3><p>Wire up the providers you already pay for. Ask AI in natural language — it drafts workflows, queues tasks, and builds views on your data.</p></div>
+      </div>
+      <div class="step" data-od-id="step-3">
+        <div class="step-num">03</div>
+        <div><h3>Scrape, score, and act</h3><p>Find leads across the web, enrich companies, score fit, and draft outreach — all inside OS20, powered by your own keys.</p></div>
+      </div>
+    </div>
+    <div class="mock-dark" data-od-id="mock-editor">
+      <div class="mock-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:12px;color:#fff;font-family:var(--font-mono);font-size:11px">~/os20 — add-lead-workflow</span><span style="margin-left:auto;background:#ffffff12;color:#fff;font-size:11px;padding:3px 8px;border-radius:999px">BYOK</span></div>
+      <div class="mock-canvas">
+        <img src="assets/images/twenty.com/download-worker-41b50ccce2.webp" alt="OS20 workflow editor" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GTM -->
+<section class="section gtm" data-od-id="gtm">
+  <div class="section-inner">
+    <div class="kicker">SKIP THE CLUNKY UX THAT COMES WITH CUSTOM</div>
+    <h2>A CRM your GTM team will actually love</h2>
+    <div class="gtm-grid">
+      <div class="gtm-visual">
+        <div style="display:flex;gap:6px;margin-bottom:10px"><span style="font-size:11px;padding:4px 8px;border-radius:999px;background:#89fc9a">All opportunities 9</span><span style="font-size:11px;padding:4px 8px;border-radius:999px;border:1px solid #1c1c1c12">Identified 3</span><span style="font-size:11px;padding:4px 8px;border-radius:999px;border:1px solid #1c1c1c12">Qualified 1</span></div>
+        <div class="gtm-table">
+          <table class="table">
+            <thead><tr><th>Company</th><th>Owner</th><th>Amount</th><th>Stage</th></tr></thead>
+            <tbody>
+              <tr><td>Github</td><td>Eddy Cue</td><td>$6,562.04</td><td>Qualified</td></tr>
+              <tr><td>Figma</td><td>Jeff Williams</td><td>$6,562.04</td><td>Identified</td></tr>
+              <tr><td>Notion</td><td>Katherine Adams</td><td>$4,200.00</td><td>Qualified</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="margin-top:10px;display:flex;gap:8px;justify-content:flex-end"><button style="width:20px;height:20px;border:1px solid #1c1c1c12;background:#fff;border-radius:4px">‹</button><button style="width:20px;height:20px;border:1px solid #1c1c1c12;background:#fff;border-radius:4px">›</button> <span style="font-size:12px;border:1px solid #1c1c1c12;padding:4px 8px;border-radius:999px;background:#fff">Add filter</span></div>
+      </div>
+      <div>
+        <div class="gtm-list">
+          <div data-od-id="gtm-familiar"><h4>Familiar, modern interface</h4><p>Spreadsheet-speed navigation, keyboard-first, command palette, real-time collaboration — your team already knows it.</p></div>
+          <div data-od-id="gtm-live"><h4>Live data, AI built in</h4><p>Enrich, score, and summarize records with the model you pick — connected to your Postgres, not a walled garden.</p></div>
+          <div data-od-id="gtm-fast"><h4>Fast path to action</h4><p>From record to workflow to webhook in one click. Every object is a REST + GraphQL endpoint.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section class="cases" data-od-id="case-studies">
+  <div class="section-inner">
+    <div class="kicker" style="opacity:.5">IN PRODUCTION</div>
+    <h2>Teams power company-wide change with OS20</h2>
+    <div class="case-grid">
+      <article class="case-card" data-od-id="case-w3villa"><img src="assets/images/twenty.com/environment-01a2b09040.jpg" alt="W3villa" loading="lazy" decoding="async"><div class="case-body"><div style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;opacity:.6">W3VILLA</div><h3>Ship a product on OS20</h3><p>W3villa built W3Grads for AI mock interviews at scale, with OS20 as the operational backbone.</p><a class="btn btn-outline btn-lg" href="#">READ THE CASE</a></div></article>
+      <article class="case-card" data-od-id="case-act"><img src="assets/images/twenty.com/environment-01a2b09040.jpg" alt="AC&T" style="filter:hue-rotate(30deg) brightness(.9)" loading="lazy" decoding="async"><div class="case-body"><div style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;opacity:.6">AC&amp;T</div><h3>Own your CRM end to end</h3><p>AC&amp;T replaced a shuttered vendor CRM with self-hosted OS20 and cut CRM costs by more than 90%.</p><a class="btn btn-outline btn-lg" href="#">READ THE CASE</a></div></article>
+      <article class="case-card" data-od-id="case-netzero"><img src="assets/images/twenty.com/environment-01a2b09040.jpg" alt="NetZero" style="filter:hue-rotate(80deg) brightness(.92)" loading="lazy" decoding="async"><div class="case-body"><div style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;opacity:.6">NETZERO</div><h3>Grow with a flexible foundation</h3><p>NetZero runs a modular OS20 setup across carbon credits, ag products, and industrial systems.</p><a class="btn btn-outline btn-lg" href="#">READ THE CASE</a></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="testimonial" data-od-id="testimonials">
+  <div class="t-inner">
+    <div>
+      <div class="t-badge">1 / 3 — REAL CUSTOMER STORIES</div>
+      <div class="t-quote" style="margin-top:14px">“The flexibility is really what made the difference. Our needs evolve very fast. I discover a new need and in two clicks I can address it. That is a real advantage when you're moving quickly.”</div>
+      <div class="t-person"><img src="assets/images/twenty.com/ray-damm-7e8235a7d4.webp" alt=""><div><b style="font-size:13px">We didn’t want to patch — we wanted to own</b><div style="font-size:12px;opacity:.5">Founding team, NetZero</div></div></div>
+    </div>
+    <div style="text-align:right">
+      <div class="t-nav"><button aria-label="Previous">‹</button><button aria-label="Next">›</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ CTA -->
+<section class="faq-cta" data-od-id="faq">
+  <div class="faq-inner">
+    <div class="cta-row">
+      <h2>Bring your own AI.<br>Start building, with OS20</h2>
+      <div style="display:flex;gap:10px"><a class="btn btn-white btn-lg" href="http://localhost:3010/welcome">GET STARTED</a><a class="btn btn-outline btn-lg" href="product.html">TALK TO US</a></div>
+    </div>
+    <div class="faq" data-od-id="faq-list">
+      <div class="faq-item open"><button class="faq-q"><span>Is OS20 really open source?</span><span class="chev">⌃</span></button><div class="faq-a">Yes — AGPL-3.0 core, MIT for many packages. Self-host for full control, or let OS20 run it. Your data is always yours.</div></div>
+      <div class="faq-item"><button class="faq-q"><span>Do I need a separate AI subscription?</span><span class="chev">⌄</span></button><div class="faq-a">No. OS20 is Bring-Your-Own-Key: plug in the OpenAI, Anthropic, Google, OpenRouter, Groq, Mistral, or Ollama keys you already have. No lock-in to one vendor.</div></div>
+      <div class="faq-item"><button class="faq-q"><span>Where does my data live?</span><span class="chev">⌄</span></button><div class="faq-a">In your own Postgres database. Self-host on your VPC or use OS20 Cloud — same model, same API, full export anytime.</div></div>
+      <div class="faq-item"><button class="faq-q"><span>Can it build workflows and scrape leads?</span><span class="chev">⌄</span></button><div class="faq-a">Yes. Build visual workflows with AI-agent steps, HTTP/scraping actions, triggers, and filters. Find and enrich leads from the web, all inside OS20.</div></div>
+      <div class="faq-item"><button class="faq-q"><span>Does OS20 work with ChatGPT, Claude, and Cursor?</span><span class="chev">⌄</span></button><div class="faq-a">Yes — connect via API or MCP, enrich records, draft emails, and build workflows with your preferred tools.</div></div>
+      <div class="faq-item"><button class="faq-q"><span>How long does it take to get started?</span><span class="chev">⌄</span></button><div class="faq-a">Minutes. Import from CSV or migrate from Salesforce / HubSpot with our guides, then connect your AI keys.</div></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer" data-od-id="footer">
+  <div class="footer-grid">
+    <div data-od-id="footer-sitemap"><h4>SITEMAP</h4><a href="index.html">Home</a><a href="product.html">Product</a><a href="docs.html">Docs</a><a href="#">Why OS20</a></div>
+    <div data-od-id="footer-help"><h4>PRODUCT</h4><a href="product.html">AI &amp; Agents</a><a href="product.html">Workflows</a><a href="product.html">Lead Generation</a><a href="product.html">Self-hosting</a></div>
+    <div data-od-id="footer-legal"><h4>LEGAL</h4><a href="#">Privacy Policy</a><a href="#">Terms and Conditions</a><a href="#">Trust Center</a></div>
+    <div data-od-id="footer-connect"><h4>CONNECT</h4><a href="#">LinkedIn</a><div class="footer-ctas" style="margin-top:14px"><a class="btn btn-white btn-lg" href="http://localhost:3010/welcome" style="width:fit-content">GET STARTED</a></div></div>
+  </div>
+  <div class="footer-bottom" data-od-id="footer-bottom">
+    <div style="display:flex;gap:10px;align-items:center">© 2026 – OS20</div>
+    <nav><a href="https://github.com/omyvnss/os20" aria-label="GitHub">GH</a></nav>
+  </div>
+</footer>
+
+<div id="cmd-palette" role="dialog" aria-modal="true" aria-label="Command palette" style="display:none;position:fixed;inset:0;z-index:100;background:#1c1c1c60;backdrop-filter:blur(6px);align-items:flex-start;justify-content:center;padding-top:18vh">
+  <div style="width:min(640px,92vw);background:#fff;border:1px solid #1c1c1c10;border-radius:8px;box-shadow:0 24px 64px #00000020;overflow:hidden">
+    <div style="display:flex;align-items:center;gap:10px;padding:14px;border-bottom:1px solid #1c1c1c08"><span style="font-family:var(--font-mono);font-size:11px;opacity:.6">⌘K</span><input placeholder="Search commands, docs, people…" style="flex:1;border:none;outline:none;font-size:14px" aria-label="Search commands"><span style="font-size:11px;border:1px solid #1c1c1c12;padding:3px 6px;border-radius:4px;opacity:.6">ESC</span></div>
+    <div style="padding:8px;display:grid;gap:4px">
+      <a href="product.html" style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-radius:6px;background:#f4f4f4"><span><b style="font-size:13px">Go to Product</b><span style="font-size:12px;opacity:.6;margin-left:8px">→ AI &amp; workflows</span></span><span style="font-size:11px;opacity:.4">↵</span></a>
+      <a href="docs.html" style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-radius:6px"><span><b style="font-size:13px">Open Docs</b><span style="font-size:12px;opacity:.6;margin-left:8px">→ introduction</span></span><span style="font-size:11px;opacity:.4">↗</span></a>
+      <a href="index.html" style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-radius:6px"><span><b style="font-size:13px">Go to Home</b><span style="font-size:12px;opacity:.6;margin-left:8px">→ BYOK AI CRM</span></span><span style="font-size:11px;opacity:.4">↵</span></a>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
