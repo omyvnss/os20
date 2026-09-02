@@ -16,7 +16,7 @@ to the actual OS20 product (BYOK AI, workflows, lead scraping, MCP, Postgres).
 Any static file server works:
 
 ```bash
-cd packages/os20-landing
+cd landing
 python3 -m http.server 8080
 # or
 npx serve .
@@ -37,7 +37,7 @@ Drop your exported `assets/` folder (with `images/` and `fonts/` intact) into
 this directory so it sits **next to** `index.html`:
 
 ```
-packages/os20-landing/
+landing/
 ├── index.html
 ├── product.html
 ├── docs.html
