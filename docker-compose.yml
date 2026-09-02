@@ -37,6 +37,34 @@ services:
       start_period: 60s
     restart: unless-stopped
 
+  os20-worker:
+    image: ghcr.io/omyvnss/os20:latest
+    command: node dist/queue-worker/queue-worker
+    environment:
+      NODE_ENV: development
+      PG_DATABASE_URL: postgres://postgres:postgres@db:5432/os20
+      SERVER_URL: http://localhost:3010
+      REDIS_URL: redis://redis:6379
+      SKIP_AUTH: "true"
+      ACCESS_TOKEN_SECRET: ${ACCESS_TOKEN_SECRET:-os20-local-dev-secret-change-in-production}
+      LOGIN_TOKEN_SECRET: ${LOGIN_TOKEN_SECRET:-os20-local-login-secret-change-in-production}
+      REFRESH_TOKEN_SECRET: ${REFRESH_TOKEN_SECRET:-os20-local-refresh-secret-change-in-production}
+      FILE_TOKEN_SECRET: ${FILE_TOKEN_SECRET:-os20-local-file-secret-change-in-production}
+      PGDB_ENCRYPTION_KEY: ${PGDB_ENCRYPTION_KEY:-os20-local-encryption-key-change}
+      APP_SECRET: ${APP_SECRET:-os20-local-app-secret}
+      FRONT_BASE_URL: http://localhost:3010
+      STORAGE_TYPE: local
+      DISABLE_DB_MIGRATIONS: "true"
+      DISABLE_CRON_JOBS_REGISTRATION: "true"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - os20-data:/app/packages/twenty-server/.local-storage
+    restart: unless-stopped
+
   db:
     image: postgres:16-alpine
     volumes:
