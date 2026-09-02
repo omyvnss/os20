@@ -94,4 +94,4 @@ npm pack --dry-run     # shows exactly which files ship
 2. Bump `cli/package.json` version.
 3. `npm publish` (tag a release on GitHub for provenance).
 4. Rebuild + push the container image if the app changed.
-5. Verify: `npx os20 status` on a clean machine.
+5. Verify: `npx crmos20 status` on a clean machine.
