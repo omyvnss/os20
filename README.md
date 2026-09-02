@@ -111,14 +111,14 @@ OS20 installs per-user under `~/.os20/`; all app state and data lives with it.
 ```
 .
 ├── cli/                 # The `os20` npm CLI (installer + lifecycle tool)
-├── landing/             # Landing page served at the app root path
+├── landing/             # Marketing site source (hosted on Lovable — NOT served by the app)
 ├── docs/                # Architecture & configuration guides
 ├── docker-compose.yml   # Runs the prebuilt GHCR image + PostgreSQL + Redis
 ├── .env.example         # Optional AI keys & secret overrides
 └── entrypoint-os20.sh   # Local-first startup (migrate + serve)
 ```
 
-> **Slim distribution.** OS20 ships the CLI, landing page, and Docker configuration that run the prebuilt image. The full Twenty monorepo (frontend, server) is built once into the published container image.
+> **Slim distribution.** OS20 ships the CLI and Docker configuration that run the prebuilt image. The full Twenty monorepo (frontend, server) is built once into the published container image. The marketing site (`landing/`) lives on Lovable — the app itself opens the CRM dashboard at its root.
 
 ## Development
 

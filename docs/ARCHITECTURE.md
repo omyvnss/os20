@@ -30,11 +30,11 @@ your data lives, and how the AI layer works.
 
 | Component | Where it lives | What it does |
 |-----------|----------------|--------------|
-| **CLI** (`cli/`) | npm package `os20` | Checks Docker, clones/pulls the app, starts/stop/status/logs/update/reset |
-| **Container** | `ghcr.io/omyvnss/os20:latest` | The Twelve frontend + server + landing site, prebuilt |
+| **CLI** (`cli/`) | npm package `crmos20` | Checks Docker, clones/pulls the app, starts/stop/status/logs/update/reset |
+| **Container** | `ghcr.io/omyvnss/os20:latest` | The Twenty frontend + server, prebuilt |
 | **PostgreSQL** | Docker volume | All CRM data (companies, people, opportunities, tasks, notes) |
 | **Redis** | Docker volume | Cache + queues |
-| **Landing** (`landing/`) | Inside the container | Marketing site served at the root path |
+| **Marketing site** (`landing/`) | Lovable (hosted) | Public site — NOT baked into the image; the app opens the CRM dashboard |
 | **AI provider layer** | Inside the container | Routes model calls to OpenAI / Anthropic / Google / OpenRouter / Groq / Ollama |
 
 ## Where Data Lives
