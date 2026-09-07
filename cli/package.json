@@ -1,7 +1,7 @@
 {
-  "name": "os20",
+  "name": "os20-cli",
   "version": "1.0.0",
-  "description": "OS20 — Bring Your Own AI. Run a modern open-source CRM on your machine, in one command.",
+  "description": "OS20 \u2014 Bring Your Own AI. Run a modern open-source CRM on your machine, in one command.",
   "type": "commonjs",
   "main": "dist/index.js",
   "bin": {
