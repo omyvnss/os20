@@ -42,6 +42,16 @@ That's it. The CLI checks Docker, pulls OS20, starts PostgreSQL + Redis + the CR
 
 **Requirements:** [Docker Desktop](https://docs.docker.com/get-docker/) (macOS / Windows) or Docker Engine (Linux), Node.js 18+ for the `npx` shim.
 
+### Zero-install (curl) quick start
+
+Prefer a raw one-liner with no npm? Paste this:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/omyvnss/os20/main/install.sh | bash
+```
+
+This clones the repo, generates local secrets, pulls both prebuilt images from GitHub Container Registry, and starts the full stack — CRM **plus** the AI Lead Engine.
+
 ### Run without npm
 
 Prefer Docker only? Works straight from this repo:
@@ -53,13 +63,14 @@ docker compose up -d
 # → http://localhost:3010
 ```
 
-The Compose file pulls a prebuilt image from `ghcr.io/omyvnss/os20` — no local build required.
+The Compose file pulls prebuilt images from `ghcr.io/omyvnss/os20` and `ghcr.io/omyvnss/os20-leadgen` — no local build required.
 
 ### Ports
 
 | Service | Purpose | Port |
 |---------|---------|------|
 | OS20 CRM | Web app | `3010` |
+| OS20 Lead Engine | AI scraping, scoring, email verification (`/health`) | `8120` |
 | PostgreSQL | Database | `5433` |
 | Redis | Cache | `6380` |
 
