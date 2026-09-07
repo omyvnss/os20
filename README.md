@@ -3,6 +3,7 @@
 ![OS20](https://img.shields.io/badge/OS20-Bring%20Your%20Own%20AI-2ea44f?style=for-the-badge)
 ![License](https://img.shields.io/badge/license-AGPL--3.0-blue.svg)
 ![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-lightgrey)
+[![npm](https://img.shields.io/npm/v/os20-cli)](https://www.npmjs.com/package/os20-cli)
 
 <h1>OS20</h1>
 <p><strong>Bring Your Own AI. Run a modern CRM.</strong></p>
