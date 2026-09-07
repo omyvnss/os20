@@ -30,7 +30,7 @@ your data lives, and how the AI layer works.
 
 | Component | Where it lives | What it does |
 |-----------|----------------|--------------|
-| **CLI** (`cli/`) | npm package `crmos20` | Checks Docker, clones/pulls the app, starts/stop/status/logs/update/reset |
+| **CLI** (`cli/`) | npm package `os20` | Checks Docker, clones/pulls the app, starts/stop/status/logs/update/reset |
 | **Container** | `ghcr.io/omyvnss/os20:latest` | The Twenty frontend + server, prebuilt |
 | **PostgreSQL** | Docker volume | All CRM data (companies, people, opportunities, tasks, notes) |
 | **Redis** | Docker volume | Cache + queues |

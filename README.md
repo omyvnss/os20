@@ -35,7 +35,7 @@
 The fastest way to run OS20 is the one-line CLI:
 
 ```bash
-npx crmos20
+npx os20
 ```
 
 That's it. The CLI checks Docker, pulls OS20, starts PostgreSQL + Redis + the CRM, and opens your browser at <http://localhost:3010>.
@@ -106,13 +106,13 @@ No account required to try OS20 — point it at any model you already have and g
 The `os20` CLI is published to **npm** and manages the whole lifecycle:
 
 ```bash
-npx crmos20            # Start OS20
-npx crmos20 start      # Start OS20
-npx crmos20 stop       # Stop OS20
-npx crmos20 status     # Check status
-npx crmos20 logs       # View logs (`-f` to follow)
-npx crmos20 update     # Pull latest image & recreate containers
-npx crmos20 reset      # DELETE all data, start fresh
+npx os20            # Start OS20
+npx os20 start      # Start OS20
+npx os20 stop       # Stop OS20
+npx os20 status     # Check status
+npx os20 logs       # View logs (`-f` to follow)
+npx os20 update     # Pull latest image & recreate containers
+npx os20 reset      # DELETE all data, start fresh
 ```
 
 OS20 installs per-user under `~/.os20/`; all app state and data lives with it.

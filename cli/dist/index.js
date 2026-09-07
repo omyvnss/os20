@@ -168,7 +168,11 @@ program
     }
     try {
         (0, child_process_1.execSync)('git pull --ff-only', { cwd: APP_DIR, stdio: 'inherit' });
-        (0, child_process_1.execSync)('docker compose up -d --build', {
+        (0, child_process_1.execSync)('docker compose pull', {
+            cwd: APP_DIR,
+            stdio: 'inherit',
+        });
+        (0, child_process_1.execSync)('docker compose up -d', {
             cwd: APP_DIR,
             stdio: 'inherit',
         });

@@ -192,7 +192,11 @@ program
 
     try {
       execSync('git pull --ff-only', { cwd: APP_DIR, stdio: 'inherit' });
-      execSync('docker compose up -d --build', {
+      execSync('docker compose pull', {
+        cwd: APP_DIR,
+        stdio: 'inherit',
+      });
+      execSync('docker compose up -d', {
         cwd: APP_DIR,
         stdio: 'inherit',
       });
