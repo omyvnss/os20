@@ -3,279 +3,314 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>OS20 - The CRM that finds its own leads</title>
-  <meta name="description" content="OS20 is a CRM that runs on your own machine. Ask the AI to find leads and it searches the web, scores companies and saves them to your CRM.">
-  <meta name="theme-color" content="#014BFC">
-  <link rel="icon" href="img/logo.svg" type="image/svg+xml">
+  <title>OS20 | The CRM that finds its own leads</title>
+  <meta name="description" content="OS20 is an open source CRM that runs on your computer. Ask your own AI to find leads and it searches the web, scores companies and saves them to your CRM.">
+  <link rel="icon" href="img/mark.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <a class="skip" href="#main">Skip to content</a>
-
-  <header class="nav" data-nav>
-    <a class="brand" href="#top" aria-label="OS20 home">
-      <img src="img/logo.svg" alt="" width="26" height="26"><span>OS20</span>
+  <header class="nav">
+    <a class="logo" href="#top" aria-label="OS20 home">
+      <img src="img/mark.svg" alt="" width="28" height="28"><span>OS20</span>
     </a>
     <nav class="nav-links" aria-label="Primary">
-      <a href="#how">How it works</a>
-      <a href="#different">Why OS20</a>
+      <a href="#lead-engine">Lead engine</a>
+      <a href="#ai-agent">AI agent</a>
+      <a href="#crm">CRM</a>
       <a href="#faq">FAQ</a>
-      <a href="https://github.com/omyvnss/os20">GitHub</a>
     </nav>
-    <a class="btn btn-sm btn-dark" href="#install">Install</a>
+    <div class="nav-actions">
+      <a class="nav-login" href="https://github.com/omyvnss/os20">GitHub</a>
+      <button class="btn btn-outline" type="button" data-copy>Get started</button>
+    </div>
   </header>
 
-  <main id="main">
+  <main id="top">
     <!-- HERO -->
-    <section class="hero" id="top">
-      <div class="hero-glow" aria-hidden="true"></div>
-      <div class="wrap hero-inner">
-        <p class="eyebrow reveal"><span class="pulse"></span>Open source. Runs on localhost.</p>
-        <h1 class="hero-title reveal">The CRM that<br><span class="shift">finds its own leads.</span></h1>
-        <p class="hero-sub reveal">Tell the AI who you sell to. OS20 searches the web, scores every company and saves the good ones to your CRM. On your machine, with your keys.</p>
-
-        <div class="install reveal" id="install">
-          <div class="install-tabs" role="tablist" aria-label="Install method">
-            <button role="tab" aria-selected="true" data-cmd="npx os20-cli">npx</button>
-            <button role="tab" aria-selected="false" data-cmd="curl -fsSL https://raw.githubusercontent.com/omyvnss/os20/main/install.sh | bash">curl</button>
-          </div>
-          <div class="install-row">
-            <span class="prompt" aria-hidden="true">$</span>
-            <code data-cmd-out>npx os20-cli</code>
-            <button class="copy" type="button" data-copy aria-label="Copy install command">Copy</button>
-          </div>
+    <section class="hero">
+      <div class="hero-art" aria-hidden="true">
+        <div class="tube tube-top"></div>
+        <div class="tube tube-bottom"></div>
+        <div class="fall">
+          <span class="tile t-claude"><i class="lg" style="--src:url(img/logos/lobe-claude.svg)"></i></span>
+          <span class="tile t-openai"><i class="lg" style="--src:url(img/logos/lobe-openai.svg)"></i></span>
+          <span class="tile t-gemini"><i class="lg" style="--src:url(img/logos/lobe-gemini.svg)"></i></span>
+          <span class="tile t-ollama"><i class="lg" style="--src:url(img/logos/lobe-ollama.svg)"></i></span>
+          <span class="tile t-firecrawl"><i class="lg" style="--src:url(img/logos/lobe-firecrawl.svg)"></i></span>
         </div>
-
-        <ul class="badges reveal" aria-label="Trust">
-          <li>AGPL-3.0 open source</li>
-          <li>No account needed</li>
-          <li>Data stays on your device</li>
-          <li>Bring your own AI key</li>
-        </ul>
+        <div class="glass"></div>
       </div>
-
-      <div class="wrap">
-        <div class="shot-frame reveal">
-          <div class="shot-tabs" role="tablist" aria-label="App preview">
-            <button role="tab" aria-selected="true" data-shot="0">Companies</button>
-            <button role="tab" aria-selected="false" data-shot="1">Find leads</button>
-            <button role="tab" aria-selected="false" data-shot="2">AI providers</button>
-            <button role="tab" aria-selected="false" data-shot="3">Setup</button>
-          </div>
-          <div class="shot-window">
-            <div class="shot-bar"><i></i><i></i><i></i><span>localhost:3010</span></div>
-            <div class="shot-stack">
-              <img class="is-on" src="img/companies.png" alt="OS20 Companies table with twelve saved companies" width="2880" height="1800" fetchpriority="high">
-              <img src="img/lead-generation.png" alt="OS20 lead generation form with industry, size, location and keywords" width="2880" height="1800" loading="lazy">
-              <img src="img/ai-providers.png" alt="OS20 AI providers settings with OpenAI, Anthropic, Gemini, OpenRouter, Groq and Ollama" width="2880" height="1800" loading="lazy">
-              <img src="img/setup.png" alt="OS20 first-run setup with AI provider, web search and find leads steps" width="2880" height="1800" loading="lazy">
-            </div>
-          </div>
-          <p class="shot-note">Real screenshots of OS20. Company rows are sample data.</p>
-        </div>
+      <p class="hero-side reveal">Find leads with a prompt<br>instead of a spreadsheet.</p>
+      <h1 class="hero-title reveal">The CRM that finds <br>its own leads.</h1>
+      <div class="hero-cta reveal">
+        <p>Runs on your computer, uses your own AI key, <br>and keeps every lead on your device.</p>
+        <button class="btn btn-purple" type="button" data-copy>Copy install command</button>
       </div>
     </section>
 
-    <!-- CHAOS BOARD -->
-    <section class="section chaos">
-      <div class="wrap">
-        <h2 class="h2 reveal">What usually takes days<br><span class="muted">of tabs, sheets and copy-paste.</span></h2>
-        <div class="board" data-board>
-          <div class="note n1"><b>Google</b>"saas companies berlin" page 4 of 11</div>
-          <div class="note n2"><b>Spreadsheet</b>leads_final_v3_REAL.xlsx</div>
-          <div class="note n3"><b>Tab 38</b>Is this company still active?</div>
-          <div class="note n4"><b>Notes</b>find email for head of sales</div>
-          <div class="note n5"><b>CRM import</b>312 duplicates found</div>
-          <div class="note n6"><b>Directory</b>$299/mo for stale contacts</div>
-          <div class="board-center">
-            <p>OS20 does it in one prompt.</p>
-            <span class="chip">find 20 SaaS companies in Berlin</span>
+    <!-- SIDE MENU -->
+    <nav class="chapters" aria-label="Product sections" data-chapters>
+      <a href="#lead-engine" data-chapter="lead-engine">Lead engine</a>
+      <a href="#ai-agent" data-chapter="ai-agent">AI agent</a>
+      <a href="#crm" data-chapter="crm">CRM</a>
+    </nav>
+
+    <!-- CHAPTER 1: LEAD ENGINE -->
+    <section class="chapter light" id="lead-engine" data-theme="lead-engine">
+      <h2 class="chapter-title reveal"><span class="chapter-icon"><svg viewBox="0 0 32 32" fill="none" stroke="url(#g1)" stroke-width="2"><defs><linearGradient id="g1" x1="0" x2="1"><stop stop-color="#b78aff"/><stop offset="1" stop-color="#fe9c72"/></linearGradient></defs><circle cx="14" cy="14" r="8"/><path d="M20 20l6 6" stroke-linecap="round"/></svg></span>Lead engine</h2>
+
+      <div class="panel panel-lead">
+        <div class="phone reveal">
+          <div class="phone-head">Ask AI <span class="phone-btn"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 10h12M11 5l5 5-5 5"/></svg></span></div>
+          <div class="phone-body">
+            <div class="prompt">Find dental software companies in Germany, 10 to 200 people.</div>
+            <div class="item"><span class="av" style="--c:#f8d1c9">N</span><div><b>Northwind Dental Cloud</b><small>northwinddental.io</small></div><em>92</em></div>
+            <div class="item"><span class="av" style="--c:#dcf">M</span><div><b>Meridian Health OS</b><small>meridianhealth.app</small></div><em>84</em></div>
+            <div class="item"><span class="av" style="--c:#ffcf87">H</span><div><b>Harbor Analytics</b><small>harboranalytics.co</small></div><em>71</em></div>
+          </div>
+        </div>
+        <div class="notify reveal">
+          <span class="burst"><svg viewBox="0 0 40 40" fill="none" stroke="#fd8fe5" stroke-width="1.2"><path d="M20 3l3 7 7-3-3 7 7 3-7 3 3 7-7-3-3 7-3-7-7 3 3-7-7-3 7-3-3-7 7 3z"/></svg></span>
+          <p>6 companies matched your request and were saved to your CRM.</p>
+        </div>
+      </div>
+
+      <p class="statement reveal">Find the companies that fit you, straight from the live web, with <span class="grad g-lead">one plain-English prompt.</span></p>
+
+      <div class="stack">
+        <article class="scard white">
+          <h3>Bring your own AI</h3>
+          <p>Plug in Claude, ChatGPT, Gemini, OpenRouter or Groq with your own key, or run a local model with Ollama and pay nothing.</p>
+          <div class="drift" aria-hidden="true">
+            <span class="dt" style="--bg:#d97757;--x:4%;--y:70%;--r:-12deg"><i class="lg" style="--src:url(img/logos/lobe-claude.svg)"></i></span>
+            <span class="dt" style="--bg:#000;--x:18%;--y:62%;--r:-8deg"><i class="lg" style="--src:url(img/logos/lobe-openai.svg)"></i></span>
+            <span class="dt" style="--bg:#f1f1f1;--fg:#000;--x:32%;--y:55%;--r:-10deg"><i class="lg" style="--src:url(img/logos/lobe-ollama.svg)"></i></span>
+            <span class="dt" style="--bg:#6467f2;--x:46%;--y:48%;--r:-6deg"><i class="lg" style="--src:url(img/logos/lobe-openrouter.svg)"></i></span>
+            <span class="dt" style="--bg:#f55036;--x:60%;--y:43%;--r:-9deg"><i class="lg" style="--src:url(img/logos/lobe-groq.svg)"></i></span>
+            <span class="dt" style="--bg:#e8f0fe;--fg:#1a73e8;--x:74%;--y:38%;--r:-7deg"><i class="lg" style="--src:url(img/logos/lobe-gemini.svg)"></i></span>
+            <span class="dt" style="--bg:#ccedff;--fg:#000;--x:88%;--y:32%;--r:-11deg"><i class="lg" style="--src:url(img/logos/lobe-anthropic.svg)"></i></span>
+          </div>
+        </article>
+        <article class="scard black">
+          <h3>Search the live web</h3>
+          <p>Add a Firecrawl, Tavily, Brave or SerpApi key and OS20 reads real company websites, not a database that went stale last year.</p>
+          <div class="frames" aria-hidden="true">
+            <div class="frame-ring"></div>
+            <span class="fr"><span style="--bg:#ff6a2c"><i class="lg" style="--src:url(img/logos/lobe-firecrawl.svg)"></i></span></span>
+            <span class="fr"><span style="--bg:#8dc8ff"><i class="lg" style="--src:url(img/logos/lobe-tavily.svg)"></i></span></span>
+            <span class="fr"><span style="--bg:#fb542b"><i class="lg" style="--src:url(img/logos/si-brave.svg)"></i></span></span>
+          </div>
+        </article>
+        <article class="scard white">
+          <h3>Scored by fit</h3>
+          <p>Directories, listicles and duplicate domains are dropped first. Every company left is scored by your AI against what you asked for.</p>
+          <div class="strip" aria-hidden="true">
+            <div class="lead-card"><span class="av" style="--c:#dcf">K</span><div><b>Kite Payments</b><small>Fit 48</small></div><div class="chips"><span>Skipped</span></div></div>
+            <div class="lead-card"><span class="av" style="--c:#9dffca">A</span><div><b>Atlas Field Service</b><small>Fit 88</small></div><div class="chips"><span>&#10003; Saved</span><span>Open</span></div></div>
+            <div class="lead-card"><span class="av" style="--c:#ffae95">P</span><div><b>Pinecrest Legal</b><small>Fit 79</small></div><div class="chips"><span>&#10003; Saved</span><span>Open</span></div></div>
+            <div class="lead-card"><span class="av" style="--c:#ccedff">S</span><div><b>Sable Security</b><small>Fit 91</small></div><div class="chips"><span>&#10003; Saved</span><span>Open</span></div></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CHAPTER 2: AI AGENT -->
+    <section class="chapter dark" id="ai-agent" data-theme="ai-agent">
+      <h2 class="chapter-title reveal"><span class="chapter-icon white"><svg viewBox="0 0 32 32" fill="none" stroke="url(#g2)" stroke-width="2"><defs><linearGradient id="g2" x1="0" x2="1"><stop stop-color="#8dc8ff"/><stop offset="1" stop-color="#5fdca0"/></linearGradient></defs><path d="M6 8h20v13H14l-6 5v-5H6z" stroke-linejoin="round"/><path d="M11 14.5h10" stroke-linecap="round"/></svg></span>AI agent</h2>
+
+      <div class="panel panel-agent">
+        <div class="side-card reveal">
+          <span>Model</span>
+          <div class="select">Claude Sonnet</div>
+          <div class="side-tools">
+            <i class="lg" style="--src:url(img/logos/lobe-claude.svg)"></i>
+            <i class="lg" style="--src:url(img/logos/lobe-openai.svg)"></i>
+            <i class="lg" style="--src:url(img/logos/lobe-gemini.svg)"></i>
+            <i class="lg" style="--src:url(img/logos/lobe-groq.svg)"></i>
+            <i class="lg" style="--src:url(img/logos/lobe-ollama.svg)"></i>
+          </div>
+        </div>
+        <div class="phone phone-chat reveal">
+          <div class="phone-head brand">ASK AI <span class="burger"><i></i><i></i><i></i></span></div>
+          <div class="phone-body">
+            <div class="bubble me">Find 20 SaaS companies in Berlin and add them to my CRM.</div>
+            <div class="bubble tool"><code>find_leads</code> searching the web</div>
+            <div class="bubble">Found 20, saved 14 with a fit score above 70.</div>
+          </div>
+        </div>
+        <div class="comp-card reveal">
+          <span>Tools</span>
+          <div class="tool-row"><code>find_leads</code><em>on</em></div>
+          <div class="tool-row"><code>create_record</code><em>on</em></div>
+          <div class="tool-row"><code>web_search</code><em>on</em></div>
+        </div>
+      </div>
+
+      <p class="statement reveal">Talk to your CRM. It <span class="grad g-agent">searches, scores and saves</span> while you get on with your day.</p>
+
+      <div class="stack">
+        <article class="scard black">
+          <h3>Chat with your pipeline</h3>
+          <p>Ask for leads, update records or pull a list of companies in plain words. The AI works with the same data you see.</p>
+          <div class="chatline" aria-hidden="true">
+            <span class="cl me">Which leads came in this week?</span>
+            <span class="cl">12 companies, 9 with a fit above 80.</span>
+          </div>
+        </article>
+        <article class="scard white">
+          <h3>Saved straight to Companies</h3>
+          <p>Every lead lands as a real company record with its website, so nothing gets copied from a chat into a spreadsheet.</p>
+          <div class="strip tilt" aria-hidden="true">
+            <div class="order"><span class="cc" style="--c:#1740c7">92</span><div><b>Northwind Dental</b><small>northwinddental.io</small></div><div class="chips dark"><span>&#10003; Saved</span><span>Open record</span></div></div>
+            <div class="order"><span class="cc" style="--c:#35c79b">84</span><div><b>Meridian Health</b><small>meridianhealth.app</small></div><div class="chips dark"><span>&#10003; Saved</span><span>Open record</span></div></div>
+            <div class="order"><span class="cc" style="--c:#29b5e8">88</span><div><b>Atlas Field</b><small>atlasfield.io</small></div><div class="chips dark"><span>&#10003; Saved</span><span>Open record</span></div></div>
+          </div>
+        </article>
+        <article class="scard black">
+          <h3>Local models with Ollama</h3>
+          <p>No API key at all? Run Ollama on the same machine and OS20 picks it up. Nothing leaves your computer.</p>
+          <div class="local" aria-hidden="true">
+            <div class="local-box"><i class="lg" style="--src:url(img/logos/lobe-ollama.svg)"></i><code>localhost:11434</code><em>connected</em></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CHAPTER 3: CRM -->
+    <section class="chapter light" id="crm" data-theme="crm">
+      <h2 class="chapter-title reveal"><span class="chapter-icon"><svg viewBox="0 0 32 32" fill="none" stroke="url(#g3)" stroke-width="2"><defs><linearGradient id="g3" x1="0" x2="1"><stop stop-color="#77b5ff"/><stop offset="1" stop-color="#a782ff"/></linearGradient></defs><rect x="6" y="6" width="8" height="8" rx="2"/><rect x="18" y="6" width="8" height="8" rx="2"/><rect x="6" y="18" width="8" height="8" rx="2"/><rect x="18" y="18" width="8" height="8" rx="2"/></svg></span>CRM</h2>
+
+      <div class="panel panel-crm">
+        <div class="pipe-card reveal">
+          <div class="pipe-head">Pipeline <span class="av sm" style="--c:#c9a9ff">OS</span></div>
+          <div class="bars"><span>Leads</span><div><i style="--h:30%"></i><i style="--h:55%"></i><i style="--h:40%"></i><i style="--h:70%"></i><i style="--h:62%"></i><i style="--h:85%"></i><i style="--h:78%"></i></div></div>
+        </div>
+        <div class="browser reveal">
+          <div class="browser-head"><b>OS20</b><span>Companies</span><span>People</span><span>Opportunities</span></div>
+          <div class="browser-body">
+            <div class="hero-row"><p>All Companies</p><span>12</span></div>
+            <div class="row"><span class="av sm" style="--c:#f8d1c9">N</span>Northwind Dental Cloud<small>northwinddental.io</small></div>
+            <div class="row"><span class="av sm" style="--c:#dcf">M</span>Meridian Health OS<small>meridianhealth.app</small></div>
+            <div class="row"><span class="av sm" style="--c:#9dffca">A</span>Atlas Field Service<small>atlasfield.io</small></div>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- CHAT + TABLE -->
-    <section class="section">
-      <div class="wrap split">
-        <div class="split-copy reveal">
-          <p class="kicker">Ask AI</p>
-          <h2 class="h2">Say who you want.<br><span class="muted">Get a ranked list.</span></h2>
-          <p class="lead">The find_leads tool lives inside the Ask AI chat. It searches, visits each site, scores fit against your request and writes the companies into your CRM.</p>
-        </div>
-        <div class="chat reveal" data-chat>
-          <div class="chat-head"><span class="dot"></span>Ask AI</div>
-          <div class="msg me">Find dental software companies in Germany, 10-200 people.</div>
-          <div class="msg ai"><span class="tool">find_leads</span> Searched 4 queries, read 18 sites, kept 6.</div>
-          <table class="fit">
-            <thead><tr><th>Company</th><th>Domain</th><th>Fit</th></tr></thead>
-            <tbody>
-              <tr><td>Northwind Dental Cloud</td><td>northwinddental.io</td><td><span class="score" style="--s:92">92</span></td></tr>
-              <tr><td>Meridian Health OS</td><td>meridianhealth.app</td><td><span class="score" style="--s:84">84</span></td></tr>
-              <tr><td>Harbor Analytics</td><td>harboranalytics.co</td><td><span class="score" style="--s:71">71</span></td></tr>
-              <tr><td>Kite Payments</td><td>kitepay.eu</td><td><span class="score" style="--s:48">48</span></td></tr>
-            </tbody>
-          </table>
-          <div class="msg ai saved">Saved 6 companies to Companies.</div>
-          <p class="example">Illustrative example</p>
-        </div>
-      </div>
-    </section>
+      <p class="statement reveal">Every lead, person and deal in one place, <span class="grad g-crm">on your machine and in your database.</span></p>
 
-    <!-- STATS -->
-    <section class="section stats-sec">
-      <div class="wrap">
-        <h2 class="h2 center reveal">We search the internet.<br><span class="muted">Not a stale database.</span></h2>
-        <div class="stats">
-          <div class="stat reveal"><b data-count="6">0</b><span>AI providers, including local Ollama</span></div>
-          <div class="stat reveal"><b data-count="4">0</b><span>web search APIs: Firecrawl, Tavily, Brave, SerpAPI</span></div>
-          <div class="stat reveal"><b data-count="15">0</b><span>free lead sources built in</span></div>
-          <div class="stat reveal"><b data-count="0">0</b><span>accounts, logins or sign-ups</span></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- USUAL VS OS20 -->
-    <section class="section">
-      <div class="wrap">
-        <h2 class="h2 reveal">Your sales stack, <span class="muted">in one place.</span></h2>
-        <div class="versus">
-          <div class="vs-card old reveal">
-            <p class="kicker">The usual way</p>
-            <ul>
-              <li>Lead database subscription</li>
-              <li>Separate CRM in the cloud</li>
-              <li>Scraper tools and exports</li>
-              <li>Your customer list on someone else's server</li>
-            </ul>
+      <div class="stack">
+        <article class="scard white">
+          <h3>A complete CRM</h3>
+          <p>Companies, people, opportunities, tasks and notes, with views, filters and a full REST and GraphQL API.</p>
+          <div class="objects" aria-hidden="true">
+            <span>Companies</span><span>People</span><span>Opportunities</span><span>Tasks</span><span>Notes</span><span>Workflows</span>
           </div>
-          <div class="vs-card new reveal">
-            <p class="kicker">OS20</p>
-            <div class="pipe" aria-label="Lead pipeline">
-              <span>Search</span><i></i><span>Read sites</span><i></i><span>Score</span><i></i><span>Save to CRM</span>
-            </div>
-            <ul>
-              <li>One Docker install on your computer</li>
-              <li>Live web search with your own key</li>
-              <li>AI scoring with the model you choose</li>
-              <li>Postgres database you own</li>
-            </ul>
+        </article>
+        <article class="scard black">
+          <h3>Automate the follow-up</h3>
+          <p>Workflows run when records change. Two are ready on install, including one that turns a quick lead into a company.</p>
+          <div class="insight" aria-hidden="true">
+            <div class="gauge-card"><span class="av" style="--c:#c9a9ff">W</span><b>Quick Lead</b><div class="gauge"><svg viewBox="0 0 120 70"><path d="M10 62a50 50 0 0 1 100 0" fill="none" stroke="#2e2e2e" stroke-width="8" stroke-linecap="round"/><path d="M10 62a50 50 0 0 1 86-35" fill="none" stroke="#8a9cf5" stroke-width="8" stroke-linecap="round"/></svg><strong>Active</strong><small>Workflow</small></div></div>
+            <div class="views"><span>Runs</span><div><i style="--h:30%"></i><i style="--h:60%"></i><i style="--h:25%"></i><i style="--h:45%"></i><i style="--h:65%"></i><i style="--h:80%"></i><i style="--h:70%"></i><i style="--h:90%"></i></div></div>
           </div>
-        </div>
+        </article>
+        <article class="scard white">
+          <h3>Your data stays yours</h3>
+          <p>Everything lives in a Postgres database inside Docker on your computer. No account, no login, ports bound to localhost only.</p>
+          <div class="objects" aria-hidden="true">
+            <span><i class="lg ink" style="--src:url(img/logos/si-postgresql.svg)"></i>Postgres</span><span><i class="lg ink" style="--src:url(img/logos/si-docker.svg)"></i>Docker</span><span>127.0.0.1</span><span>AES-GCM keys</span>
+          </div>
+        </article>
       </div>
     </section>
 
-    <!-- STEPS -->
-    <section class="section" id="how">
-      <div class="wrap">
-        <h2 class="h2 reveal">Four steps. <span class="muted">About five minutes.</span></h2>
-        <ol class="steps">
-          <li class="step reveal"><span class="num">01</span><div><h3>Install</h3><p>Run one command. Docker starts OS20 at localhost:3010.</p></div><code>npx os20-cli</code></li>
-          <li class="step reveal"><span class="num">02</span><div><h3>Add your keys</h3><p>Paste an AI key, or use Ollama with no key. Add a search key for better results.</p></div><code>Settings &rsaquo; AI Providers</code></li>
-          <li class="step reveal"><span class="num">03</span><div><h3>Ask AI</h3><p>Describe your ideal customer in plain words.</p></div><code>"find leads for..."</code></li>
-          <li class="step reveal"><span class="num">04</span><div><h3>Own your CRM</h3><p>Leads land in Companies. Add people, deals, tasks and workflows.</p></div><code>/objects/companies</code></li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- AGENT CARD -->
-    <section class="section">
-      <div class="wrap split">
-        <div class="agent reveal" data-agent>
-          <div class="agent-head"><span>Lead run</span><span class="live">running</span></div>
-          <ol>
-            <li>Search queries built from your request</li>
-            <li>Directories and articles filtered out</li>
-            <li>Company sites read in parallel</li>
-            <li>Fit scored by your AI model</li>
-            <li>Duplicates skipped, companies saved</li>
-          </ol>
-        </div>
-        <div class="split-copy reveal">
-          <p class="kicker">Under the hood</p>
-          <h2 class="h2">Built to skip the noise.</h2>
-          <p class="lead">OS20 drops listicles, directories and duplicate domains before it spends a single AI call. You only see real company websites.</p>
+    <!-- INTEGRATIONS -->
+    <section class="integrations">
+      <h3 class="statement narrow reveal">Every model, every search API, one CRM.</h3>
+      <div class="marquee">
+        <div class="track">
+          <span class="brand-tile" style="--bg:#d97757"><i class="lg" style="--src:url(img/logos/lobe-claude.svg)"></i>Claude</span>
+          <span class="brand-tile" style="--bg:#0a0a0a"><i class="lg" style="--src:url(img/logos/lobe-openai.svg)"></i>ChatGPT</span>
+          <span class="brand-tile" style="--bg:#e8f0fe;--fg:#1f1f1f"><i class="lg" style="--src:url(img/logos/lobe-gemini.svg)"></i>Gemini</span>
+          <span class="brand-tile" style="--bg:#6467f2"><i class="lg" style="--src:url(img/logos/lobe-openrouter.svg)"></i>OpenRouter</span>
+          <span class="brand-tile" style="--bg:#f55036"><i class="lg" style="--src:url(img/logos/lobe-groq.svg)"></i>Groq</span>
+          <span class="brand-tile" style="--bg:#f1f1f1;--fg:#000"><i class="lg" style="--src:url(img/logos/lobe-ollama.svg)"></i>Ollama</span>
         </div>
       </div>
-    </section>
+      <div class="marquee reverse">
+        <div class="track">
+          <span class="brand-tile" style="--bg:#ff6a2c"><i class="lg" style="--src:url(img/logos/lobe-firecrawl.svg)"></i>Firecrawl</span>
+          <span class="brand-tile" style="--bg:#ccedff;--fg:#0b1a33"><i class="lg" style="--src:url(img/logos/lobe-tavily.svg)"></i>Tavily</span>
+          <span class="brand-tile" style="--bg:#fb542b"><i class="lg" style="--src:url(img/logos/si-brave.svg)"></i>Brave Search</span>
+          <span class="brand-tile" style="--bg:#1a73e8">SerpApi</span>
+          <span class="brand-tile" style="--bg:#1d63ed"><i class="lg" style="--src:url(img/logos/si-docker.svg)"></i>Docker</span>
+          <span class="brand-tile" style="--bg:#336791"><i class="lg" style="--src:url(img/logos/si-postgresql.svg)"></i>PostgreSQL</span>
+        </div>
+      </div>
 
-    <!-- DIFFERENT -->
-    <section class="section" id="different">
-      <div class="wrap">
-        <h2 class="h2 reveal">Why OS20 is different</h2>
-        <div class="cards">
-          <article class="card reveal"><span class="ic">01</span><h3>Local first</h3><p>Runs on your computer. Ports bind to 127.0.0.1 only.</p></article>
-          <article class="card reveal"><span class="ic">02</span><h3>Your keys, encrypted</h3><p>API keys are stored with AES-GCM and never shown again after saving.</p></article>
-          <article class="card reveal"><span class="ic">03</span><h3>Any model</h3><p>OpenAI, Anthropic, Gemini, OpenRouter, Groq or a local Ollama model.</p></article>
-          <article class="card reveal"><span class="ic">04</span><h3>A full CRM</h3><p>Companies, people, opportunities, tasks, notes, workflows and an API.</p></article>
+      <div class="essentials">
+        <p class="inline-list reveal">
+          <span class="ico"><svg viewBox="0 0 54 30"><rect x="1" y="1" width="52" height="28" rx="14"/><path d="M19 15h16M29 10l6 5-6 5"/></svg></span>zero login,
+          <span class="ico"><svg viewBox="0 0 30 30"><rect x="3" y="3" width="24" height="24" rx="3"/><path d="M9 12l4 3-4 3M15 19h6"/></svg></span>runs on localhost,
+          <span class="ico"><svg viewBox="0 0 30 30"><path d="M15 3l10 4v7c0 7-4.5 11-10 13C9.5 25 5 21 5 14V7z"/><rect x="11" y="13" width="8" height="7" rx="1"/><path d="M12.5 13v-2a2.5 2.5 0 015 0v2"/></svg></span>encrypted keys,
+          <span class="ico"><svg viewBox="0 0 30 30"><circle cx="13" cy="13" r="8"/><path d="M19 19l7 7"/></svg></span>live lead search,
+          <span class="ico"><svg viewBox="0 0 30 30"><circle cx="15" cy="15" r="12"/><circle cx="15" cy="15" r="7"/><circle cx="15" cy="15" r="2"/></svg></span>fit scoring,
+          <span class="ico"><svg viewBox="0 0 30 30"><circle cx="15" cy="10" r="5"/><path d="M5 27c1-6 5-9 10-9s9 3 10 9"/></svg></span>people and companies,
+          <span class="ico"><svg viewBox="0 0 30 30"><circle cx="15" cy="15" r="4"/><path d="M15 3v4M15 23v4M3 15h4M23 15h4M6.5 6.5l3 3M20.5 20.5l3 3M6.5 23.5l3-3M20.5 9.5l3-3"/></svg></span>workflows,
+          <span class="ico"><svg viewBox="0 0 30 30"><path d="M10 8l-7 7 7 7M20 8l7 7-7 7"/></svg></span>REST and GraphQL API,
+          <span class="ico"><svg viewBox="0 0 30 30"><path d="M15 3a9 9 0 00-5 16.5V23h10v-3.5A9 9 0 0015 3zM11 27h8"/></svg></span>local AI models,
+          <span class="ico"><svg viewBox="0 0 30 30"><path d="M15 3l3.5 7.5L27 12l-6 5.5 1.5 8.5L15 22l-7.5 4L9 17.5 3 12l8.5-1.5z"/></svg></span>open source
+        </p>
+        <div class="pill reveal">
+          <p>Everything a small sales team needs, running on your own computer</p>
+          <a class="btn btn-white" href="https://github.com/omyvnss/os20">View on GitHub</a>
         </div>
       </div>
     </section>
 
     <!-- FAQ -->
-    <section class="section" id="faq">
-      <div class="wrap faq-wrap">
-        <h2 class="h2 reveal">Questions</h2>
-        <div class="faq">
-          <details class="reveal"><summary>Is OS20 free?</summary><p>Yes. OS20 is open source under AGPL-3.0. You pay only your own AI or search provider, and Ollama costs nothing.</p></details>
-          <details class="reveal"><summary>Where is my data stored?</summary><p>In a Postgres database inside Docker on your machine. Nothing is sent to us.</p></details>
-          <details class="reveal"><summary>What do I need to install it?</summary><p>Docker Desktop (or Docker Engine on Linux) and Node.js 18+ for the npx command.</p></details>
-          <details class="reveal"><summary>Do I need a search API key?</summary><p>No, but it helps. Without one OS20 uses free search, which can be rate limited. Firecrawl, Tavily, Brave or SerpAPI give steadier results.</p></details>
-          <details class="reveal"><summary>Can I use it without any AI key?</summary><p>Yes. Run Ollama locally and OS20 picks it up. Leads are still found without AI, just not ranked by fit.</p></details>
-          <details class="reveal"><summary>Is there a login?</summary><p>No. OS20 opens straight into your workspace on localhost.</p></details>
-        </div>
+    <section class="faq" id="faq">
+      <h3 class="reveal">Frequently Asked Questions</h3>
+      <div class="faq-card reveal">
+        <details><summary>What do I need to run OS20?</summary><p>Docker Desktop (or Docker Engine on Linux) and Node.js 18 or newer. Then run <code>npx os20-cli</code> and open localhost:3010.</p></details>
+        <details><summary>Is OS20 free?</summary><p>Yes. OS20 is open source under AGPL-3.0. You only pay your own AI or search provider, and local Ollama models cost nothing.</p></details>
+        <details><summary>Where is my data stored?</summary><p>In a Postgres database inside Docker on your computer. OS20 has no cloud account and sends nothing to us.</p></details>
+        <details><summary>Which AI models and search APIs work?</summary><p>Claude, ChatGPT, Gemini, OpenRouter, Groq and any local Ollama model. For search: Firecrawl, Tavily, Brave or SerpApi. A search key is optional but gives steadier results.</p></details>
+        <details><summary>Do I need to sign up or log in?</summary><p>No. OS20 opens straight into your workspace on localhost.</p></details>
       </div>
     </section>
 
-    <!-- FOUNDERS -->
-    <section class="section founders-sec">
-      <div class="wrap">
-        <div class="founder reveal">
-          <div class="founder-copy">
-            <p class="kicker">Who builds this</p>
-            <h2 class="h2">Made by git11.</h2>
-            <p class="lead">We build tools that run on your own machine. OS20 started because finding leads should not need three subscriptions and a spreadsheet.</p>
-            <a class="btn btn-ghost" href="https://git11.xyz">git11.xyz</a>
-          </div>
-          <div class="people">
-            <div class="person"><span class="avatar">OY</span><div><b>Om Yaduvanshi</b><span>Co-founder, CEO</span></div></div>
-            <div class="person"><span class="avatar">SR</span><div><b>Shreyash Raj Shekhar</b><span>Co-founder, CTO</span></div></div>
-          </div>
+    <!-- CTA + FOOTER -->
+    <section class="cta">
+      <div class="cta-copy">
+        <h4 class="reveal">Run your CRM on your<br>own machine today</h4>
+        <div class="cta-buttons reveal">
+          <button class="btn btn-purple" type="button" data-copy>Get started</button>
+          <a class="btn btn-ghost" href="https://github.com/omyvnss/os20">View on GitHub</a>
         </div>
       </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="section cta">
-      <div class="wrap center">
-        <h2 class="h2 reveal">Your next customers are on the web.<br><span class="shift">Go get them.</span></h2>
-        <div class="cta-row reveal">
-          <a class="btn btn-brand" href="#install">Install OS20</a>
-          <a class="btn btn-ghost" href="http://localhost:3010">Open my dashboard</a>
-        </div>
-      </div>
+      <div class="cta-shot reveal"><img src="img/companies.png" alt="OS20 Companies view with saved companies" width="2880" height="1800" loading="lazy"></div>
     </section>
   </main>
 
   <footer class="footer">
-    <div class="wrap">
-      <div class="foot-top">
-        <div class="brand"><img src="img/logo.svg" alt="" width="22" height="22"><span>OS20</span></div>
-        <nav class="foot-links" aria-label="Footer">
-          <a href="https://github.com/omyvnss/os20">GitHub</a>
-          <a href="https://github.com/omyvnss/os20#readme">Docs</a>
-          <a href="https://github.com/omyvnss/os20/blob/main/LICENSE">License</a>
-          <a href="https://git11.xyz">git11.xyz</a>
-        </nav>
-      </div>
-      <canvas class="pixels" data-pixels aria-hidden="true"></canvas>
-      <p class="foot-note">OS20 is open source under AGPL-3.0.</p>
+    <div class="foot-grid">
+      <a class="logo light" href="#top"><img src="img/mark-white.svg" alt="" width="34" height="34"><span>OS20</span></a>
+      <div class="col"><span>Product</span><a href="#lead-engine">Lead engine</a><a href="#ai-agent">AI agent</a><a href="#crm">CRM</a></div>
+      <div class="col"><span>Company</span><a href="https://git11.xyz">git11</a><a href="https://git11.xyz">Om Yaduvanshi</a><a href="https://git11.xyz">Shreyash Raj Shekhar</a></div>
+      <div class="col"><span>Resources</span><a href="https://github.com/omyvnss/os20">GitHub</a><a href="https://github.com/omyvnss/os20#readme">Docs</a><a href="#faq">FAQ</a><a href="https://github.com/omyvnss/os20/blob/main/LICENSE">License</a></div>
+    </div>
+    <div class="foot-meta">
+      <a href="https://github.com/omyvnss/os20/issues"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>Contact us</a>
+      <a class="gh" href="https://github.com/omyvnss/os20" aria-label="GitHub"><i class="lg" style="--src:url(img/logos/si-github.svg)"></i></a>
+      <span class="copy">Copyright &copy; 2026 git11. OS20 is open source under AGPL-3.0.</span>
     </div>
   </footer>
 
+  <div class="toast" role="status" aria-live="polite" data-toast></div>
   <script src="script.js"></script>
 </body>
 </html>
