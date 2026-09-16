@@ -25,7 +25,29 @@
     check: '<svg viewBox="0 0 16 16"><rect x="3" y="3" width="10" height="10" rx="2"/><path d="M6 8l1.5 1.5L10.5 6.5"/></svg>',
   };
   const chipName = (name, i, round) => `<span class="chip"><span class="ini${round ? ' round' : ''}" style="--c:${tint[i % tint.length]}">${name[0]}</span>${name}</span>`;
-  const actor = '<span class="chip"><span class="ini round" style="--c:#e9ddff">A</span>Admin User</span>';
+  const slug = (name) => name.toLowerCase().replace(/\s+/g, '-');
+  const person = (name) => `<span class="chip"><img class="pfp" src="img/avatars/${slug(name)}.svg" alt="" loading="lazy">${name}</span>`;
+  const actor = person('Admin User');
+  const companyNames = ['Northwind Dental Cloud', 'Sable Security', 'Harbor Analytics', 'Atlas Field Service', 'Kite Payments', 'Meridian Health OS', 'Pinecrest Legal', 'Verde Commerce', 'Fold Studio', 'Quill Recruiting', 'Orbit Energy Data', 'Lumen Logistics'];
+  const marks = [
+    '<path d="M8 2.8l1.2 3.6h3.8L10 8.6l1.2 3.6L8 10l-3.2 2.2L6 8.6 3 6.4h3.8z" fill="#fff"/>',
+    '<path d="M8 3l4.5 1.8v3.1c0 2.7-1.9 4.4-4.5 5.1-2.6-.7-4.5-2.4-4.5-5.1V4.8z" fill="#fff"/>',
+    '<path d="M4 12V8.5M8 12V4.5M12 12V6.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>',
+    '<path d="M8 3.2l4.8 4.8L8 12.8 3.2 8z" fill="#fff"/>',
+    '<path d="M3.5 12.5L12.5 3.5v9z" fill="#fff"/>',
+    '<path d="M8 4v8M4 8h8" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/>',
+    '<path d="M5 4.5h6M5 8h6M5 11.5h6" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>',
+    '<path d="M3.5 12C3.5 7 7 3.5 12.5 3.5 12.5 9 9 12.5 3.5 12z" fill="#fff"/>',
+    '<rect x="4" y="4" width="8" height="8" rx="4" fill="none" stroke="#fff" stroke-width="2"/><path d="M8 4v8" stroke="#fff" stroke-width="2"/>',
+    '<path d="M4 12c0-4 1.8-8 6-8.5M7.5 12c0-2.6 1.3-4.6 4.5-5" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/>',
+    '<circle cx="8" cy="8" r="4.3" fill="none" stroke="#fff" stroke-width="2"/><circle cx="8" cy="8" r="1.4" fill="#fff"/>',
+    '<path d="M3 9.5c1.7-2.4 3.3-2.4 5 0s3.3 2.4 5 0M3 6.5c1.7-2.4 3.3-2.4 5 0s3.3 2.4 5 0" stroke="#fff" stroke-width="1.7" fill="none" stroke-linecap="round"/>',
+  ];
+  const brandColors = ['#0e9f9a', '#1f2937', '#2563eb', '#ea580c', '#7c3aed', '#e11d48', '#475569', '#16a34a', '#db2777', '#ca8a04', '#0284c7', '#4f46e5'];
+  const company = (name) => {
+    const i = Math.max(0, companyNames.indexOf(name));
+    return `<span class="chip"><svg class="logo-mark" viewBox="0 0 16 16" style="background:${brandColors[i]}">${marks[i]}</svg>${name}</span>`;
+  };
 
   /* Copy + toast */
   const INSTALL = 'npx os20-cli';
@@ -139,7 +161,7 @@
     companies: {
       title: 'Companies', add: 'Company',
       head: [['Name', icon.building], ['Domain', icon.link], ['Created by', icon.history], ['Account Owner', icon.user], ['Creation date', icon.calendar], ['LinkedIn', icon.linkedin], ['Address', icon.map]],
-      rows: () => companyRows.map(([n, d, t, a], i) => [chipName(n, i), `<span class="link">${d}</span>`, actor, '', t, '', a || '']),
+      rows: () => companyRows.map(([n, d, t, a], i) => [company(n), `<span class="link">${d}</span>`, actor, '', t, '', a || '']),
     },
     people: {
       title: 'People', add: 'Person',
@@ -149,7 +171,7 @@
         ['Tomas Ruiz', 'tomas@kitepay.eu', 'Kite Payments', 'COO', 'Lisbon'],
         ['Aiko Sato', 'aiko@harboranalytics.co', 'Harbor Analytics', 'Founder', 'Amsterdam'],
         ['Noah Keller', 'noah@foldstudio.design', 'Fold Studio', 'Design Lead', 'Copenhagen'],
-      ].map(([n, e, c, j, city], i) => [chipName(n, i + 3, true), `<span class="link">${e}</span>`, actor, chipName(c, i), j, city]),
+      ].map(([n, e, c, j, city], i) => [person(n), `<span class="link">${e}</span>`, actor, company(c), j, city]),
     },
     opportunities: {
       title: 'Opportunities', add: 'Opportunity',
@@ -158,7 +180,7 @@
         ['Clinic rollout', '$60k', 'Proposal', '30 Oct, 2026', 'Meridian Health OS'],
         ['Payments pilot', '$25k', 'Meeting', '14 Nov, 2026', 'Kite Payments'],
         ['Security audit', '$40k', 'Screening', '2 Dec, 2026', 'Sable Security'],
-      ].map(([n, a, s, d, c], i) => [chipName(n, i + 1), a, `<span class="chip">${s}</span>`, d, chipName(c, i + 4)]),
+      ].map(([n, a, s, d, c], i) => [chipName(n, i + 1), a, `<span class="chip">${s}</span>`, d, company(c)]),
     },
     tasks: {
       title: 'Tasks', add: 'Task',
@@ -166,7 +188,7 @@
       rows: () => [
         ['Call Northwind Dental', 'To do', 'Fri, 18 Sep', 'Om Yaduvanshi'],
         ['Send pilot proposal to Kite', 'In progress', 'Mon, 21 Sep', 'Om Yaduvanshi'],
-      ].map(([t, s, d, a], i) => [chipName(t, i + 5), `<span class="chip">${s}</span>`, d, chipName(a, 7, true)]),
+      ].map(([t, s, d, a], i) => [chipName(t, i + 5), `<span class="chip">${s}</span>`, d, person(a)]),
     },
     notes: {
       title: 'Notes', add: 'Note',
@@ -580,8 +602,8 @@
     col.dataset.stage = name;
     cols.append(col);
   });
-  deals.forEach(([stageName, name, amount, close, company, contact], i) => {
-    const card = el('div', 'kb-card', `<div class="kc-name">${chipName(name, i).replace('class="chip"', 'class="chip" style="background:none;padding:0"')}</div><div class="kc-row">${icon.dollar}$ ${k(amount)}</div><div class="kc-row">${icon.calendar}${close}</div><div class="kc-row">${icon.building}${chipName(company, i + 2)}</div><div class="kc-row">${icon.user}${chipName(contact, i + 4, true)}</div>`);
+  deals.forEach(([stageName, name, amount, close, companyName, contact], i) => {
+    const card = el('div', 'kb-card', `<div class="kc-name">${chipName(name, i).replace('class="chip"', 'class="chip" style="background:none;padding:0"')}</div><div class="kc-row">${icon.dollar}$ ${k(amount)}</div><div class="kc-row">${icon.calendar}${close}</div><div class="kc-row">${icon.building}${company(companyName)}</div><div class="kc-row">${icon.user}${person(contact)}</div>`);
     card.dataset.amount = amount;
     const col = $(`.kb-col[data-stage="${stageName}"]`, cols);
     col.insertBefore(card, $('.kb-add', col));

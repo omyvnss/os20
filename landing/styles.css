@@ -218,6 +218,9 @@ svg { overflow: visible; }
 .chip { display: inline-flex; align-items: center; gap: 6px; padding: 1px 6px 1px 3px; border-radius: 4px; background: #f3f3f3; color: #222; }
 .ini { display: inline-grid; place-items: center; width: 14px; height: 14px; border-radius: 3px; font-size: 9px; background: var(--c, #eee); color: rgba(0, 0, 0, 0.65); }
 .ini.round { border-radius: 50%; }
+.pfp { width: 20px; height: 20px; flex: none; margin: -3px 0 -3px -2px; border-radius: 50%; object-fit: cover; background: #eee; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06); }
+.logo-mark { width: 16px; height: 16px; flex: none; border-radius: 4px; }
+.kc-row .chip { gap: 6px; }
 .link { display: inline-block; max-width: 120px; overflow: hidden; text-overflow: ellipsis; padding: 1px 8px; border: 1px solid #e3e3e3; border-radius: 99px; color: #333; vertical-align: middle; }
 .muted { color: #bbb; }
 .os-foot { display: flex; gap: 16px; padding: 8px 44px; color: #999; font-size: 12px; }
