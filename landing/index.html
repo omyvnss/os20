@@ -8,24 +8,13 @@
   <link rel="icon" href="img/mark.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="nav">
-    <a class="logo" href="#top" aria-label="OS20 home">
-      <img src="img/mark.svg" alt="" width="28" height="28"><span>OS20</span>
-    </a>
-    <nav class="nav-links" aria-label="Primary">
-      <a href="#lead-engine">Lead engine</a>
-      <a href="#ai-agent">AI agent</a>
-      <a href="#crm">CRM</a>
-      <a href="#faq">FAQ</a>
-    </nav>
-    <div class="nav-actions">
-      <a class="nav-login" href="https://github.com/omyvnss/os20">GitHub</a>
-      <button class="btn btn-outline" type="button" data-copy>Get started</button>
-    </div>
+  <header class="island" data-island>
+    <a class="island-logo" href="#top" aria-label="OS20 home"><img src="img/mark.svg" alt="" width="22" height="22"><span>OS20</span></a>
+    <a class="island-gh" href="https://github.com/omyvnss/os20" aria-label="OS20 on GitHub"><i class="lg" style="--src:url(img/logos/si-github.svg)"></i></a>
   </header>
 
   <main id="top">
@@ -43,7 +32,7 @@
         </div>
         <div class="glass"></div>
       </div>
-      <p class="hero-side reveal">Find leads with a prompt<br>instead of a spreadsheet.</p>
+      <p class="hero-side reveal">Find leads with a prompt <br>instead of a spreadsheet.</p>
       <h1 class="hero-title reveal">The CRM that finds <br>its own leads.</h1>
       <div class="hero-cta reveal">
         <p>Runs on your computer, uses your own AI key, <br>and keeps every lead on your device.</p>
@@ -51,30 +40,67 @@
       </div>
     </section>
 
+    <!-- TRUST STRIP -->
+    <section class="trust">
+      <div class="trust-row">
+        <span class="trust-label">Runs on</span>
+        <span class="badge"><i class="lg" style="--src:url(img/logos/si-apple.svg)"></i>macOS</span>
+        <span class="badge"><i class="lg" style="--src:url(img/logos/si-windows.svg)"></i>Windows</span>
+        <span class="badge"><i class="lg" style="--src:url(img/logos/si-linux.svg)"></i>Linux</span>
+        <span class="trust-sep"></span>
+        <span class="trust-label">Built with</span>
+        <span class="badge"><i class="lg" style="--src:url(img/logos/si-docker.svg)"></i>Docker</span>
+        <span class="badge"><i class="lg" style="--src:url(img/logos/si-postgresql.svg)"></i>PostgreSQL</span>
+        <span class="badge"><i class="lg" style="--src:url(img/logos/si-redis.svg)"></i>Redis</span>
+        <span class="badge"><i class="lg" style="--src:url(img/logos/si-nestjs.svg)"></i>NestJS</span>
+        <span class="badge"><i class="lg" style="--src:url(img/logos/si-react.svg)"></i>React</span>
+        <span class="trust-sep"></span>
+        <span class="badge dark"><i class="lg" style="--src:url(img/logos/si-opensourceinitiative.svg)"></i>AGPL-3.0</span>
+        <span class="badge dark">No account</span>
+        <span class="badge dark">Ports on 127.0.0.1</span>
+      </div>
+    </section>
+
     <!-- SIDE MENU -->
     <nav class="chapters" aria-label="Product sections" data-chapters>
       <a href="#lead-engine" data-chapter="lead-engine">Lead engine</a>
-      <a href="#ai-agent" data-chapter="ai-agent">AI agent</a>
+      <a href="#workflows" data-chapter="workflows">Workflows</a>
       <a href="#crm" data-chapter="crm">CRM</a>
     </nav>
 
     <!-- CHAPTER 1: LEAD ENGINE -->
-    <section class="chapter light" id="lead-engine" data-theme="lead-engine">
+    <section class="chapter light" id="lead-engine">
       <h2 class="chapter-title reveal"><span class="chapter-icon"><svg viewBox="0 0 32 32" fill="none" stroke="url(#g1)" stroke-width="2"><defs><linearGradient id="g1" x1="0" x2="1"><stop stop-color="#b78aff"/><stop offset="1" stop-color="#fe9c72"/></linearGradient></defs><circle cx="14" cy="14" r="8"/><path d="M20 20l6 6" stroke-linecap="round"/></svg></span>Lead engine</h2>
 
       <div class="panel panel-lead">
-        <div class="phone reveal">
-          <div class="phone-head">Ask AI <span class="phone-btn"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 10h12M11 5l5 5-5 5"/></svg></span></div>
-          <div class="phone-body">
-            <div class="prompt">Find dental software companies in Germany, 10 to 200 people.</div>
-            <div class="item"><span class="av" style="--c:#f8d1c9">N</span><div><b>Northwind Dental Cloud</b><small>northwinddental.io</small></div><em>92</em></div>
-            <div class="item"><span class="av" style="--c:#dcf">M</span><div><b>Meridian Health OS</b><small>meridianhealth.app</small></div><em>84</em></div>
-            <div class="item"><span class="av" style="--c:#ffcf87">H</span><div><b>Harbor Analytics</b><small>harboranalytics.co</small></div><em>71</em></div>
+        <div class="demo-tag">Interactive demo <span>sample data</span></div>
+        <div class="app" data-lead-demo>
+          <aside class="app-side">
+            <div class="app-ws"><img src="img/mark.svg" alt="" width="18" height="18">OS20</div>
+            <p class="app-group">Workspace</p>
+            <button type="button" class="app-nav is-on" data-view="companies"><svg viewBox="0 0 20 20"><path d="M4 17V5l6-2v14M10 8h6v9M7 7v.01M7 10v.01M7 13v.01M13 11v.01M13 14v.01"/></svg>Companies</button>
+            <button type="button" class="app-nav" data-view="people"><svg viewBox="0 0 20 20"><circle cx="10" cy="7" r="3.2"/><path d="M4 17c.8-3.4 3.2-5 6-5s5.2 1.6 6 5"/></svg>People</button>
+            <button type="button" class="app-nav" data-view="opportunities"><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><circle cx="10" cy="10" r="3.5"/></svg>Opportunities</button>
+            <button type="button" class="app-nav" data-view="tasks"><svg viewBox="0 0 20 20"><rect x="4" y="4" width="12" height="12" rx="2.5"/><path d="M7.5 10l2 2 3.5-4"/></svg>Tasks</button>
+            <button type="button" class="app-nav" data-view="notes"><svg viewBox="0 0 20 20"><rect x="5" y="3" width="10" height="14" rx="2"/><path d="M8 7h4M8 10h4M8 13h2"/></svg>Notes</button>
+            <button type="button" class="app-nav" data-view="workflows"><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="2.5"/><path d="M10 3v2.5M10 14.5V17M3 10h2.5M14.5 10H17M5 5l1.8 1.8M13.2 13.2L15 15M5 15l1.8-1.8M13.2 6.8L15 5"/></svg>Workflows</button>
+          </aside>
+          <div class="app-main">
+            <div class="app-top"><span class="app-crumb" data-crumb>Companies</span><span class="app-count" data-count></span><span class="app-new" data-new>+ New Company</span></div>
+            <div class="app-bar"><span data-viewname>All Companies</span><span class="app-tools"><span>Filter</span><span>Sort</span><span>Options</span></span></div>
+            <div class="app-table"><table><thead data-head></thead><tbody data-rows></tbody></table></div>
           </div>
-        </div>
-        <div class="notify reveal">
-          <span class="burst"><svg viewBox="0 0 40 40" fill="none" stroke="#fd8fe5" stroke-width="1.2"><path d="M20 3l3 7 7-3-3 7 7 3-7 3 3 7-7-3-3 7-3-7-7 3 3-7-7-3 7-3-3-7 7 3z"/></svg></span>
-          <p>6 companies matched your request and were saved to your CRM.</p>
+          <aside class="app-chat">
+            <div class="chat-top">Ask AI<span>find_leads</span></div>
+            <div class="chat-log" data-log>
+              <div class="msg ai">Tell me who you sell to. I will search the web and save the companies that fit.</div>
+            </div>
+            <form class="chat-form" data-form>
+              <input type="text" data-input value="Find SaaS companies in Berlin with 10 to 200 people" aria-label="Ask AI message">
+              <button type="submit" aria-label="Send"><svg viewBox="0 0 20 20"><path d="M10 16V4M5 9l5-5 5 5"/></svg></button>
+            </form>
+            <p class="chat-hint" data-hint>Press Enter to run the lead search</p>
+          </aside>
         </div>
       </div>
 
@@ -83,7 +109,7 @@
       <div class="stack">
         <article class="scard white">
           <h3>Bring your own AI</h3>
-          <p>Plug in Claude, ChatGPT, Gemini, OpenRouter or Groq with your own key, or run a local model with Ollama and pay nothing.</p>
+          <p>Use Claude, ChatGPT, Gemini, OpenRouter or Groq with your own key, or run a local model with Ollama and pay nothing.</p>
           <div class="drift" aria-hidden="true">
             <span class="dt" style="--bg:#d97757;--x:4%;--y:70%;--r:-12deg"><i class="lg" style="--src:url(img/logos/lobe-claude.svg)"></i></span>
             <span class="dt" style="--bg:#000;--x:18%;--y:62%;--r:-8deg"><i class="lg" style="--src:url(img/logos/lobe-openai.svg)"></i></span>
@@ -105,97 +131,102 @@
           </div>
         </article>
         <article class="scard white">
-          <h3>Scored by fit</h3>
-          <p>Directories, listicles and duplicate domains are dropped first. Every company left is scored by your AI against what you asked for.</p>
-          <div class="strip" aria-hidden="true">
-            <div class="lead-card"><span class="av" style="--c:#dcf">K</span><div><b>Kite Payments</b><small>Fit 48</small></div><div class="chips"><span>Skipped</span></div></div>
-            <div class="lead-card"><span class="av" style="--c:#9dffca">A</span><div><b>Atlas Field Service</b><small>Fit 88</small></div><div class="chips"><span>&#10003; Saved</span><span>Open</span></div></div>
-            <div class="lead-card"><span class="av" style="--c:#ffae95">P</span><div><b>Pinecrest Legal</b><small>Fit 79</small></div><div class="chips"><span>&#10003; Saved</span><span>Open</span></div></div>
-            <div class="lead-card"><span class="av" style="--c:#ccedff">S</span><div><b>Sable Security</b><small>Fit 91</small></div><div class="chips"><span>&#10003; Saved</span><span>Open</span></div></div>
+          <h3>Only real company websites</h3>
+          <p>Search results are full of directories, "top 10" articles and duplicates. OS20 drops those first, then reads each company's own site.</p>
+          <div class="sieve" aria-hidden="true" data-sieve>
+            <div class="sieve-col">
+              <span class="url bad">best-saas-startups-berlin-2026<em>article</em></span>
+              <span class="url good">northwinddental.io</span>
+              <span class="url bad">startup directory listing<em>directory</em></span>
+              <span class="url good">harboranalytics.co</span>
+              <span class="url bad">app.northwinddental.io<em>duplicate</em></span>
+              <span class="url good">kitepay.eu</span>
+            </div>
+            <div class="sieve-arrow"><svg viewBox="0 0 60 24"><path d="M2 12h54M46 4l10 8-10 8"/></svg></div>
+            <div class="sieve-out">
+              <span class="kept">northwinddental.io</span>
+              <span class="kept">harboranalytics.co</span>
+              <span class="kept">kitepay.eu</span>
+            </div>
           </div>
         </article>
       </div>
     </section>
 
-    <!-- CHAPTER 2: AI AGENT -->
-    <section class="chapter dark" id="ai-agent" data-theme="ai-agent">
-      <h2 class="chapter-title reveal"><span class="chapter-icon white"><svg viewBox="0 0 32 32" fill="none" stroke="url(#g2)" stroke-width="2"><defs><linearGradient id="g2" x1="0" x2="1"><stop stop-color="#8dc8ff"/><stop offset="1" stop-color="#5fdca0"/></linearGradient></defs><path d="M6 8h20v13H14l-6 5v-5H6z" stroke-linejoin="round"/><path d="M11 14.5h10" stroke-linecap="round"/></svg></span>AI agent</h2>
+    <!-- CHAPTER 2: WORKFLOWS -->
+    <section class="chapter dark" id="workflows">
+      <h2 class="chapter-title reveal"><span class="chapter-icon white"><svg viewBox="0 0 32 32" fill="none" stroke="url(#g2)" stroke-width="2"><defs><linearGradient id="g2" x1="0" x2="1"><stop stop-color="#5aaef5"/><stop offset="1" stop-color="#3fcf8e"/></linearGradient></defs><rect x="11" y="4" width="10" height="6" rx="2"/><rect x="4" y="22" width="10" height="6" rx="2"/><rect x="18" y="22" width="10" height="6" rx="2"/><path d="M16 10v6M9 22v-3h14v3" stroke-linejoin="round"/></svg></span>Workflows</h2>
 
       <div class="panel panel-agent">
-        <div class="side-card reveal">
-          <span>Model</span>
-          <div class="select">Claude Sonnet</div>
-          <div class="side-tools">
-            <i class="lg" style="--src:url(img/logos/lobe-claude.svg)"></i>
-            <i class="lg" style="--src:url(img/logos/lobe-openai.svg)"></i>
-            <i class="lg" style="--src:url(img/logos/lobe-gemini.svg)"></i>
-            <i class="lg" style="--src:url(img/logos/lobe-groq.svg)"></i>
-            <i class="lg" style="--src:url(img/logos/lobe-ollama.svg)"></i>
+        <div class="demo-tag">Interactive demo <span>real prefilled workflow</span></div>
+        <div class="wf" data-wf>
+          <div class="wf-top">
+            <span class="wf-crumb"><span>Workflows /</span> Create company when adding a new person</span>
+            <span class="wf-status">Active</span>
+            <div class="wf-controls">
+              <label class="wf-select">New person email
+                <select data-wf-email>
+                  <option value="jane@northwinddental.io">jane@northwinddental.io</option>
+                  <option value="alex@foldstudio.design">alex@foldstudio.design</option>
+                  <option value="sam.lee@gmail.com">sam.lee@gmail.com</option>
+                </select>
+              </label>
+              <button type="button" class="wf-run" data-wf-run><svg viewBox="0 0 16 16"><path d="M5 3.5v9l7-4.5z"/></svg>Test run</button>
+            </div>
           </div>
-        </div>
-        <div class="phone phone-chat reveal">
-          <div class="phone-head brand">ASK AI <span class="burger"><i></i><i></i><i></i></span></div>
-          <div class="phone-body">
-            <div class="bubble me">Find 20 SaaS companies in Berlin and add them to my CRM.</div>
-            <div class="bubble tool"><code>find_leads</code> searching the web</div>
-            <div class="bubble">Found 20, saved 14 with a fit score above 70.</div>
+          <div class="wf-body">
+            <div class="wf-canvas" data-wf-canvas></div>
+            <aside class="wf-panel">
+              <p class="wf-panel-label" data-wf-kind>Trigger</p>
+              <h4 data-wf-title>Record is created or updated</h4>
+              <p class="wf-panel-desc" data-wf-desc>Runs when a person is created or their email changes.</p>
+              <p class="wf-panel-label">Run log</p>
+              <ol class="wf-log" data-wf-log><li class="muted">Pick an email and press Test run.</li></ol>
+            </aside>
           </div>
-        </div>
-        <div class="comp-card reveal">
-          <span>Tools</span>
-          <div class="tool-row"><code>find_leads</code><em>on</em></div>
-          <div class="tool-row"><code>create_record</code><em>on</em></div>
-          <div class="tool-row"><code>web_search</code><em>on</em></div>
         </div>
       </div>
 
-      <p class="statement reveal">Talk to your CRM. It <span class="grad g-agent">searches, scores and saves</span> while you get on with your day.</p>
+      <p class="statement reveal">Automate the busywork. Workflows <span class="grad g-agent">react to your records</span> so you do not have to.</p>
 
       <div class="stack">
         <article class="scard black">
-          <h3>Chat with your pipeline</h3>
-          <p>Ask for leads, update records or pull a list of companies in plain words. The AI works with the same data you see.</p>
-          <div class="chatline" aria-hidden="true">
-            <span class="cl me">Which leads came in this week?</span>
-            <span class="cl">12 companies, 9 with a fit above 80.</span>
+          <h3>Talk to your CRM</h3>
+          <p>Ask AI works with the same records you see. Find leads, look up a company or create records by asking in plain words.</p>
+          <div class="talk" aria-hidden="true" data-talk>
+            <span class="cl me">Which companies did we add this week?</span>
+            <span class="cl">8 companies, all from the Berlin SaaS search on Monday.</span>
+            <span class="cl me">Create a task to call Northwind Dental on Friday.</span>
+            <span class="cl">Task created and linked to Northwind Dental Cloud.</span>
           </div>
         </article>
         <article class="scard white">
-          <h3>Saved straight to Companies</h3>
-          <p>Every lead lands as a real company record with its website, so nothing gets copied from a chat into a spreadsheet.</p>
-          <div class="strip tilt" aria-hidden="true">
-            <div class="order"><span class="cc" style="--c:#1740c7">92</span><div><b>Northwind Dental</b><small>northwinddental.io</small></div><div class="chips dark"><span>&#10003; Saved</span><span>Open record</span></div></div>
-            <div class="order"><span class="cc" style="--c:#35c79b">84</span><div><b>Meridian Health</b><small>meridianhealth.app</small></div><div class="chips dark"><span>&#10003; Saved</span><span>Open record</span></div></div>
-            <div class="order"><span class="cc" style="--c:#29b5e8">88</span><div><b>Atlas Field</b><small>atlasfield.io</small></div><div class="chips dark"><span>&#10003; Saved</span><span>Open record</span></div></div>
+          <h3>Triggers and actions</h3>
+          <p>Start a workflow when a record changes, on a schedule, from a webhook or by hand. Then create or update records, send email, call an API or run code.</p>
+          <div class="chips-rows" aria-hidden="true">
+            <div class="chip-track"><span class="tchip trig">Record created</span><span class="tchip trig">Record updated</span><span class="tchip trig">Schedule</span><span class="tchip trig">Webhook</span><span class="tchip trig">Manual</span><span class="tchip trig">Record created</span><span class="tchip trig">Record updated</span><span class="tchip trig">Schedule</span><span class="tchip trig">Webhook</span><span class="tchip trig">Manual</span></div>
+            <div class="chip-track rev"><span class="tchip">Create record</span><span class="tchip">Update record</span><span class="tchip">Search records</span><span class="tchip">Send email</span><span class="tchip">HTTP request</span><span class="tchip">Code</span><span class="tchip">If / else</span><span class="tchip">Filter</span><span class="tchip">Delay</span><span class="tchip">AI agent</span><span class="tchip">Form</span><span class="tchip">Create record</span><span class="tchip">Update record</span><span class="tchip">Search records</span><span class="tchip">Send email</span><span class="tchip">HTTP request</span></div>
           </div>
         </article>
         <article class="scard black">
           <h3>Local models with Ollama</h3>
-          <p>No API key at all? Run Ollama on the same machine and OS20 picks it up. Nothing leaves your computer.</p>
+          <p>No API key at all? Run Ollama on the same machine and OS20 picks it up. Your prompts and records stay on your computer.</p>
           <div class="local" aria-hidden="true">
-            <div class="local-box"><i class="lg" style="--src:url(img/logos/lobe-ollama.svg)"></i><code>localhost:11434</code><em>connected</em></div>
+            <div class="local-box"><i class="lg" style="--src:url(img/logos/lobe-ollama.svg)"></i><code>localhost:11434</code><em><span class="pulse-dot"></span>connected</em></div>
           </div>
         </article>
       </div>
     </section>
 
     <!-- CHAPTER 3: CRM -->
-    <section class="chapter light" id="crm" data-theme="crm">
+    <section class="chapter light" id="crm">
       <h2 class="chapter-title reveal"><span class="chapter-icon"><svg viewBox="0 0 32 32" fill="none" stroke="url(#g3)" stroke-width="2"><defs><linearGradient id="g3" x1="0" x2="1"><stop stop-color="#77b5ff"/><stop offset="1" stop-color="#a782ff"/></linearGradient></defs><rect x="6" y="6" width="8" height="8" rx="2"/><rect x="18" y="6" width="8" height="8" rx="2"/><rect x="6" y="18" width="8" height="8" rx="2"/><rect x="18" y="18" width="8" height="8" rx="2"/></svg></span>CRM</h2>
 
       <div class="panel panel-crm">
-        <div class="pipe-card reveal">
-          <div class="pipe-head">Pipeline <span class="av sm" style="--c:#c9a9ff">OS</span></div>
-          <div class="bars"><span>Leads</span><div><i style="--h:30%"></i><i style="--h:55%"></i><i style="--h:40%"></i><i style="--h:70%"></i><i style="--h:62%"></i><i style="--h:85%"></i><i style="--h:78%"></i></div></div>
-        </div>
-        <div class="browser reveal">
-          <div class="browser-head"><b>OS20</b><span>Companies</span><span>People</span><span>Opportunities</span></div>
-          <div class="browser-body">
-            <div class="hero-row"><p>All Companies</p><span>12</span></div>
-            <div class="row"><span class="av sm" style="--c:#f8d1c9">N</span>Northwind Dental Cloud<small>northwinddental.io</small></div>
-            <div class="row"><span class="av sm" style="--c:#dcf">M</span>Meridian Health OS<small>meridianhealth.app</small></div>
-            <div class="row"><span class="av sm" style="--c:#9dffca">A</span>Atlas Field Service<small>atlasfield.io</small></div>
-          </div>
+        <div class="demo-tag">Interactive demo <span>drag the cards</span></div>
+        <div class="kanban" data-kanban>
+          <div class="kb-top"><span class="kb-title"><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><circle cx="10" cy="10" r="3.5"/></svg>Opportunities</span><span class="kb-view">By stage</span><span class="kb-total" data-kb-total></span></div>
+          <div class="kb-cols" data-kb-cols></div>
         </div>
       </div>
 
@@ -204,24 +235,38 @@
       <div class="stack">
         <article class="scard white">
           <h3>A complete CRM</h3>
-          <p>Companies, people, opportunities, tasks and notes, with views, filters and a full REST and GraphQL API.</p>
-          <div class="objects" aria-hidden="true">
-            <span>Companies</span><span>People</span><span>Opportunities</span><span>Tasks</span><span>Notes</span><span>Workflows</span>
+          <p>Companies, people, opportunities, tasks and notes with table and board views, filters and a REST and GraphQL API. Click an object.</p>
+          <div class="objects-demo" data-objects>
+            <div class="obj-tabs" role="tablist"></div>
+            <div class="obj-card"><div class="obj-head"><span class="obj-icon" data-obj-icon></span><b data-obj-name></b></div><ul data-obj-fields></ul></div>
           </div>
         </article>
         <article class="scard black">
-          <h3>Automate the follow-up</h3>
-          <p>Workflows run when records change. Two are ready on install, including one that turns a quick lead into a company.</p>
-          <div class="insight" aria-hidden="true">
-            <div class="gauge-card"><span class="av" style="--c:#c9a9ff">W</span><b>Quick Lead</b><div class="gauge"><svg viewBox="0 0 120 70"><path d="M10 62a50 50 0 0 1 100 0" fill="none" stroke="#2e2e2e" stroke-width="8" stroke-linecap="round"/><path d="M10 62a50 50 0 0 1 86-35" fill="none" stroke="#8a9cf5" stroke-width="8" stroke-linecap="round"/></svg><strong>Active</strong><small>Workflow</small></div></div>
-            <div class="views"><span>Runs</span><div><i style="--h:30%"></i><i style="--h:60%"></i><i style="--h:25%"></i><i style="--h:45%"></i><i style="--h:65%"></i><i style="--h:80%"></i><i style="--h:70%"></i><i style="--h:90%"></i></div></div>
+          <h3>Dashboards</h3>
+          <p>Chart your own records: pipeline by stage, deals by close date and how many leads came in. Numbers update as records change.</p>
+          <div class="dash" aria-hidden="true" data-dash>
+            <div class="dcard d-num"><small>Open pipeline</small><strong data-num="485">0</strong><span>k USD</span></div>
+            <div class="dcard d-bars"><small>Deals by stage</small><div class="dbars"><i style="--h:.45"></i><i style="--h:.7"></i><i style="--h:.55"></i><i style="--h:.85"></i><i style="--h:.35"></i></div><div class="dlabels"><span>New</span><span>Scr.</span><span>Meet</span><span>Prop.</span><span>Cust.</span></div></div>
+            <div class="dcard d-gauge"><small>Leads saved</small><svg viewBox="0 0 120 70"><path d="M10 62a50 50 0 0 1 100 0" class="g-bg"/><path d="M10 62a50 50 0 0 1 100 0" class="g-fg"/></svg><strong data-num="72">0</strong><span>this month</span></div>
+            <div class="dcard d-line"><small>Companies added</small><svg viewBox="0 0 200 70" preserveAspectRatio="none"><path class="l-area" d="M0 60 L25 52 L50 55 L75 40 L100 44 L125 30 L150 34 L175 18 L200 12 L200 70 L0 70Z"/><path class="l-line" d="M0 60 L25 52 L50 55 L75 40 L100 44 L125 30 L150 34 L175 18 L200 12"/></svg></div>
           </div>
         </article>
         <article class="scard white">
           <h3>Your data stays yours</h3>
-          <p>Everything lives in a Postgres database inside Docker on your computer. No account, no login, ports bound to localhost only.</p>
-          <div class="objects" aria-hidden="true">
-            <span><i class="lg ink" style="--src:url(img/logos/si-postgresql.svg)"></i>Postgres</span><span><i class="lg ink" style="--src:url(img/logos/si-docker.svg)"></i>Docker</span><span>127.0.0.1</span><span>AES-GCM keys</span>
+          <p>Everything lives in a Postgres database inside Docker on your computer. No account, no login, ports bound to 127.0.0.1.</p>
+          <div class="local-map" aria-hidden="true">
+            <div class="lm-machine">
+              <span class="lm-label">Your computer</span>
+              <div class="lm-flow">
+                <span class="lm-node"><img src="img/mark.svg" alt="">OS20</span>
+                <span class="lm-wire"><i></i><i></i><i></i></span>
+                <span class="lm-node"><i class="lg" style="--src:url(img/logos/si-postgresql.svg)"></i>Postgres</span>
+                <span class="lm-wire"><i></i><i></i><i></i></span>
+                <span class="lm-node"><i class="lg" style="--src:url(img/logos/si-docker.svg)"></i>Volume</span>
+              </div>
+              <span class="lm-lock"><svg viewBox="0 0 20 20"><rect x="4" y="9" width="12" height="8" rx="2"/><path d="M7 9V6.5a3 3 0 016 0V9"/></svg>127.0.0.1 only</span>
+            </div>
+            <div class="lm-cloud"><svg viewBox="0 0 64 40"><path d="M18 34h30a10 10 0 000-20 14 14 0 00-27-3A11 11 0 0018 34z"/><path d="M14 6l36 30" class="x"/></svg><span>No OS20 cloud</span></div>
           </div>
         </article>
       </div>
@@ -260,13 +305,13 @@
           <span class="ico"><svg viewBox="0 0 30 30"><circle cx="15" cy="15" r="12"/><circle cx="15" cy="15" r="7"/><circle cx="15" cy="15" r="2"/></svg></span>fit scoring,
           <span class="ico"><svg viewBox="0 0 30 30"><circle cx="15" cy="10" r="5"/><path d="M5 27c1-6 5-9 10-9s9 3 10 9"/></svg></span>people and companies,
           <span class="ico"><svg viewBox="0 0 30 30"><circle cx="15" cy="15" r="4"/><path d="M15 3v4M15 23v4M3 15h4M23 15h4M6.5 6.5l3 3M20.5 20.5l3 3M6.5 23.5l3-3M20.5 9.5l3-3"/></svg></span>workflows,
+          <span class="ico"><svg viewBox="0 0 30 30"><rect x="4" y="16" width="5" height="10" rx="1"/><rect x="12.5" y="9" width="5" height="17" rx="1"/><rect x="21" y="4" width="5" height="22" rx="1"/></svg></span>dashboards,
           <span class="ico"><svg viewBox="0 0 30 30"><path d="M10 8l-7 7 7 7M20 8l7 7-7 7"/></svg></span>REST and GraphQL API,
-          <span class="ico"><svg viewBox="0 0 30 30"><path d="M15 3a9 9 0 00-5 16.5V23h10v-3.5A9 9 0 0015 3zM11 27h8"/></svg></span>local AI models,
-          <span class="ico"><svg viewBox="0 0 30 30"><path d="M15 3l3.5 7.5L27 12l-6 5.5 1.5 8.5L15 22l-7.5 4L9 17.5 3 12l8.5-1.5z"/></svg></span>open source
+          <span class="ico"><svg viewBox="0 0 30 30"><path d="M15 3a9 9 0 00-5 16.5V23h10v-3.5A9 9 0 0015 3zM11 27h8"/></svg></span>local AI models
         </p>
         <div class="pill reveal">
-          <p>Everything a small sales team needs, running on your own computer</p>
-          <a class="btn btn-white" href="https://github.com/omyvnss/os20">View on GitHub</a>
+          <p>Free and open source under AGPL-3.0. One command to install.</p>
+          <a class="btn btn-white" href="https://github.com/omyvnss/os20"><i class="lg" style="--src:url(img/logos/si-github.svg)"></i>View on GitHub</a>
         </div>
       </div>
     </section>
@@ -283,13 +328,16 @@
       </div>
     </section>
 
-    <!-- CTA + FOOTER -->
+    <!-- CTA -->
     <section class="cta">
       <div class="cta-copy">
-        <h4 class="reveal">Run your CRM on your<br>own machine today</h4>
+        <h4 class="reveal">Run your CRM on your <br>own machine today</h4>
+        <div class="cmd reveal">
+          <span class="cmd-tabs"><button type="button" class="is-on" data-cmd="npx os20-cli">npx</button><button type="button" data-cmd="curl -fsSL https://raw.githubusercontent.com/omyvnss/os20/main/install.sh | bash">curl</button></span>
+          <div class="cmd-row"><span>$</span><code data-cmd-out>npx os20-cli</code><button type="button" data-copy-cmd>Copy</button></div>
+        </div>
         <div class="cta-buttons reveal">
-          <button class="btn btn-purple" type="button" data-copy>Get started</button>
-          <a class="btn btn-ghost" href="https://github.com/omyvnss/os20">View on GitHub</a>
+          <a class="btn btn-ghost" href="https://github.com/omyvnss/os20"><i class="lg" style="--src:url(img/logos/si-github.svg)"></i>View on GitHub</a>
         </div>
       </div>
       <div class="cta-shot reveal"><img src="img/companies.png" alt="OS20 Companies view with saved companies" width="2880" height="1800" loading="lazy"></div>
@@ -297,16 +345,24 @@
   </main>
 
   <footer class="footer">
-    <div class="foot-grid">
-      <a class="logo light" href="#top"><img src="img/mark-white.svg" alt="" width="34" height="34"><span>OS20</span></a>
-      <div class="col"><span>Product</span><a href="#lead-engine">Lead engine</a><a href="#ai-agent">AI agent</a><a href="#crm">CRM</a></div>
-      <div class="col"><span>Company</span><a href="https://git11.xyz">git11</a><a href="https://git11.xyz">Om Yaduvanshi</a><a href="https://git11.xyz">Shreyash Raj Shekhar</a></div>
-      <div class="col"><span>Resources</span><a href="https://github.com/omyvnss/os20">GitHub</a><a href="https://github.com/omyvnss/os20#readme">Docs</a><a href="#faq">FAQ</a><a href="https://github.com/omyvnss/os20/blob/main/LICENSE">License</a></div>
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a class="logo light" href="#top"><img src="img/mark-white.svg" alt="" width="34" height="34"><span>OS20</span></a>
+        <p>An open source CRM with a lead engine, built to run on your own computer.</p>
+        <div class="foot-badges">
+          <span><i class="lg" style="--src:url(img/logos/si-opensourceinitiative.svg)"></i>AGPL-3.0</span>
+          <span><i class="lg" style="--src:url(img/logos/si-docker.svg)"></i>Docker</span>
+          <span><span class="pulse-dot"></span>Local first</span>
+        </div>
+      </div>
+      <div class="col"><span>Product</span><a href="#lead-engine">Lead engine</a><a href="#workflows">Workflows</a><a href="#crm">CRM</a><a href="#faq">FAQ</a></div>
+      <div class="col"><span>Resources</span><a href="https://github.com/omyvnss/os20">GitHub</a><a href="https://github.com/omyvnss/os20#readme">Docs</a><a href="https://github.com/omyvnss/os20/issues">Report an issue</a><a href="https://github.com/omyvnss/os20/blob/main/LICENSE">License</a></div>
+      <div class="col people"><span>Built by</span><a href="https://git11.xyz"><b>Om Yaduvanshi</b><small>Co-founder, CEO</small></a><a href="https://git11.xyz"><b>Shreyash Raj Shekhar</b><small>Co-founder, CTO</small></a><a href="https://git11.xyz" class="git11">git11.xyz</a></div>
     </div>
+    <div class="foot-word" aria-hidden="true">OS20</div>
     <div class="foot-meta">
-      <a href="https://github.com/omyvnss/os20/issues"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>Contact us</a>
-      <a class="gh" href="https://github.com/omyvnss/os20" aria-label="GitHub"><i class="lg" style="--src:url(img/logos/si-github.svg)"></i></a>
-      <span class="copy">Copyright &copy; 2026 git11. OS20 is open source under AGPL-3.0.</span>
+      <span>Copyright &copy; 2026 git11. OS20 is open source under AGPL-3.0.</span>
+      <a href="#top" class="to-top">Back to top <svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg></a>
     </div>
   </footer>
 
