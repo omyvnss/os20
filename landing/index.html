@@ -19,16 +19,18 @@
 
   <main id="top">
     <!-- HERO -->
-    <section class="hero">
+    <section class="hero" data-anim>
       <div class="hero-art" aria-hidden="true">
-        <div class="tube tube-top"></div>
-        <div class="tube tube-bottom"></div>
-        <div class="fall">
-          <span class="tile t-claude"><i class="lg" style="--src:url(img/logos/lobe-claude.svg)"></i></span>
-          <span class="tile t-openai"><i class="lg" style="--src:url(img/logos/lobe-openai.svg)"></i></span>
-          <span class="tile t-gemini"><i class="lg" style="--src:url(img/logos/lobe-gemini.svg)"></i></span>
-          <span class="tile t-ollama"><i class="lg" style="--src:url(img/logos/lobe-ollama.svg)"></i></span>
-          <span class="tile t-firecrawl"><i class="lg" style="--src:url(img/logos/lobe-firecrawl.svg)"></i></span>
+        <div class="pipes">
+          <div class="pipe pipe-a"><span class="mouth"></span></div>
+          <div class="lane">
+            <span class="drop" style="--d:0s"><span class="app-icon ic-gemini"><img src="img/logos/lobe-gemini-color.svg" alt=""></span></span>
+            <span class="drop" style="--d:-3s"><span class="app-icon ic-openai"><i class="lg" style="--src:url(img/logos/lobe-openai.svg)"></i></span></span>
+            <span class="drop" style="--d:-6s"><span class="app-icon ic-claude"><img src="img/logos/lobe-claude-color.svg" alt=""></span></span>
+            <span class="drop" style="--d:-9s"><span class="app-icon ic-ollama"><img src="img/logos/lobe-ollama.svg" alt=""></span></span>
+            <span class="drop" style="--d:-12s"><span class="app-icon ic-groq"><i class="lg" style="--src:url(img/logos/lobe-groq.svg)"></i></span></span>
+          </div>
+          <div class="pipe pipe-b"><span class="mouth"></span></div>
         </div>
         <div class="glass"></div>
       </div>
@@ -47,17 +49,6 @@
         <span class="badge"><i class="lg" style="--src:url(img/logos/si-apple.svg)"></i>macOS</span>
         <span class="badge"><i class="lg" style="--src:url(img/logos/si-windows.svg)"></i>Windows</span>
         <span class="badge"><i class="lg" style="--src:url(img/logos/si-linux.svg)"></i>Linux</span>
-        <span class="trust-sep"></span>
-        <span class="trust-label">Built with</span>
-        <span class="badge"><i class="lg" style="--src:url(img/logos/si-docker.svg)"></i>Docker</span>
-        <span class="badge"><i class="lg" style="--src:url(img/logos/si-postgresql.svg)"></i>PostgreSQL</span>
-        <span class="badge"><i class="lg" style="--src:url(img/logos/si-redis.svg)"></i>Redis</span>
-        <span class="badge"><i class="lg" style="--src:url(img/logos/si-nestjs.svg)"></i>NestJS</span>
-        <span class="badge"><i class="lg" style="--src:url(img/logos/si-react.svg)"></i>React</span>
-        <span class="trust-sep"></span>
-        <span class="badge dark"><i class="lg" style="--src:url(img/logos/si-opensourceinitiative.svg)"></i>AGPL-3.0</span>
-        <span class="badge dark">No account</span>
-        <span class="badge dark">Ports on 127.0.0.1</span>
       </div>
     </section>
 
@@ -74,32 +65,41 @@
 
       <div class="panel panel-lead">
         <div class="demo-tag">Interactive demo <span>sample data</span></div>
-        <div class="app" data-lead-demo>
-          <aside class="app-side">
-            <div class="app-ws"><img src="img/mark.svg" alt="" width="18" height="18">OS20</div>
-            <p class="app-group">Workspace</p>
-            <button type="button" class="app-nav is-on" data-view="companies"><svg viewBox="0 0 20 20"><path d="M4 17V5l6-2v14M10 8h6v9M7 7v.01M7 10v.01M7 13v.01M13 11v.01M13 14v.01"/></svg>Companies</button>
-            <button type="button" class="app-nav" data-view="people"><svg viewBox="0 0 20 20"><circle cx="10" cy="7" r="3.2"/><path d="M4 17c.8-3.4 3.2-5 6-5s5.2 1.6 6 5"/></svg>People</button>
-            <button type="button" class="app-nav" data-view="opportunities"><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><circle cx="10" cy="10" r="3.5"/></svg>Opportunities</button>
-            <button type="button" class="app-nav" data-view="tasks"><svg viewBox="0 0 20 20"><rect x="4" y="4" width="12" height="12" rx="2.5"/><path d="M7.5 10l2 2 3.5-4"/></svg>Tasks</button>
-            <button type="button" class="app-nav" data-view="notes"><svg viewBox="0 0 20 20"><rect x="5" y="3" width="10" height="14" rx="2"/><path d="M8 7h4M8 10h4M8 13h2"/></svg>Notes</button>
-            <button type="button" class="app-nav" data-view="workflows"><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="2.5"/><path d="M10 3v2.5M10 14.5V17M3 10h2.5M14.5 10H17M5 5l1.8 1.8M13.2 13.2L15 15M5 15l1.8-1.8M13.2 6.8L15 5"/></svg>Workflows</button>
+        <div class="os app" data-lead-demo>
+          <aside class="os-side">
+            <div class="os-ws"><span class="os-ws-logo">O</span>OS20<svg viewBox="0 0 16 16"><path d="M4 6l4 4 4-4"/></svg></div>
+            <div class="os-quick"><span class="os-qi"><svg viewBox="0 0 16 16"><path d="M3 7l5-4 5 4v6H3z"/></svg><svg viewBox="0 0 16 16"><circle cx="4" cy="4" r="1.5"/><circle cx="12" cy="8" r="1.5"/><circle cx="4" cy="12" r="1.5"/><path d="M4 5.5v5M5.5 4H9a3 3 0 013 3v-.5"/></svg><svg viewBox="0 0 16 16"><path d="M3 12V4h10v6H6z"/></svg></span><span class="os-newchat"><svg viewBox="0 0 16 16"><path d="M3 12V4h10v6H6z"/><path d="M8 5.5v3M6.5 7h3"/></svg>New chat</span></div>
+            <p class="os-group">Workspace</p>
+            <button type="button" class="os-nav is-on" data-view="companies"><span class="os-ico" style="--ib:#e7eeff;--is:#3e63dd"><svg viewBox="0 0 16 16"><path d="M3 13V4l5-1.5V13M8 6h5v7M5 6v.01M5 8.5v.01M5 11v.01M10.5 9v.01M10.5 11v.01"/></svg></span>Companies</button>
+            <button type="button" class="os-nav" data-view="people"><span class="os-ico" style="--ib:#e7eeff;--is:#3e63dd"><svg viewBox="0 0 16 16"><circle cx="8" cy="5.5" r="2.5"/><path d="M3.5 13c.6-2.6 2.4-3.8 4.5-3.8s3.9 1.2 4.5 3.8"/></svg></span>People</button>
+            <button type="button" class="os-nav" data-view="opportunities"><span class="os-ico" style="--ib:#ffe8e8;--is:#e5484d"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5"/><circle cx="8" cy="8" r="2.5"/></svg></span>Opportunities</button>
+            <button type="button" class="os-nav" data-view="tasks"><span class="os-ico" style="--ib:#e3f7ec;--is:#30a46c"><svg viewBox="0 0 16 16"><rect x="3" y="3" width="10" height="10" rx="2"/><path d="M6 8l1.5 1.5L10.5 6.5"/></svg></span>Tasks</button>
+            <button type="button" class="os-nav" data-view="notes"><span class="os-ico" style="--ib:#e0f5f3;--is:#12a594"><svg viewBox="0 0 16 16"><rect x="4" y="2.5" width="8" height="11" rx="1.5"/><path d="M6 6h4M6 8.5h4M6 11h2"/></svg></span>Notes</button>
+            <button type="button" class="os-nav" data-view="dashboards"><span class="os-ico" style="--ib:#eeeeee;--is:#6f6f6f"><svg viewBox="0 0 16 16"><rect x="3" y="3" width="4" height="4" rx="1"/><rect x="9" y="3" width="4" height="4" rx="1"/><rect x="3" y="9" width="4" height="4" rx="1"/><rect x="9" y="9" width="4" height="4" rx="1"/></svg></span>Dashboards</button>
+            <button type="button" class="os-nav" data-view="workflows"><span class="os-ico" style="--ib:#fff0e0;--is:#f76b15"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="2"/><path d="M8 2.5v2M8 11.5v2M2.5 8h2M11.5 8h2M4.2 4.2l1.4 1.4M10.4 10.4l1.4 1.4M4.2 11.8l1.4-1.4M10.4 5.6l1.4-1.4"/></svg></span>Workflows</button>
           </aside>
-          <div class="app-main">
-            <div class="app-top"><span class="app-crumb" data-crumb>Companies</span><span class="app-count" data-count></span><span class="app-new" data-new>+ New Company</span></div>
-            <div class="app-bar"><span data-viewname>All Companies</span><span class="app-tools"><span>Filter</span><span>Sort</span><span>Options</span></span></div>
-            <div class="app-table"><table><thead data-head></thead><tbody data-rows></tbody></table></div>
+          <div class="os-main">
+            <div class="os-top"><span class="os-crumb"><span class="os-ico sm" data-crumb-ico></span><span data-crumb>Companies</span></span><span class="os-new" data-new>+ New Company</span><span class="os-kebab">&#8942;</span></div>
+            <div class="os-bar"><span class="os-view"><svg viewBox="0 0 16 16"><path d="M3 4h10M3 8h10M3 12h10"/></svg><span data-viewname>All Companies</span><span class="os-count" data-count></span></span><span class="os-tools"><span>Filter</span><span>Sort</span><span>Options</span></span></div>
+            <div class="os-table"><table><thead data-head></thead><tbody data-rows></tbody></table><div class="os-foot" data-foot></div></div>
           </div>
-          <aside class="app-chat">
-            <div class="chat-top">Ask AI<span>find_leads</span></div>
-            <div class="chat-log" data-log>
-              <div class="msg ai">Tell me who you sell to. I will search the web and save the companies that fit.</div>
+          <aside class="os-chat">
+            <div class="os-chat-top">Ask AI<span class="os-chat-icons"><svg viewBox="0 0 16 16"><path d="M10.5 3.5l2 2L6 12H4v-2z"/></svg><svg viewBox="0 0 16 16"><path d="M3 6V3h3M13 10v3h-3M3 3l4 4M13 13l-4-4"/></svg></span></div>
+            <div class="os-chat-log" data-log>
+              <div class="os-empty" data-empty>
+                <p>What can I help you with?</p>
+                <span><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="2"/><path d="M8 2.5v2M8 11.5v2M2.5 8h2M11.5 8h2"/></svg>Create a workflow</span>
+                <span><svg viewBox="0 0 16 16"><path d="M8 3v10M3 8h10"/></svg>Create a record</span>
+              </div>
             </div>
-            <form class="chat-form" data-form>
-              <input type="text" data-input value="Find SaaS companies in Berlin with 10 to 200 people" aria-label="Ask AI message">
-              <button type="submit" aria-label="Send"><svg viewBox="0 0 20 20"><path d="M10 16V4M5 9l5-5 5 5"/></svg></button>
+            <form class="os-input" data-form>
+              <textarea data-input rows="2" aria-label="Ask AI message">Find SaaS companies in Berlin with 10 to 200 people</textarea>
+              <div class="os-input-row">
+                <svg class="os-clip" viewBox="0 0 16 16"><path d="M10.5 5L6 9.5a1.5 1.5 0 002 2l5-5a3 3 0 00-4.2-4.2L3.8 7.3a4.5 4.5 0 006.4 6.4L13 11"/></svg>
+                <span class="os-model"><img src="img/logos/lobe-claude-color.svg" alt="">Anthropic · Claude</span>
+                <button type="submit" class="os-send" data-send><span data-send-label>Press Enter</span><kbd>&#8629;</kbd></button>
+              </div>
             </form>
-            <p class="chat-hint" data-hint>Press Enter to run the lead search</p>
           </aside>
         </div>
       </div>
@@ -107,27 +107,32 @@
       <p class="statement reveal">Find the companies that fit you, straight from the live web, with <span class="grad g-lead">one plain-English prompt.</span></p>
 
       <div class="stack">
-        <article class="scard white">
+        <article class="scard white" data-byo>
           <h3>Bring your own AI</h3>
-          <p>Use Claude, ChatGPT, Gemini, OpenRouter or Groq with your own key, or run a local model with Ollama and pay nothing.</p>
-          <div class="drift" aria-hidden="true">
-            <span class="dt" style="--bg:#d97757;--x:4%;--y:70%;--r:-12deg"><i class="lg" style="--src:url(img/logos/lobe-claude.svg)"></i></span>
-            <span class="dt" style="--bg:#000;--x:18%;--y:62%;--r:-8deg"><i class="lg" style="--src:url(img/logos/lobe-openai.svg)"></i></span>
-            <span class="dt" style="--bg:#f1f1f1;--fg:#000;--x:32%;--y:55%;--r:-10deg"><i class="lg" style="--src:url(img/logos/lobe-ollama.svg)"></i></span>
-            <span class="dt" style="--bg:#6467f2;--x:46%;--y:48%;--r:-6deg"><i class="lg" style="--src:url(img/logos/lobe-openrouter.svg)"></i></span>
-            <span class="dt" style="--bg:#f55036;--x:60%;--y:43%;--r:-9deg"><i class="lg" style="--src:url(img/logos/lobe-groq.svg)"></i></span>
-            <span class="dt" style="--bg:#e8f0fe;--fg:#1a73e8;--x:74%;--y:38%;--r:-7deg"><i class="lg" style="--src:url(img/logos/lobe-gemini.svg)"></i></span>
-            <span class="dt" style="--bg:#ccedff;--fg:#000;--x:88%;--y:32%;--r:-11deg"><i class="lg" style="--src:url(img/logos/lobe-anthropic.svg)"></i></span>
+          <p>Use Claude, ChatGPT, Gemini, OpenRouter or Groq with your own key, or run a local model with Ollama and pay nothing. Tap a logo.</p>
+          <div class="byo-note" data-byo-note>Keys are added in Settings, AI Providers.</div>
+          <div class="byo" data-byo-field>
+            <button type="button" class="byo-tile" style="--x:6%;--y:62%;--r:-10deg" data-name="Claude" data-note="Paste an Anthropic key in Settings, AI Providers."><span class="app-icon ic-claude"><img src="img/logos/lobe-claude-color.svg" alt="Claude"></span></button>
+            <button type="button" class="byo-tile" style="--x:21%;--y:40%;--r:6deg" data-name="ChatGPT" data-note="Paste an OpenAI key in Settings, AI Providers."><span class="app-icon ic-openai"><i class="lg" style="--src:url(img/logos/lobe-openai.svg)"></i></span></button>
+            <button type="button" class="byo-tile" style="--x:36%;--y:66%;--r:-4deg" data-name="Gemini" data-note="Paste a Google AI key in Settings, AI Providers."><span class="app-icon ic-gemini"><img src="img/logos/lobe-gemini-color.svg" alt="Gemini"></span></button>
+            <button type="button" class="byo-tile" style="--x:51%;--y:38%;--r:8deg" data-name="Ollama" data-note="No key needed. OS20 finds Ollama running on this computer."><span class="app-icon ic-ollama"><img src="img/logos/lobe-ollama.svg" alt="Ollama"></span></button>
+            <button type="button" class="byo-tile" style="--x:66%;--y:62%;--r:-7deg" data-name="Groq" data-note="Paste a Groq key in Settings, AI Providers."><span class="app-icon ic-groq"><i class="lg" style="--src:url(img/logos/lobe-groq.svg)"></i></span></button>
+            <button type="button" class="byo-tile" style="--x:81%;--y:40%;--r:5deg" data-name="OpenRouter" data-note="One OpenRouter key gives access to many hosted models."><span class="app-icon ic-openrouter"><i class="lg" style="--src:url(img/logos/lobe-openrouter.svg)"></i></span></button>
           </div>
         </article>
-        <article class="scard black">
+        <article class="scard black" data-search-card>
           <h3>Search the live web</h3>
           <p>Add a Firecrawl, Tavily, Brave or SerpApi key and OS20 reads real company websites, not a database that went stale last year.</p>
-          <div class="frames" aria-hidden="true">
-            <div class="frame-ring"></div>
-            <span class="fr"><span style="--bg:#ff6a2c"><i class="lg" style="--src:url(img/logos/lobe-firecrawl.svg)"></i></span></span>
-            <span class="fr"><span style="--bg:#8dc8ff"><i class="lg" style="--src:url(img/logos/lobe-tavily.svg)"></i></span></span>
-            <span class="fr"><span style="--bg:#fb542b"><i class="lg" style="--src:url(img/logos/si-brave.svg)"></i></span></span>
+          <div class="web" aria-hidden="true">
+            <div class="web-tabs">
+              <button type="button" class="is-on" data-engine="Firecrawl"><img src="img/logos/lobe-firecrawl-color.svg" alt=""></button>
+              <button type="button" data-engine="Tavily"><img src="img/logos/lobe-tavily-color.svg" alt=""></button>
+              <button type="button" data-engine="Brave"><i class="lg" style="--src:url(img/logos/si-brave.svg);--fg:#fb542b"></i></button>
+            </div>
+            <div class="web-box">
+              <div class="web-query"><svg viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5L14 14"/></svg><span data-web-query></span><em data-web-engine>Firecrawl</em></div>
+              <ul class="web-results" data-web-results></ul>
+            </div>
           </div>
         </article>
         <article class="scard white">
@@ -158,32 +163,33 @@
       <h2 class="chapter-title reveal"><span class="chapter-icon white"><svg viewBox="0 0 32 32" fill="none" stroke="url(#g2)" stroke-width="2"><defs><linearGradient id="g2" x1="0" x2="1"><stop stop-color="#5aaef5"/><stop offset="1" stop-color="#3fcf8e"/></linearGradient></defs><rect x="11" y="4" width="10" height="6" rx="2"/><rect x="4" y="22" width="10" height="6" rx="2"/><rect x="18" y="22" width="10" height="6" rx="2"/><path d="M16 10v6M9 22v-3h14v3" stroke-linejoin="round"/></svg></span>Workflows</h2>
 
       <div class="panel panel-agent">
-        <div class="demo-tag">Interactive demo <span>real prefilled workflow</span></div>
-        <div class="wf" data-wf>
+        <div class="demo-tag">Live preview <span>your prefilled workflow</span></div>
+        <div class="os wf" data-wf>
           <div class="wf-top">
             <span class="wf-crumb"><span>Workflows /</span> Create company when adding a new person</span>
-            <span class="wf-status">Active</span>
-            <div class="wf-controls">
-              <label class="wf-select">New person email
-                <select data-wf-email>
-                  <option value="jane@northwinddental.io">jane@northwinddental.io</option>
-                  <option value="alex@foldstudio.design">alex@foldstudio.design</option>
-                  <option value="sam.lee@gmail.com">sam.lee@gmail.com</option>
-                </select>
-              </label>
-              <button type="button" class="wf-run" data-wf-run><svg viewBox="0 0 16 16"><path d="M5 3.5v9l7-4.5z"/></svg>Test run</button>
+            <span class="wf-status" data-wf-status>Draft</span>
+            <div class="wf-actions">
+              <span class="wf-btn">+ Add a Node</span>
+              <span class="wf-btn">See Runs</span>
+              <span class="wf-btn dark" data-wf-test><svg viewBox="0 0 16 16"><path d="M5 3.5v9l7-4.5z"/></svg>Test</span>
             </div>
           </div>
-          <div class="wf-body">
-            <div class="wf-canvas" data-wf-canvas></div>
-            <aside class="wf-panel">
-              <p class="wf-panel-label" data-wf-kind>Trigger</p>
-              <h4 data-wf-title>Record is created or updated</h4>
-              <p class="wf-panel-desc" data-wf-desc>Runs when a person is created or their email changes.</p>
-              <p class="wf-panel-label">Run log</p>
-              <ol class="wf-log" data-wf-log><li class="muted">Pick an email and press Test run.</li></ol>
-            </aside>
+          <div class="wf-canvas" data-wf-canvas>
+            <div class="wf-stage" data-wf-stage>
+              <svg class="wf-lines" data-wf-lines width="760" height="660"></svg>
+              <div class="wf-bubble" data-wf-bubble></div>
+            </div>
+            <div class="wf-panel" data-wf-panel>
+              <p>Select a trigger</p>
+              <span class="wf-item" data-wf-pick><svg viewBox="0 0 16 16"><path d="M3 13l1-3 7-7 2 2-7 7z"/></svg>Record is created or updated</span>
+              <span class="wf-item"><svg viewBox="0 0 16 16"><path d="M4 5h8M6 5V3.5h4V5M5 5l.7 8h4.6L11 5"/></svg>Record is deleted</span>
+              <span class="wf-item"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5"/><path d="M8 5v3l2 1.5"/></svg>On a schedule</span>
+              <span class="wf-item"><svg viewBox="0 0 16 16"><path d="M6 10a3 3 0 115-2.2M10 6a3 3 0 11-5 2.2"/></svg>Webhook</span>
+              <span class="wf-item"><svg viewBox="0 0 16 16"><path d="M5 3.5v9l7-4.5z"/></svg>Launch manually</span>
+            </div>
           </div>
+          <div class="wf-ghost" data-wf-ghost><span class="ni"><svg viewBox="0 0 16 16"><path d="M3 13l1-3 7-7 2 2-7 7z"/></svg></span><span><small>Trigger</small><b>Record is created or updated</b></span></div>
+          <div class="wf-cursor" data-wf-cursor><svg viewBox="0 0 24 24"><path d="M5 3l14 8.5-6.2 1.3L9.6 19z"/></svg></div>
         </div>
       </div>
 
@@ -224,9 +230,21 @@
 
       <div class="panel panel-crm">
         <div class="demo-tag">Interactive demo <span>drag the cards</span></div>
-        <div class="kanban" data-kanban>
-          <div class="kb-top"><span class="kb-title"><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><circle cx="10" cy="10" r="3.5"/></svg>Opportunities</span><span class="kb-view">By stage</span><span class="kb-total" data-kb-total></span></div>
-          <div class="kb-cols" data-kb-cols></div>
+        <div class="os kanban" data-kanban>
+          <aside class="os-side">
+            <div class="os-ws"><span class="os-ws-logo">O</span>OS20<svg viewBox="0 0 16 16"><path d="M4 6l4 4 4-4"/></svg></div>
+            <p class="os-group">Workspace</p>
+            <span class="os-nav"><span class="os-ico" style="--ib:#e7eeff;--is:#3e63dd"><svg viewBox="0 0 16 16"><path d="M3 13V4l5-1.5V13M8 6h5v7"/></svg></span>Companies</span>
+            <span class="os-nav"><span class="os-ico" style="--ib:#e7eeff;--is:#3e63dd"><svg viewBox="0 0 16 16"><circle cx="8" cy="5.5" r="2.5"/><path d="M3.5 13c.6-2.6 2.4-3.8 4.5-3.8s3.9 1.2 4.5 3.8"/></svg></span>People</span>
+            <span class="os-nav is-on"><span class="os-ico" style="--ib:#ffe8e8;--is:#e5484d"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5"/><circle cx="8" cy="8" r="2.5"/></svg></span>Opportunities</span>
+            <span class="os-nav"><span class="os-ico" style="--ib:#e3f7ec;--is:#30a46c"><svg viewBox="0 0 16 16"><rect x="3" y="3" width="10" height="10" rx="2"/><path d="M6 8l1.5 1.5L10.5 6.5"/></svg></span>Tasks</span>
+            <span class="os-nav"><span class="os-ico" style="--ib:#e0f5f3;--is:#12a594"><svg viewBox="0 0 16 16"><rect x="4" y="2.5" width="8" height="11" rx="1.5"/><path d="M6 6h4M6 8.5h4"/></svg></span>Notes</span>
+          </aside>
+          <div class="os-main">
+            <div class="os-top"><span class="os-crumb"><span class="os-ico sm" style="--ib:#ffe8e8;--is:#e5484d"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5"/><circle cx="8" cy="8" r="2.5"/></svg></span>Opportunities</span><span class="os-new">+ New Opportunity</span><span class="os-kebab">&#8942;</span></div>
+            <div class="os-bar"><span class="os-view"><svg viewBox="0 0 16 16"><rect x="3" y="3" width="4" height="10" rx="1"/><rect x="9" y="3" width="4" height="6" rx="1"/></svg>By Stage<span class="os-count" data-kb-count></span></span><span class="os-tools"><span>Filter</span><span>Sort</span><span>Options</span></span></div>
+            <div class="kb-cols" data-kb-cols></div>
+          </div>
         </div>
       </div>
 
@@ -234,8 +252,8 @@
 
       <div class="stack">
         <article class="scard white">
-          <h3>A complete CRM</h3>
-          <p>Companies, people, opportunities, tasks and notes with table and board views, filters and a REST and GraphQL API. Click an object.</p>
+          <h3>Companies, people and deals</h3>
+          <p>The standard CRM objects, with table and board views, filters, and a REST and GraphQL API. Click one to see its fields.</p>
           <div class="objects-demo" data-objects>
             <div class="obj-tabs" role="tablist"></div>
             <div class="obj-card"><div class="obj-head"><span class="obj-icon" data-obj-icon></span><b data-obj-name></b></div><ul data-obj-fields></ul></div>
@@ -243,7 +261,7 @@
         </article>
         <article class="scard black">
           <h3>Dashboards</h3>
-          <p>Chart your own records: pipeline by stage, deals by close date and how many leads came in. Numbers update as records change.</p>
+          <p>Build charts from your own records, like deals by stage or companies added each week.</p>
           <div class="dash" aria-hidden="true" data-dash>
             <div class="dcard d-num"><small>Open pipeline</small><strong data-num="485">0</strong><span>k USD</span></div>
             <div class="dcard d-bars"><small>Deals by stage</small><div class="dbars"><i style="--h:.45"></i><i style="--h:.7"></i><i style="--h:.55"></i><i style="--h:.85"></i><i style="--h:.35"></i></div><div class="dlabels"><span>New</span><span>Scr.</span><span>Meet</span><span>Prop.</span><span>Cust.</span></div></div>
@@ -357,7 +375,7 @@
       </div>
       <div class="col"><span>Product</span><a href="#lead-engine">Lead engine</a><a href="#workflows">Workflows</a><a href="#crm">CRM</a><a href="#faq">FAQ</a></div>
       <div class="col"><span>Resources</span><a href="https://github.com/omyvnss/os20">GitHub</a><a href="https://github.com/omyvnss/os20#readme">Docs</a><a href="https://github.com/omyvnss/os20/issues">Report an issue</a><a href="https://github.com/omyvnss/os20/blob/main/LICENSE">License</a></div>
-      <div class="col people"><span>Built by</span><a href="https://git11.xyz"><b>Om Yaduvanshi</b><small>Co-founder, CEO</small></a><a href="https://git11.xyz"><b>Shreyash Raj Shekhar</b><small>Co-founder, CTO</small></a><a href="https://git11.xyz" class="git11">git11.xyz</a></div>
+      <div class="col people"><span>Built by</span><a href="https://git11.xyz"><b>Om Yaduvanshi</b><small>Founder</small></a><a href="https://git11.xyz" class="git11">git11.xyz</a></div>
     </div>
     <div class="foot-word" aria-hidden="true">OS20</div>
     <div class="foot-meta">
