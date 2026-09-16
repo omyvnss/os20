@@ -2,7 +2,8 @@
 
 import { spawn, execSync } from 'child_process';
 import { Command } from 'commander';
-import { existsSync, mkdirSync } from 'fs';
+import { copyFileSync, existsSync, mkdirSync, writeFileSync } from 'fs';
+import { randomBytes } from 'crypto';
 import { join } from 'path';
 import { homedir } from 'os';
 
@@ -10,6 +11,22 @@ const OS20_DIR = join(homedir(), '.os20');
 const APP_DIR = join(OS20_DIR, 'app');
 const REPO_URL = process.env.OS20_REPO_URL || 'https://github.com/omyvnss/os20.git';
 const DEFAULT_PORT = 3010;
+const ENV_FILE = join(OS20_DIR, '.env');
+
+// Secrets shared with install.sh. Generated once: APP_SECRET encrypts stored
+// API keys, so it must never change after the first start.
+function ensureEnvFile(): void {
+  if (!existsSync(ENV_FILE)) {
+    const secret = () => randomBytes(32).toString('hex');
+    writeFileSync(
+      ENV_FILE,
+      `APP_SECRET=${secret()}\nPGDB_ENCRYPTION_KEY=${secret()}\nOS20_LEADGEN_TOKEN=${secret()}\n`,
+      { mode: 0o600 },
+    );
+  }
+
+  copyFileSync(ENV_FILE, join(APP_DIR, '.env'));
+}
 
 function checkDocker(): boolean {
   try {
@@ -98,7 +115,7 @@ program
   .version('1.0.0');
 
 program
-  .command('start')
+  .command('start', { isDefault: true })
   .description('Start OS20 CRM')
   .option('-p, --port <port>', 'Port for the CRM', String(DEFAULT_PORT))
   .action(async (options) => {
@@ -120,6 +137,8 @@ program
     if (!ensureApp()) {
       process.exit(1);
     }
+
+    ensureEnvFile();
 
     console.log('  🐳 Starting services...');
     try {
@@ -192,6 +211,7 @@ program
 
     try {
       execSync('git pull --ff-only', { cwd: APP_DIR, stdio: 'inherit' });
+      ensureEnvFile();
       execSync('docker compose pull', {
         cwd: APP_DIR,
         stdio: 'inherit',

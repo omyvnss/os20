@@ -1,4 +1,4 @@
-<div align="center">
+# OS20 — Open-Source CRM with AI Lead Engine
 
 ![OS20](https://img.shields.io/badge/OS20-Bring%20Your%20Own%20AI-2ea44f?style=for-the-badge)
 ![License](https://img.shields.io/badge/license-AGPL--3.0-blue.svg)
@@ -18,22 +18,9 @@
   <a href="#license">License</a>
 </p>
 
-</div>
-
 ---
 
-## What is OS20?
-
-**OS20** is a **local-first, open-source CRM** — a fork of [Twenty](https://github.com/twentyhq/twenty), redesigned around one simple idea: the CRM runs on **your** machine, and **you** bring your own AI.
-
-- **No cloud, no signup, no login.** Zero auth — a full CRM dashboard the moment it boots.
-- **Bring-your-own AI.** Connect OpenAI, Anthropic, Google Gemini, OpenRouter, Groq — or a local, private **Ollama** model. 100+ models, zero lock-in.
-- **Your data stays local.** PostgreSQL + storage run on your machine. Nothing leaves it.
-- **Local-first AI.** Use a fully offline local model and your CRM + AI run with **no internet at all**.
-
 ## Quick Start
-
-The fastest way to run OS20 is the one-line CLI:
 
 ```bash
 npx os20-cli
@@ -59,14 +46,13 @@ Prefer Docker only? Works straight from this repo:
 
 ```bash
 git clone https://github.com/omyvnss/os20.git
-cd os20
+cd os20/os20-pub
 docker compose up -d
-# → http://localhost:3010
 ```
 
 The Compose file pulls prebuilt images from `ghcr.io/omyvnss/os20` and `ghcr.io/omyvnss/os20-leadgen` — no local build required.
 
-### Ports
+---
 
 | Service | Purpose | Port |
 |---------|---------|------|
@@ -75,84 +61,147 @@ The Compose file pulls prebuilt images from `ghcr.io/omyvnss/os20` and `ghcr.io/
 | PostgreSQL | Database | `5433` |
 | Redis | Cache | `6380` |
 
-Ports are offset from the defaults so OS20 never clashes with other local projects.
+### CRM Dashboard (`:3010`)
+- Contacts, Companies, Opportunities, People management
+- AI Chat Agent with your own API keys (BYOK)
+- Lead Generation page with AI scoring + outreach generation
+- Custom objects, views, filters, sorting
+- Full GraphQL + REST API
 
-## What You Get
+### AI Lead Engine (`:8120`)
+Built on **[Scout](https://github.com/kiryano/Scout)** (MIT) + **[ScrapeGraphAI](https://github.com/ScrapeGraphAI/Scrapegraph-AI)**:
 
-- **Full CRM** — Companies, People, Opportunities, Tasks, Notes, Dashboards, Workflows
-- **AI Chat** — ask questions about your data in natural language
-- **AI Agents** — automate workflows with AI-powered actions
-- **Lead generation** — web search, company scraping, and AI lead scoring
-- **Bring-your-own-key** — add any provider in Settings → AI Providers
-- **100% local** — PostgreSQL + storage on your disk, Ollama auto-detected
-- **Zero auth** — no signup, no login, no email collection
+| Feature | How it works |
+|---------|-------------|
+| **Web Search** | Bing API → discovers companies matching your ICP |
+| **Company Scraping** | Regex extraction → name, industry, emails, description |
+| **AI Extraction** | ScrapeGraphAI SmartScraperGraph (BYOK LLM) → deep structured extraction |
+| **AI Scoring** | LLM scores each lead 0-100 against your Ideal Customer Profile |
+| **Email Verification** | DNS MX lookup + SMTP RCPT check — verified vs deliverable vs unknown |
+| **Outreach Generation** | LLM writes personalized outreach messages per lead |
+| **Persistence** | Leads saved to workspace-scoped JSONB store → survive restarts |
 
-## AI Providers
+### Endpoints
 
-Add keys in **Settings → AI Providers** after launch — or use a fully local model.
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/health` | GET | Service health check |
+| `/verify-email` | POST | `{email}` → MX + SMTP verification |
+| `/enrich` | POST | `{company, website, description}` → deep scrape + MX + score |
+| `/enrich-bulk` | POST | Batch enrichment |
+| `/extract` | POST | `{url, provider, apiKey, model}` → ScrapeGraphAI LLM extraction |
 
-| Provider | Models |
-|----------|--------|
-| **OpenAI** | GPT-4o, GPT-4o-mini, o3, o3-mini, o4-mini |
-| **Anthropic** | Claude Sonnet 4, Claude Opus 4, Claude 3.5 Haiku |
-| **Google** | Gemini 2.5 Pro, Gemini 2.5 Flash, Gemini 2.0 Flash |
-| **OpenRouter** | 100+ models from every major provider |
-| **Groq** | Llama 3.3 70B, Mixtral 8x7B, and more |
-| **Ollama** | Any locally installed model (auto-detected, fully offline) |
+---
 
-No account required to try OS20 — point it at any model you already have and go.
+## BYOK (Bring Your Own Key)
+
+Zero recurring cost. The system uses YOUR API keys for AI:
+
+1. Open **http://localhost:3010** → Settings → AI Providers
+2. Save a key for OpenRouter, OpenAI, Anthropic, Google, Groq, or OmniRoute
+3. AI chat, workflow AI steps, lead scoring, and outreach use it automatically
+
+Keys are encrypted with your `APP_SECRET` and never shown again after saving.
+
+**Local models:**
+- **Ollama** is reached at `host.docker.internal:11434`. On Linux, start Ollama with
+  `OLLAMA_HOST=0.0.0.0` so the container can connect.
+- **OmniRoute** is reached at `host.docker.internal:20128/v1`. Save any value as its key if
+  your router runs without auth.
+
+Without any key, lead scoring falls back to a heuristic score (no AI).
+
+---
+
+## Architecture
+
+```
+┌──────────────────────────────────────────────────────────┐
+│                     Docker Compose                        │
+│                                                           │
+│  ┌─────────┐  ┌─────────┐  ┌──────────────────────────┐ │
+│  │ OS20     │  │ Redis   │  │ PostgreSQL               │ │
+│  │ :3010    │  │ :6379   │  │ :5432                    │ │
+│  │ (CRM)    │  └─────────┘  │ (os20 DB)                │ │
+│  │          │                └──────────────────────────┘ │
+│  │  NestJS  │                                             │
+│  │  + React │  ┌────────────────────────────────────────┐ │
+│  │          │  │ OS20 Lead Engine (Python)               │ │
+│  │          │◄─┤ :8120                                    │ │
+│  │          │  │ FastAPI + ScrapeGraphAI + SMTP verify   │ │
+│  └─────────┘  └────────────────────────────────────────┘ │
+└──────────────────────────────────────────────────────────┘
+```
+
+The NestJS server calls the Python sidecar over HTTP (`OS20_LEADGEN_URL`).
+When the env var is empty, the lead engine is fully disabled — zero regression.
+
+---
 
 ## CLI
 
-The `os20` CLI is published to **npm** and manages the whole lifecycle:
-
 ```bash
 npx os20-cli            # Start OS20
-npx os20-cli start      # Start OS20
 npx os20-cli stop       # Stop OS20
 npx os20-cli status     # Check status
 npx os20-cli logs       # View logs (`-f` to follow)
-npx os20-cli update     # Pull latest image & recreate containers
+npx os20-cli update     # Pull latest images & recreate containers
 npx os20-cli reset      # DELETE all data, start fresh
 ```
 
-OS20 installs per-user under `~/.os20/`; all app state and data lives with it.
+Secrets live in `~/.os20/.env`, shared by the CLI and `install.sh`. Keep that file: changing
+`APP_SECRET` makes saved API keys unreadable.
 
-## Repository Layout
+---
 
-```
-.
-├── cli/                 # The `os20` npm CLI (installer + lifecycle tool)
-├── landing/             # Marketing site source (hosted on Lovable — NOT served by the app)
-├── docs/                # Architecture & configuration guides
-├── docker-compose.yml   # Runs the prebuilt GHCR image + PostgreSQL + Redis
-├── .env.example         # Optional AI keys & secret overrides
-└── entrypoint-os20.sh   # Local-first startup (migrate + serve)
-```
+## Running on a server (EC2, VPS)
 
-> **Slim distribution.** OS20 ships the CLI and Docker configuration that run the prebuilt image. The full Twenty monorepo (frontend, server) is built once into the published container image. The marketing site (`landing/`) lives on Lovable — the app itself opens the CRM dashboard at its root.
+OS20 has no login screen, so every port is published on `127.0.0.1` only. Never open port
+3010 to the internet directly.
+
+- **Just you:** tunnel over SSH, then open <http://localhost:3010>.
+  ```bash
+  ssh -L 3010:127.0.0.1:3010 you@your-server
+  ```
+- **A team on a domain:** run a reverse proxy on the same server that requires its own login
+  (for example Caddy `basic_auth`), proxy to `127.0.0.1:3010`, and add to `~/.os20/.env`:
+  ```bash
+  OS20_SERVER_URL=https://crm.example.com
+  OS20_ALLOWED_HOSTS=crm.example.com
+  ```
+- **Workflow HTTP steps** block private and host addresses by default. To call services
+  such as n8n on your network, set `OUTBOUND_HTTP_SAFE_MODE_ENABLED=false`.
+
+---
 
 ## Development
 
-See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) and [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) for the full picture.
-
-The container image is built from the full Twenty monorepo with the OS20 modifications. To rebuild and publish (requires `write:packages` on GHCR):
-
 ```bash
-docker build --target twenty \
-  -t ghcr.io/omyvnss/os20:latest \
-  -f packages/twenty-docker/twenty/Dockerfile .
-docker push ghcr.io/omyvnss/os20:latest
+# Run sidecar locally
+cd services/os20-leadgen
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+uvicorn main:app --port 8120
+
+# Run OS20 locally
+cd packages/twenty-server
+yarn dev
+
+# Run tests
+cd services/os20-leadgen && python -m pytest
 ```
 
-## Configuration
-
-OS20 works with **zero configuration**. Sensible defaults are baked in.
-
-- **AI keys** — optional. Add `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `GOOGLE_API_KEY`, `OPENROUTER_API_KEY`, `GROQ_API_KEY`, or use a local Ollama (`OLLAMA_BASE_URL`).
-- **Secrets** — generated automatically if unset (see `.env.example`).
-- **Environment overrides** — copy `.env.example` to `.env` and edit.
+---
 
 ## License
 
-**AGPL-3.0** — see [LICENSE](LICENSE).
+- OS20 core: AGPL-3.0
+- Scout enrichment: MIT ([Scout](https://github.com/kiryano/Scout))
+- ScrapeGraphAI: MIT ([ScrapegraphAI](https://github.com/ScrapegraphAI/Scrapegraph-AI))
+- Lead Engine: MIT
+
+---
+
+## Credits
+
+Built by **Om Yaduvanshi** (CEO) & **Shreyash Raj Shekhar** (CTO) — [git11.xyz](https://git11.xyz)

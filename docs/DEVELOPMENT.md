@@ -20,7 +20,6 @@ or publish new versions.
 ├── landing/             # Static marketing pages
 ├── docs/                # This documentation
 ├── docker-compose.yml   # Runs the prebuilt container + Postgres + Redis
-└── entrypoint-os20.sh   # Local-first startup (migrate + serve)
 ```
 
 ## The CLI
@@ -43,26 +42,28 @@ npm publish         # requires npm login
 
 ## The Container Image
 
-The production image (`ghcr.io/omyvnss/os20`) is built from the **full Twenty
-monorepo** with the OS20 modifications (multi-provider AI layer, local-first
-auth bypass, lead generation module, plus the landing site baked in).
+The production image (`ghcr.io/omyvnss/os20`) is built from the OS20 fork
+with the custom multi-provider AI layer, local-first auth bypass, lead
+generation module, and the landing site baked in.
 
-To build from source, you need the full fork. Then:
+To build from source you need the fork repo. Then:
 
 ```bash
+git clone https://github.com/omyvnss/os20-docker.git
+cd os20-docker
 docker build --target twenty \
   -t ghcr.io/omyvnss/os20:latest \
   -f packages/twenty-docker/twenty/Dockerfile .
-docker push ghcr.io/omyvnss/os20:latest   # requires write:packages on GHCR
+docker push ghcr.io/omyvnss/os20:latest
 ```
 
 If you'd rather build the frontend/server directly (not via Docker):
 
 ```bash
-git clone https://github.com/twentyhq/twenty.git
-cd twenty
+git clone https://github.com/omyvnss/os20-docker.git
+cd os20-docker
 yarn install
-yarn dev          # starts the Twenty dev environment
+yarn dev
 ```
 
 ## Running the stack locally

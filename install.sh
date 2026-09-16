@@ -37,7 +37,7 @@ REPO="os20"
 BRANCH="main"
 COMPOSE_URL="https://raw.githubusercontent.com/${REPO_OWNER}/${REPO}/${BRANCH}/docker-compose.yml"
 
-REQUESTED_DIR="${OS20_DIR:-$HOME/os20}"
+REQUESTED_DIR="${OS20_DIR:-$HOME/.os20}"
 RUNTIME_DIR="$REQUESTED_DIR"
 
 # ---------------------------------------------------------------------------
@@ -115,12 +115,9 @@ ENV_FILE="$RUNTIME_DIR/.env"
 if [ ! -f "$ENV_FILE" ]; then
   log "Generating secrets..."
   cat > "$ENV_FILE" <<EOF
-ACCESS_TOKEN_SECRET=$(openssl rand -hex 32 2>/dev/null || head -c 64 /dev/urandom | base64 | tr -dc 'a-zA-Z0-9' | head -c 64)
-LOGIN_TOKEN_SECRET=$(openssl rand -hex 32 2>/dev/null || head -c 64 /dev/urandom | base64 | tr -dc 'a-zA-Z0-9' | head -c 64)
-REFRESH_TOKEN_SECRET=$(openssl rand -hex 32 2>/dev/null || head -c 64 /dev/urandom | base64 | tr -dc 'a-zA-Z0-9' | head -c 64)
-FILE_TOKEN_SECRET=$(openssl rand -hex 32 2>/dev/null || head -c 64 /dev/urandom | base64 | tr -dc 'a-zA-Z0-9' | head -c 64)
-PGDB_ENCRYPTION_KEY=$(openssl rand -hex 32 2>/dev/null || head -c 64 /dev/urandom | base64 | tr -dc 'a-zA-Z0-9' | head -c 64)
 APP_SECRET=$(openssl rand -hex 32 2>/dev/null || head -c 64 /dev/urandom | base64 | tr -dc 'a-zA-Z0-9' | head -c 64)
+PGDB_ENCRYPTION_KEY=$(openssl rand -hex 32 2>/dev/null || head -c 64 /dev/urandom | base64 | tr -dc 'a-zA-Z0-9' | head -c 64)
+OS20_LEADGEN_TOKEN=$(openssl rand -hex 32 2>/dev/null || head -c 64 /dev/urandom | base64 | tr -dc 'a-zA-Z0-9' | head -c 64)
 EOF
   ok "Secrets generated → $ENV_FILE"
 fi

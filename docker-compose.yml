@@ -1,28 +1,42 @@
 name: os20
 
+# Secrets come from .env next to this file (install.sh and the CLI generate it).
+# APP_SECRET signs sessions and encrypts stored API keys: never change it after
+# the first start, or saved keys can no longer be decrypted.
+x-os20-env: &os20-env
+  NODE_ENV: development
+  PG_DATABASE_URL: postgres://postgres:postgres@db:5432/os20
+  SERVER_URL: ${OS20_SERVER_URL:-http://localhost:3010}
+  FRONT_BASE_URL: ${OS20_SERVER_URL:-http://localhost:3010}
+  REDIS_URL: redis://redis:6379
+  SKIP_AUTH: "true"
+  APP_SECRET: ${APP_SECRET:?APP_SECRET is missing. Run install.sh or npx os20-cli, which generate .env}
+  PGDB_ENCRYPTION_KEY: ${PGDB_ENCRYPTION_KEY:-}
+  STORAGE_TYPE: local
+  ALLOW_PRIVATE_EMAIL_HOSTS: "true"
+  # Workflow code steps run in-process; explicit so NODE_ENV never disables them.
+  LOGIC_FUNCTION_TYPE: LOCAL
+  # Set to "false" to let workflow HTTP steps reach services on your network.
+  OUTBOUND_HTTP_SAFE_MODE_ENABLED: ${OUTBOUND_HTTP_SAFE_MODE_ENABLED:-true}
+  # Extra hostnames allowed to open OS20 without login. Only for a reverse
+  # proxy that already requires its own authentication.
+  OS20_ALLOWED_HOSTS: ${OS20_ALLOWED_HOSTS:-}
+  OS20_LEADGEN_URL: http://os20-leadgen:8120
+  OS20_LEADGEN_TOKEN: ${OS20_LEADGEN_TOKEN:-}
+
 services:
   os20:
     image: ghcr.io/omyvnss/os20:latest
+    # Lets the container reach Ollama/OmniRoute on the host (needed on Linux).
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     ports:
-      - "3010:3000"
+      - "127.0.0.1:3010:3000"
     environment:
-      NODE_ENV: development
+      <<: *os20-env
       NODE_PORT: 3000
-      PG_DATABASE_URL: postgres://postgres:postgres@db:5432/os20
-      SERVER_URL: http://localhost:3010
-      REDIS_URL: redis://redis:6379
-      SKIP_AUTH: "true"
-      ACCESS_TOKEN_SECRET: ${ACCESS_TOKEN_SECRET:-os20-local-dev-secret-change-in-production}
-      LOGIN_TOKEN_SECRET: ${LOGIN_TOKEN_SECRET:-os20-local-login-secret-change-in-production}
-      REFRESH_TOKEN_SECRET: ${REFRESH_TOKEN_SECRET:-os20-local-refresh-secret-change-in-production}
-      FILE_TOKEN_SECRET: ${FILE_TOKEN_SECRET:-os20-local-file-secret-change-in-production}
-      PGDB_ENCRYPTION_KEY: ${PGDB_ENCRYPTION_KEY:-os20-local-encryption-key-change}
-      APP_SECRET: ${APP_SECRET:-os20-local-app-secret}
-      FRONT_BASE_URL: http://localhost:3010
-      STORAGE_TYPE: local
       DISABLE_DB_MIGRATIONS: ""
       DISABLE_CRON_JOBS_REGISTRATION: ""
-      OS20_LEADGEN_URL: http://os20-leadgen:8120
     depends_on:
       db:
         condition: service_healthy
@@ -31,7 +45,7 @@ services:
     volumes:
       - os20-data:/app/packages/twenty-server/.local-storage
     healthcheck:
-      test: curl --fail http://localhost:3000/healthz || curl --fail http://localhost:3000 || exit 1
+      test: curl --fail http://localhost:3000/healthz || exit 1
       interval: 10s
       timeout: 10s
       retries: 30
@@ -40,24 +54,17 @@ services:
 
   os20-worker:
     image: ghcr.io/omyvnss/os20:latest
-    command: node dist/queue-worker/queue-worker
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    command: node /app/packages/twenty-server/dist/queue-worker/queue-worker.js
+    working_dir: /app/packages/twenty-server
     environment:
-      NODE_ENV: development
-      PG_DATABASE_URL: postgres://postgres:postgres@db:5432/os20
-      SERVER_URL: http://localhost:3010
-      REDIS_URL: redis://redis:6379
-      SKIP_AUTH: "true"
-      ACCESS_TOKEN_SECRET: ${ACCESS_TOKEN_SECRET:-os20-local-dev-secret-change-in-production}
-      LOGIN_TOKEN_SECRET: ${LOGIN_TOKEN_SECRET:-os20-local-login-secret-change-in-production}
-      REFRESH_TOKEN_SECRET: ${REFRESH_TOKEN_SECRET:-os20-local-refresh-secret-change-in-production}
-      FILE_TOKEN_SECRET: ${FILE_TOKEN_SECRET:-os20-local-file-secret-change-in-production}
-      PGDB_ENCRYPTION_KEY: ${PGDB_ENCRYPTION_KEY:-os20-local-encryption-key-change}
-      APP_SECRET: ${APP_SECRET:-os20-local-app-secret}
-      FRONT_BASE_URL: http://localhost:3010
-      STORAGE_TYPE: local
+      <<: *os20-env
       DISABLE_DB_MIGRATIONS: "true"
       DISABLE_CRON_JOBS_REGISTRATION: "true"
     depends_on:
+      os20:
+        condition: service_healthy
       db:
         condition: service_healthy
       redis:
@@ -69,7 +76,15 @@ services:
   os20-leadgen:
     image: ghcr.io/omyvnss/os20-leadgen:latest
     ports:
-      - "8120:8120"
+      - "127.0.0.1:8120:8120"
+    environment:
+      PYTHONPATH: /app
+      OS20_LEADGEN_TOKEN: ${OS20_LEADGEN_TOKEN:-}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request as u; u.urlopen('http://localhost:8120/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
     restart: unless-stopped
 
   db:
@@ -77,7 +92,7 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
     ports:
-      - "5433:5432"
+      - "127.0.0.1:5433:5432"
     environment:
       POSTGRES_DB: os20
       POSTGRES_PASSWORD: postgres
@@ -92,7 +107,7 @@ services:
   redis:
     image: redis:7-alpine
     ports:
-      - "6380:6379"
+      - "127.0.0.1:6380:6379"
     restart: unless-stopped
     command: ["--maxmemory-policy", "noeviction"]
     healthcheck:
