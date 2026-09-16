@@ -46,6 +46,7 @@
     }
   };
   $$('[data-copy]').forEach((b) => b.addEventListener('click', () => copy(INSTALL)));
+  $$('[data-copy-text]').forEach((b) => b.addEventListener('click', () => copy(b.dataset.copyText)));
   const cmdOut = $('[data-cmd-out]');
   $$('.cmd-tabs button').forEach((tab, _, tabs) => tab.addEventListener('click', () => {
     tabs.forEach((t) => t.classList.toggle('is-on', t === tab));
@@ -54,7 +55,7 @@
   $('[data-copy-cmd]').addEventListener('click', () => copy(cmdOut.textContent));
 
   /* Pause looping animations while offscreen */
-  $$('[data-anim], .integrations, .scard').forEach((node) => whenVisible(node, (v) => node.classList.toggle('is-paused', !v), 0));
+  $$('.integrations, .scard').forEach((node) => whenVisible(node, (v) => node.classList.toggle('is-paused', !v), 0));
 
   /* Island + chapter menu */
   const island = $('[data-island]');

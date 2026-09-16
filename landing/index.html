@@ -8,7 +8,7 @@
   <link rel="icon" href="img/mark.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,700;1,400&family=Instrument+Serif&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -19,36 +19,31 @@
 
   <main id="top">
     <!-- HERO -->
-    <section class="hero" data-anim>
-      <div class="hero-art" aria-hidden="true">
-        <div class="pipes">
-          <div class="pipe pipe-a"><span class="mouth"></span></div>
-          <div class="lane">
-            <span class="drop" style="--d:0s"><span class="app-icon ic-gemini"><img src="img/logos/lobe-gemini-color.svg" alt=""></span></span>
-            <span class="drop" style="--d:-3s"><span class="app-icon ic-openai"><i class="lg" style="--src:url(img/logos/lobe-openai.svg)"></i></span></span>
-            <span class="drop" style="--d:-6s"><span class="app-icon ic-claude"><img src="img/logos/lobe-claude-color.svg" alt=""></span></span>
-            <span class="drop" style="--d:-9s"><span class="app-icon ic-ollama"><img src="img/logos/lobe-ollama.svg" alt=""></span></span>
-            <span class="drop" style="--d:-12s"><span class="app-icon ic-groq"><i class="lg" style="--src:url(img/logos/lobe-groq.svg)"></i></span></span>
+    <section class="hero">
+      <div class="scene">
+        <img src="img/scene-1920.jpg" srcset="img/scene-1000.jpg 1000w, img/scene-1920.jpg 1920w" sizes="100vw" width="1920" height="664" alt="Illustrated countryside with hills, cypress trees and a farmhouse, drawn from small code characters" fetchpriority="high">
+      </div>
+      <div class="hero-body">
+        <h1 class="hero-title">The CRM that finds <br>its own leads</h1>
+        <div class="hero-side">
+          <p>Open source CRM that runs on your computer. Ask the AI for leads and they are saved straight to your CRM.</p>
+          <div class="hero-btns">
+            <button type="button" class="hbtn dark" data-copy-text="npx os20-cli"><svg viewBox="0 0 16 16"><path d="M8 2.5v8M4.5 7L8 10.5 11.5 7M3 13h10"/></svg>npx os20-cli</button>
+            <button type="button" class="hbtn light" data-copy-text="curl -fsSL https://raw.githubusercontent.com/omyvnss/os20/main/install.sh | bash">Install with curl</button>
           </div>
-          <div class="pipe pipe-b"><span class="mouth"></span></div>
         </div>
-        <div class="glass"></div>
       </div>
-      <p class="hero-side reveal">Find leads with a prompt <br>instead of a spreadsheet.</p>
-      <h1 class="hero-title reveal">The CRM that finds <br>its own leads.</h1>
-      <div class="hero-cta reveal">
-        <p>Runs on your computer, uses your own AI key, <br>and keeps every lead on your device.</p>
-        <button class="btn btn-purple" type="button" data-copy>Copy install command</button>
-      </div>
-    </section>
-
-    <!-- TRUST STRIP -->
-    <section class="trust">
-      <div class="trust-row">
-        <span class="trust-label">Runs on</span>
-        <span class="badge"><i class="lg" style="--src:url(img/logos/si-apple.svg)"></i>macOS</span>
-        <span class="badge"><i class="lg" style="--src:url(img/logos/si-windows.svg)"></i>Windows</span>
-        <span class="badge"><i class="lg" style="--src:url(img/logos/si-linux.svg)"></i>Linux</span>
+      <div class="strip">
+        <span class="strip-label">Runs on</span>
+        <span class="strip-logo"><i class="lg" style="--src:url(img/logos/si-linux.svg)"></i>Linux</span>
+        <span class="strip-logo"><i class="lg" style="--src:url(img/logos/si-apple.svg)"></i>macOS</span>
+        <span class="strip-logo"><i class="lg" style="--src:url(img/logos/si-windows.svg)"></i>Windows</span>
+        <span class="strip-label">Built with</span>
+        <span class="strip-logo"><i class="lg" style="--src:url(img/logos/si-docker.svg)"></i>Docker</span>
+        <span class="strip-logo"><i class="lg" style="--src:url(img/logos/si-postgresql.svg)"></i>PostgreSQL</span>
+        <span class="strip-logo"><i class="lg" style="--src:url(img/logos/si-redis.svg)"></i>Redis</span>
+        <span class="strip-logo"><i class="lg" style="--src:url(img/logos/si-nodedotjs.svg)"></i>Node.js</span>
+        <span class="strip-logo"><i class="lg" style="--src:url(img/logos/si-react.svg)"></i>React</span>
       </div>
     </section>
 
