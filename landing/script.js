@@ -241,7 +241,10 @@
   const send = $('[data-send]', lead);
   const sendLabel = $('[data-send-label]', lead);
   const orbit = '<svg viewBox="0 0 14 14"><path d="M3.1 7C3.1 4.4 6 4.4 7 7s3.9 2.6 3.9 0S8 4.4 7 7 3.1 9.6 3.1 7" pathLength="100" stroke-dasharray="14 86"><animate attributeName="stroke-dashoffset" values="0;-100" dur="1.05s" repeatCount="indefinite"/><animate attributeName="stroke-dasharray" values="10 90;16 84;10 90" dur="1.05s" repeatCount="indefinite"/></path></svg>';
-  const toolIcon = '<svg viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5L14 14"/></svg>';
+  const cpuIcon = '<svg viewBox="0 0 16 16"><rect x="4" y="4" width="8" height="8" rx="1.5"/><path d="M6.5 6.5h3v3h-3zM6 2v2M10 2v2M6 12v2M10 12v2M2 6h2M2 10h2M12 6h2M12 10h2"/></svg>';
+  const dbIcon = '<svg viewBox="0 0 16 16"><ellipse cx="8" cy="4" rx="5" ry="2"/><path d="M3 4v8c0 1.1 2.2 2 5 2s5-.9 5-2V4M3 8c0 1.1 2.2 2 5 2s5-.9 5-2"/></svg>';
+  const chevron = '<svg class="chev" viewBox="0 0 16 16"><path d="M6 4l4 4-4 4"/></svg>';
+  const check = '<svg viewBox="0 0 12 12"><path d="M2.5 6.2l2.3 2.3 4.7-4.9"/></svg>';
   let running = false;
 
   const push = (node) => {
@@ -255,8 +258,56 @@
     for (let i = 0; i < words.length; i += 2) {
       node.innerHTML = words.slice(0, i + 1).join('');
       log.scrollTop = log.scrollHeight;
-      await sleep(reduced ? 0 : 28);
+      await sleep(reduced ? 0 : 45);
     }
+  };
+
+  const collapsible = (head, body) => {
+    head.addEventListener('click', () => {
+      if (!head.classList.contains('done')) return;
+      head.classList.toggle('open');
+    });
+    head.after(body);
+  };
+
+  const think = async (reason, ms) => {
+    const row = push(el('div', 'think', `${cpuIcon}<span class="tool-text shimmer">Thinking</span>`));
+    collapsible(row, el('p', 'think-body', reason));
+    await sleep(ms);
+    const label = $('.tool-text', row);
+    label.className = 'tool-text';
+    label.innerHTML = `Thought${chevron}`;
+    row.classList.add('done');
+  };
+
+  const runTool = (label, name) => {
+    const row = push(el('div', 'tool open', `<span>${dbIcon}<span class="tool-text shimmer">Running ${label}</span></span><span class="tool-name">${name}</span>`));
+    const list = el('ul', 'steps');
+    collapsible(row, list);
+    return {
+      step: (text) => {
+        const li = el('li', 'step', `<span class="step-ic"><i class="spin"></i></span><span class="step-label">${text}</span><span class="step-out"></span>`);
+        list.append(li);
+        log.scrollTop = log.scrollHeight;
+        const out = $('.step-out', li);
+        return {
+          out: (t) => { out.textContent = t; },
+          done: (t) => {
+            out.textContent = t;
+            li.classList.add('ok');
+            $('.step-ic', li).innerHTML = check;
+          },
+          detail: (html) => li.append(el('div', 'step-detail', html)),
+        };
+      },
+      finish: () => {
+        const t = $('.tool-text', row);
+        t.className = 'tool-text';
+        t.innerHTML = `Ran ${label}${chevron}`;
+        row.classList.add('done');
+        row.classList.remove('open');
+      },
+    };
   };
 
   const runLeadSearch = async (text) => {
@@ -268,30 +319,63 @@
     if (empty) empty.remove();
     push(el('div', 'u-msg')).textContent = text;
 
-    const thinking = push(el('div', 'think', `${orbit}<span>Thinking</span>`));
-    await sleep(1400);
-    thinking.remove();
+    await think('The user wants SaaS companies in Berlin. I will call find_leads with industry SaaS and location Berlin, then look up contact channels for the best matches.', 2200);
 
-    const tool = push(el('div', 'tool', `<span>${toolIcon}<span class="tool-text shimmer">Running Find Leads</span></span><span class="tool-name">find_leads</span>`));
-    await sleep(4200);
+    const leads = runTool('Find Leads', 'find_leads');
+    const pipeline = [
+      ['Building search queries', '4 queries'],
+      ['Searching the web with Firecrawl', '38 results'],
+      ['Dropping directories and articles', '22 removed'],
+    ];
+    for (const [label, result] of pipeline) {
+      const s = leads.step(label);
+      await sleep(900 + Math.random() * 400);
+      s.done(result);
+    }
+    const reading = leads.step('Reading company websites');
+    for (let i = 1; i <= 16; i++) {
+      reading.out(`${i}/16`);
+      await sleep(85);
+    }
+    await sleep(150);
+    reading.done('16/16');
+    const scoring = leads.step('Scoring fit with a free OpenRouter model');
+    await sleep(1300);
+    scoring.done('7 above 70');
 
+    const saving = leads.step('Saving to Companies');
     if (current !== 'companies') switchView('companies');
     const fresh = found.filter(([n]) => !companyRows.some(([m]) => m === n));
-    companyRows = [...fresh.map(([n, d]) => [n, d, 'less than a minute ago', '']), ...companyRows];
-    render(fresh.length);
+    await sleep(300);
+    for (const [n, d] of [...fresh].reverse()) {
+      companyRows = [[n, d, 'less than a minute ago', ''], ...companyRows];
+      if (current !== 'companies') switchView('companies');
+      render(1);
+      saving.out(`${companyRows.length - existing.length}/${fresh.length}`);
+      await sleep(190);
+    }
+    await sleep(250);
+    saving.done(`${fresh.length} saved`);
+    await sleep(500);
+    leads.finish();
 
-    $('.tool-text', tool).className = 'tool-text';
-    $('.tool-text', tool).textContent = `Found ${found.length} lead(s) in 9s; saved ${fresh.length} to the CRM${fresh.length < found.length ? `, ${found.length - fresh.length} already there` : ''}.`;
-    tool.classList.add('done');
-    const out = el('div', 'tool-out');
-    out.textContent = found.map(([n, d, s]) => `${String(s).padStart(3)}  ${n}  https://${d}`).join('\n');
-    tool.after(out);
-    tool.addEventListener('click', () => tool.classList.toggle('open'));
+    await sleep(400);
+    await think('Contentful, n8n and Parloa scored highest. I will check their websites for public contact channels before answering.', 1800);
+
+    const contact = runTool('Find Contact Info (Emails &amp; Phones)', 'find_contact');
+    for (const [n, d] of found.slice(0, 3)) {
+      const s = contact.step(`Looking up contact channels for ${n}`);
+      await sleep(1100 + Math.random() * 300);
+      s.done('contact page found');
+      s.detail(`<span>${d}/contact</span><span>email pattern: first@${d} (guessed)</span>`);
+    }
+    await sleep(400);
+    contact.finish();
 
     await sleep(500);
     const answer = push(el('div', 'a-msg'));
     await streamText(answer, fresh.length
-      ? `I found ${found.length} SaaS companies in Berlin and saved them to Companies. Best fits: Contentful (91), n8n (89) and Parloa (86).`
+      ? `I saved ${fresh.length} SaaS companies in Berlin to Companies. Best fits are Contentful (91), n8n (89) and Parloa (86). Contact channels for the top 3 are in the tool details above.`
       : 'These companies are already in your Companies, so nothing new was saved.');
 
     const reset = push(el('button', 'os-reset', 'Reset demo'));
