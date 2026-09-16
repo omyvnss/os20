@@ -1,315 +1,281 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>OS20 | Bring Your Own AI. Run a modern CRM.</title>
-<meta name="description" content="OS20 is a modern, self-hosted CRM that runs on your own AI models and your own Postgres. Workflows, lead scraping, AI agents — all yours.">
-<meta name="theme-color" content="#1c1c1c"><meta name="color-scheme" content="light dark">
-<link rel="preload" href="assets/fonts/os20.local/host_grotesk_latin_variable-s.p.15va9ht5r_l-h-2850a099a5.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/os20.local/aleo_latin_300-s.p.0g17h05gubla7-dbe0205df2.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css">
-<script>document.documentElement.dataset.theme = (localStorage.getItem('od-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OS20 - The CRM that finds its own leads</title>
+  <meta name="description" content="OS20 is a CRM that runs on your own machine. Ask the AI to find leads and it searches the web, scores companies and saves them to your CRM.">
+  <meta name="theme-color" content="#014BFC">
+  <link rel="icon" href="img/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body class="page-home">
+<body>
+  <a class="skip" href="#main">Skip to content</a>
 
-<header class="site-header" data-od-id="header">
-  <div class="header-inner">
-    <a class="brand" href="index.html" aria-label="Home" data-od-id="brand"><span class="brand-mark">◈</span>&nbsp;OS20</a>
-    <nav class="nav-primary" data-od-id="nav-primary">
-      <a href="product.html">PRODUCT</a>
-      <button data-od-id="nav-command" class="nav-command" aria-label="Open command palette">COMMAND<kbd>⌘K</kbd></button>
-      <a href="docs.html" data-od-id="nav-docs">DOCS</a>
+  <header class="nav" data-nav>
+    <a class="brand" href="#top" aria-label="OS20 home">
+      <img src="img/logo.svg" alt="" width="26" height="26"><span>OS20</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#how">How it works</a>
+      <a href="#different">Why OS20</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://github.com/omyvnss/os20">GitHub</a>
     </nav>
-  </div>
-</header>
+    <a class="btn btn-sm btn-dark" href="#install">Install</a>
+  </header>
 
-<main>
-<!-- HERO -->
-<section class="hero" data-od-id="hero">
-  <canvas id="vbars" class="hero-vbars" aria-hidden="true"></canvas>
-  <div class="hero-inner">
-    <div class="hero-copy">
-      <div class="eyebrow">OS20 — BRING YOUR OWN AI CRM</div>
-      <h1 data-od-id="hero-title">Run your CRM<br>on your own AI.<br>Your data stays yours.</h1>
-      <p>OS20 is the modern CRM that connects to the AI models you already use — OpenAI, Anthropic, Google, OpenRouter, Groq, Ollama. Keep your records in your own Postgres. Automate with workflows, scrape leads, and ship an AI agent in minutes.</p>
-      <div class="install" id="install" data-od-id="hero-install">
-        <div class="install-head">
-          <span class="install-label" id="install-label">INSTALL IN ONE COMMAND</span>
-          <div class="install-tabs" role="tablist" aria-labelledby="install-label">
-            <button type="button" class="install-tab" role="tab" id="install-tab-curl" aria-selected="true" aria-controls="install-panel-curl">macOS / Linux</button>
-            <button type="button" class="install-tab" role="tab" id="install-tab-npx" aria-selected="false" aria-controls="install-panel-npx" tabindex="-1">npx</button>
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="wrap hero-inner">
+        <p class="eyebrow reveal"><span class="pulse"></span>Open source. Runs on localhost.</p>
+        <h1 class="hero-title reveal">The CRM that<br><span class="shift">finds its own leads.</span></h1>
+        <p class="hero-sub reveal">Tell the AI who you sell to. OS20 searches the web, scores every company and saves the good ones to your CRM. On your machine, with your keys.</p>
+
+        <div class="install reveal" id="install">
+          <div class="install-tabs" role="tablist" aria-label="Install method">
+            <button role="tab" aria-selected="true" data-cmd="npx os20-cli">npx</button>
+            <button role="tab" aria-selected="false" data-cmd="curl -fsSL https://raw.githubusercontent.com/omyvnss/os20/main/install.sh | bash">curl</button>
+          </div>
+          <div class="install-row">
+            <span class="prompt" aria-hidden="true">$</span>
+            <code data-cmd-out>npx os20-cli</code>
+            <button class="copy" type="button" data-copy aria-label="Copy install command">Copy</button>
           </div>
         </div>
-        <div class="install-panel" role="tabpanel" id="install-panel-curl" aria-labelledby="install-tab-curl">
-          <pre class="install-cmd"><span class="install-prompt" aria-hidden="true">$</span><code data-install-cmd>curl -fsSL https://raw.githubusercontent.com/omyvnss/os20/main/install.sh | bash</code></pre>
-          <button type="button" class="install-copy" data-install-copy aria-label="Copy install command">Copy</button>
-        </div>
-        <div class="install-panel" role="tabpanel" id="install-panel-npx" aria-labelledby="install-tab-npx" hidden>
-          <pre class="install-cmd"><span class="install-prompt" aria-hidden="true">$</span><code data-install-cmd>npx os20-cli</code></pre>
-          <button type="button" class="install-copy" data-install-copy aria-label="Copy npx command">Copy</button>
-        </div>
-        <p class="install-note">Requires <a href="https://docs.docker.com/get-docker/" target="_blank" rel="noopener">Docker</a>. Then open <a href="http://localhost:3010">localhost:3010</a>. Windows: use WSL2 or Git Bash, or <code>npx os20-cli</code> with Node 18+.</p>
-        <span class="sr-only" role="status" aria-live="polite" data-install-status></span>
+
+        <ul class="badges reveal" aria-label="Trust">
+          <li>AGPL-3.0 open source</li>
+          <li>No account needed</li>
+          <li>Data stays on your device</li>
+          <li>Bring your own AI key</li>
+        </ul>
       </div>
-      <div class="hero-cta" data-od-id="hero-cta">
-        <a class="btn btn-dark btn-lg" href="/welcome" data-app-link hidden>OPEN OS20</a>
-        <a class="btn btn-ghost btn-lg" href="/" data-app-link hidden>DASHBOARD</a>
-        <a class="btn btn-ghost btn-lg" href="#how-it-works">HOW IT WORKS</a>
-        <a class="btn btn-ghost btn-lg" href="product.html">SEE IT WORK</a>
-      </div>
-    </div>
-    <div class="hero-stage" data-od-id="hero-visual">
-      <div class="window-bar">
-        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-        <div class="window-tabs"><span class="tab">● OS20</span><span class="tab active">Companies</span></div>
-      </div>
-      <div class="hero-grid">
-        <aside class="hero-sidebar">
-          <div class="sb-search">⌕ Search …</div>
-          <div class="sb-nav">
-            <div class="sb-item" style="opacity:.5;font-size:11px;letter-spacing:.08em">WORKSPACE</div>
-            <div class="sb-item active">◉ Dashboard</div>
-            <div class="sb-item">▦ Companies</div>
-            <div class="sb-item">◎ People</div>
-            <div class="sb-item">◆ Opportunities</div>
-            <div class="sb-item">⚡ Workflows</div>
-            <div class="sb-item">✦ AI Agents</div>
+
+      <div class="wrap">
+        <div class="shot-frame reveal">
+          <div class="shot-tabs" role="tablist" aria-label="App preview">
+            <button role="tab" aria-selected="true" data-shot="0">Companies</button>
+            <button role="tab" aria-selected="false" data-shot="1">Find leads</button>
+            <button role="tab" aria-selected="false" data-shot="2">AI providers</button>
+            <button role="tab" aria-selected="false" data-shot="3">Setup</button>
           </div>
-        </aside>
-        <div class="hero-main">
-          <div class="hero-card">
-            <div class="hero-card-head"><b>Companies</b><span class="pill">+ New</span></div>
-            <table class="table">
-              <thead><tr><th>Company</th><th>Domain</th><th>ARR</th><th>Stage</th></tr></thead>
-              <tbody>
-                <tr><td><span class="avatar" style="display:inline-grid;place-items:center;background:#4a38f5;color:#fff">F</span> Figma</td><td>figma.com</td><td>$3.5M</td><td>Expansion</td></tr>
-                <tr><td><span class="avatar" style="display:inline-grid;place-items:center;background:#6e5494;color:#fff">G</span> GitHub</td><td>github.com</td><td>$1.0M</td><td>Outreach</td></tr>
-                <tr><td><span class="avatar" style="display:inline-grid;place-items:center;background:#3b3b3b;color:#fff">S</span> Stripe</td><td>stripe.com</td><td>$1.8M</td><td>Billing</td></tr>
-                <tr><td><span class="avatar" style="display:inline-grid;place-items:center;background:#611f69;color:#fff">N</span> Notion</td><td>notion.so</td><td>$2.3M</td><td>Renewal</td></tr>
-                <tr><td><span class="avatar" style="display:inline-grid;place-items:center;background:#611f69;color:#fff">S</span> Slack</td><td>slack.com</td><td>$2.3M</td><td>Qualified</td></tr>
-              </tbody>
-            </table>
+          <div class="shot-window">
+            <div class="shot-bar"><i></i><i></i><i></i><span>localhost:3010</span></div>
+            <div class="shot-stack">
+              <img class="is-on" src="img/companies.png" alt="OS20 Companies table with twelve saved companies" width="2880" height="1800" fetchpriority="high">
+              <img src="img/lead-generation.png" alt="OS20 lead generation form with industry, size, location and keywords" width="2880" height="1800" loading="lazy">
+              <img src="img/ai-providers.png" alt="OS20 AI providers settings with OpenAI, Anthropic, Gemini, OpenRouter, Groq and Ollama" width="2880" height="1800" loading="lazy">
+              <img src="img/setup.png" alt="OS20 first-run setup with AI provider, web search and find leads steps" width="2880" height="1800" loading="lazy">
+            </div>
           </div>
-          <div style="margin-top:14px;display:flex;gap:8px">
-            <span style="font-size:11px;background:#1c1c1c;color:#fff;padding:4px 8px;border-radius:999px">All Companies 9</span>
-            <span style="font-size:11px;border:1px solid #1c1c1c12;padding:4px 8px;border-radius:999px">Filter</span>
-            <span style="font-size:11px;border:1px solid #1c1c1c12;padding:4px 8px;border-radius:999px">Sort</span>
-          </div>
+          <p class="shot-note">Real screenshots of OS20. Company rows are sample data.</p>
         </div>
-        <div class="hero-editor">
-          <div style="display:flex;gap:6px;margin-bottom:10px"><span class="tab active" style="background:#fff;color:#111">Ask AI</span><span style="margin-left:auto;font-size:11px;background:#ffffff14;padding:4px 8px;border-radius:999px">OpenAI · Anthropic · Google</span></div>
-          <div style="color:#fff;font-size:12px">"Find companies in fintech above $1M ARR — score them, draft outreach."</div>
-          <div class="code-c" style="margin-top:8px">↳ 42 leads · scored · emails drafted · workflow created</div>
-          <div style="margin-top:10px;display:grid;gap:6px">
-            <span style="background:#89fc9a;color:#1c1c1c;padding:6px 10px;border-radius:999px;font-size:11px;font-weight:700">▶ Scrape leads → enrich → score → sync</span>
-            <span style="background:#ffffff10;border:1px solid #ffffff18;padding:6px 10px;border-radius:999px;font-size:11px">◇ Build a workflow for my top 10 accounts</span>
+      </div>
+    </section>
+
+    <!-- CHAOS BOARD -->
+    <section class="section chaos">
+      <div class="wrap">
+        <h2 class="h2 reveal">What usually takes days<br><span class="muted">of tabs, sheets and copy-paste.</span></h2>
+        <div class="board" data-board>
+          <div class="note n1"><b>Google</b>"saas companies berlin" page 4 of 11</div>
+          <div class="note n2"><b>Spreadsheet</b>leads_final_v3_REAL.xlsx</div>
+          <div class="note n3"><b>Tab 38</b>Is this company still active?</div>
+          <div class="note n4"><b>Notes</b>find email for head of sales</div>
+          <div class="note n5"><b>CRM import</b>312 duplicates found</div>
+          <div class="note n6"><b>Directory</b>$299/mo for stale contacts</div>
+          <div class="board-center">
+            <p>OS20 does it in one prompt.</p>
+            <span class="chip">find 20 SaaS companies in Berlin</span>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- TRUSTED -->
-<section class="trusted" data-od-id="trusted">
-  <div class="trusted-inner">
-    <div class="trusted-label">bring your own key</div>
-    <div class="logo-bar" data-od-id="logo-bar">
-      <span style="font-family:var(--font-body);font-weight:800;font-size:15px">OpenAI</span>
-      <span style="font-family:var(--font-body);font-weight:800;font-size:15px;opacity:.85">Anthropic</span>
-      <span style="font-family:var(--font-body);font-weight:800;font-size:15px;color:#4285f4">Google</span>
-      <span style="font-family:var(--font-body);font-weight:800;font-size:15px;color:#6366f1">OpenRouter</span>
-      <span style="font-family:var(--font-body);font-weight:800;font-size:15px;opacity:.85">Mistral</span>
-      <span style="font-family:var(--font-body);font-weight:800;font-size:15px;color:#f55036">Groq</span>
-      <span style="font-family:var(--font-body);font-weight:800;font-size:15px;opacity:.75">Ollama</span>
-    </div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section class="section how" id="how-it-works" data-od-id="how-it-works">
-  <div class="section-inner">
-    <div class="kicker">HOW IT WORKS</div>
-    <h2>From install to leads in three steps</h2>
-    <ol class="cards3 how-steps">
-      <li class="card"><div class="how-num">01</div><h3>Install</h3><p>Paste the command in a terminal. OS20 downloads its Docker images and runs at <a href="http://localhost:3010">localhost:3010</a>. No account, no login.</p></li>
-      <li class="card"><div class="how-num">02</div><h3>Add your AI + search keys</h3><p>Settings → AI Providers: OpenRouter, OpenAI, Anthropic, Google Gemini, Groq, or local Ollama. Settings → Web Search APIs: Firecrawl, Tavily, Brave, or SerpAPI.</p></li>
-      <li class="card"><div class="how-num">03</div><h3>Ask AI to find leads</h3><p>Describe who you sell to in the Ask AI chat. It searches the web, scores matches, and saves them to your CRM. Data stays on your machine.</p></li>
-    </ol>
-  </div>
-</section>
-
-<!-- PROBLEM -->
-<section class="section problem" data-od-id="problem">
-  <div class="section-inner">
-    <div class="kicker">THE PROBLEM</div>
-    <h2>Enterprise CRMs hold your data hostage. Build your own and you drown in maintenance.</h2>
-    <div class="problem-grid">
-      <div class="problem-card" data-od-id="problem-card-monolith">
-        <img src="assets/images/os20.local/monolith-problem-f588e27db2.webp" alt="The Giant Monolith" loading="lazy" decoding="async">
-        <div class="pc-body">
-          <h3>The Giant Monolith</h3>
-          <p>Salesforce and its peers own your data, lock you into their roadmap, and charge a premium. Adapt your business to the CRM — not the other way around.</p>
+    <!-- CHAT + TABLE -->
+    <section class="section">
+      <div class="wrap split">
+        <div class="split-copy reveal">
+          <p class="kicker">Ask AI</p>
+          <h2 class="h2">Say who you want.<br><span class="muted">Get a ranked list.</span></h2>
+          <p class="lead">The find_leads tool lives inside the Ask AI chat. It searches, visits each site, scores fit against your request and writes the companies into your CRM.</p>
         </div>
-      </div>
-      <div class="problem-card" data-od-id="problem-card-burden">
-        <img src="assets/images/os20.local/hero-bridge-507b7f628a.webp" alt="The In-house Burden" loading="lazy" decoding="async">
-        <div class="pc-body">
-          <h3>The In-house Burden</h3>
-          <p>DIY CRMs fail on the parts nobody builds first: auth, permissions, migrations, and edge cases. V1 ships fast; the next year is maintenance.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ASSEMBLE -->
-<section class="section assemble" data-od-id="solution">
-  <div class="section-inner">
-    <div class="kicker">STOP SETTLING FOR TRADE-OFFS</div>
-    <h2>The CRM that adapts to you — data and AI included</h2>
-    <p class="lead">OS20 gives you a production-grade CRM out of the box, then lets you reshape it: objects, workflows, AI agents, and scraping — all versioned and all yours.</p>
-    <div class="cards3">
-      <div class="card" data-od-id="feature-quality"><h3>Production-grade from day one</h3><p>Postgres-native, row-level permissions, audit trails, and an API for everything. No plumbing to build before you get value.</p></div>
-      <div class="card" data-od-id="feature-ai"><h3>Bring your own AI</h3><p>Connect OpenAI, Anthropic, Google, OpenRouter, Groq, Mistral, or local Ollama. Pick your model per task — 106 models across 6 providers.</p></div>
-      <div class="card" data-od-id="feature-control"><h3>Your data, your control</h3><p>Self-host on your own Postgres or let OS20 run it. Export everything, keep SSO and audit — no lock-in, ever.</p></div>
-    </div>
-    <div class="quote-row">
-      <div class="quote"><span class="avatar" style="display:inline-grid;place-items:center;background:#4a38f5;color:#fff">VP</span><div><b>VP of Engineering</b><br>W3villa Technologies</div><span style="margin-left:auto">↗</span></div>
-      <div class="quote"><span class="avatar" style="display:inline-grid;place-items:center;background:#1c1c1c;color:#fff">P</span><div><b>Principal and Founder</b><br>Alternative Partners</div><span style="margin-left:auto">↗</span></div>
-      <div class="quote"><span class="avatar" style="display:inline-grid;place-items:center;background:#4285f4;color:#fff">C</span><div><b>CRM Engineer</b><br>AC&amp;T Migration</div><span style="margin-left:auto">↗</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- STEPPER -->
-<section class="stepper" data-od-id="building-blocks">
-  <div class="stepper-grid">
-    <div class="steps">
-      <div class="step active" data-od-id="step-1">
-        <div class="step-num">01</div>
-        <div><h3>Start with production-grade building blocks</h3><p>Objects, views, and workflows — composed with a single toolkit. Your data model, layout, and automation are all versioned.</p><div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap"><span style="font-size:11px;border:1px solid #1c1c1c12;padding:4px 8px;border-radius:999px;background:#fff">Objects</span><span style="font-size:11px;border:1px solid #1c1c1c12;padding:4px 8px;border-radius:999px;background:#fff">Views</span><span style="font-size:11px;border:1px solid #1c1c1c12;padding:4px 8px;border-radius:999px;background:#fff">Workflows</span></div></div>
-      </div>
-      <div class="step" data-od-id="step-2">
-        <div class="step-num">02</div>
-        <div><h3>Connect your models, automate with AI</h3><p>Wire up the providers you already pay for. Ask AI in natural language — it drafts workflows, queues tasks, and builds views on your data.</p></div>
-      </div>
-      <div class="step" data-od-id="step-3">
-        <div class="step-num">03</div>
-        <div><h3>Scrape, score, and act</h3><p>Find leads across the web, enrich companies, score fit, and draft outreach — all inside OS20, powered by your own keys.</p></div>
-      </div>
-    </div>
-    <div class="mock-dark" data-od-id="mock-editor">
-      <div class="mock-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:12px;color:#fff;font-family:var(--font-mono);font-size:11px">~/os20 — add-lead-workflow</span><span style="margin-left:auto;background:#ffffff12;color:#fff;font-size:11px;padding:3px 8px;border-radius:999px">BYOK</span></div>
-      <div class="mock-canvas">
-        <img src="assets/images/os20.local/download-worker-41b50ccce2.webp" alt="OS20 workflow editor" loading="lazy">
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- GTM -->
-<section class="section gtm" data-od-id="gtm">
-  <div class="section-inner">
-    <div class="kicker">SKIP THE CLUNKY UX THAT COMES WITH CUSTOM</div>
-    <h2>A CRM your GTM team will actually love</h2>
-    <div class="gtm-grid">
-      <div class="gtm-visual">
-        <div style="display:flex;gap:6px;margin-bottom:10px"><span style="font-size:11px;padding:4px 8px;border-radius:999px;background:#89fc9a">All opportunities 9</span><span style="font-size:11px;padding:4px 8px;border-radius:999px;border:1px solid #1c1c1c12">Identified 3</span><span style="font-size:11px;padding:4px 8px;border-radius:999px;border:1px solid #1c1c1c12">Qualified 1</span></div>
-        <div class="gtm-table">
-          <table class="table">
-            <thead><tr><th>Company</th><th>Owner</th><th>Amount</th><th>Stage</th></tr></thead>
+        <div class="chat reveal" data-chat>
+          <div class="chat-head"><span class="dot"></span>Ask AI</div>
+          <div class="msg me">Find dental software companies in Germany, 10-200 people.</div>
+          <div class="msg ai"><span class="tool">find_leads</span> Searched 4 queries, read 18 sites, kept 6.</div>
+          <table class="fit">
+            <thead><tr><th>Company</th><th>Domain</th><th>Fit</th></tr></thead>
             <tbody>
-              <tr><td>Github</td><td>Eddy Cue</td><td>$6,562.04</td><td>Qualified</td></tr>
-              <tr><td>Figma</td><td>Jeff Williams</td><td>$6,562.04</td><td>Identified</td></tr>
-              <tr><td>Notion</td><td>Katherine Adams</td><td>$4,200.00</td><td>Qualified</td></tr>
+              <tr><td>Northwind Dental Cloud</td><td>northwinddental.io</td><td><span class="score" style="--s:92">92</span></td></tr>
+              <tr><td>Meridian Health OS</td><td>meridianhealth.app</td><td><span class="score" style="--s:84">84</span></td></tr>
+              <tr><td>Harbor Analytics</td><td>harboranalytics.co</td><td><span class="score" style="--s:71">71</span></td></tr>
+              <tr><td>Kite Payments</td><td>kitepay.eu</td><td><span class="score" style="--s:48">48</span></td></tr>
             </tbody>
           </table>
-        </div>
-        <div style="margin-top:10px;display:flex;gap:8px;justify-content:flex-end"><button style="width:20px;height:20px;border:1px solid #1c1c1c12;background:#fff;border-radius:4px">‹</button><button style="width:20px;height:20px;border:1px solid #1c1c1c12;background:#fff;border-radius:4px">›</button> <span style="font-size:12px;border:1px solid #1c1c1c12;padding:4px 8px;border-radius:999px;background:#fff">Add filter</span></div>
-      </div>
-      <div>
-        <div class="gtm-list">
-          <div data-od-id="gtm-familiar"><h4>Familiar, modern interface</h4><p>Spreadsheet-speed navigation, keyboard-first, command palette, real-time collaboration — your team already knows it.</p></div>
-          <div data-od-id="gtm-live"><h4>Live data, AI built in</h4><p>Enrich, score, and summarize records with the model you pick — connected to your Postgres, not a walled garden.</p></div>
-          <div data-od-id="gtm-fast"><h4>Fast path to action</h4><p>From record to workflow to webhook in one click. Every object is a REST + GraphQL endpoint.</p></div>
+          <div class="msg ai saved">Saved 6 companies to Companies.</div>
+          <p class="example">Illustrative example</p>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- CASE STUDIES -->
-<section class="cases" data-od-id="case-studies">
-  <div class="section-inner">
-    <div class="kicker" style="opacity:.5">IN PRODUCTION</div>
-    <h2>Teams power company-wide change with OS20</h2>
-    <div class="case-grid">
-      <article class="case-card" data-od-id="case-w3villa"><img src="assets/images/os20.local/environment-01a2b09040.jpg" alt="W3villa" loading="lazy" decoding="async"><div class="case-body"><div style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;opacity:.6">W3VILLA</div><h3>Ship a product on OS20</h3><p>W3villa built W3Grads for AI mock interviews at scale, with OS20 as the operational backbone.</p><a class="btn btn-outline btn-lg" href="#">READ THE CASE</a></div></article>
-      <article class="case-card" data-od-id="case-act"><img src="assets/images/os20.local/environment-01a2b09040.jpg" alt="AC&T" style="filter:hue-rotate(30deg) brightness(.9)" loading="lazy" decoding="async"><div class="case-body"><div style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;opacity:.6">AC&amp;T</div><h3>Own your CRM end to end</h3><p>AC&amp;T replaced a shuttered vendor CRM with self-hosted OS20 and cut CRM costs by more than 90%.</p><a class="btn btn-outline btn-lg" href="#">READ THE CASE</a></div></article>
-      <article class="case-card" data-od-id="case-netzero"><img src="assets/images/os20.local/environment-01a2b09040.jpg" alt="NetZero" style="filter:hue-rotate(80deg) brightness(.92)" loading="lazy" decoding="async"><div class="case-body"><div style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;opacity:.6">NETZERO</div><h3>Grow with a flexible foundation</h3><p>NetZero runs a modular OS20 setup across carbon credits, ag products, and industrial systems.</p><a class="btn btn-outline btn-lg" href="#">READ THE CASE</a></div></article>
-    </div>
-  </div>
-</section>
+    <!-- STATS -->
+    <section class="section stats-sec">
+      <div class="wrap">
+        <h2 class="h2 center reveal">We search the internet.<br><span class="muted">Not a stale database.</span></h2>
+        <div class="stats">
+          <div class="stat reveal"><b data-count="6">0</b><span>AI providers, including local Ollama</span></div>
+          <div class="stat reveal"><b data-count="4">0</b><span>web search APIs: Firecrawl, Tavily, Brave, SerpAPI</span></div>
+          <div class="stat reveal"><b data-count="15">0</b><span>free lead sources built in</span></div>
+          <div class="stat reveal"><b data-count="0">0</b><span>accounts, logins or sign-ups</span></div>
+        </div>
+      </div>
+    </section>
 
-<!-- TESTIMONIAL -->
-<section class="testimonial" data-od-id="testimonials">
-  <div class="t-inner">
-    <div>
-      <div class="t-badge">1 / 3 — REAL CUSTOMER STORIES</div>
-      <div class="t-quote" style="margin-top:14px">“The flexibility is really what made the difference. Our needs evolve very fast. I discover a new need and in two clicks I can address it. That is a real advantage when you're moving quickly.”</div>
-      <div class="t-person"><img src="assets/images/os20.local/ray-damm-7e8235a7d4.webp" alt=""><div><b style="font-size:13px">We didn’t want to patch — we wanted to own</b><div style="font-size:12px;opacity:.5">Founding team, NetZero</div></div></div>
-    </div>
-    <div style="text-align:right">
-      <div class="t-nav"><button aria-label="Previous">‹</button><button aria-label="Next">›</button></div>
-    </div>
-  </div>
-</section>
+    <!-- USUAL VS OS20 -->
+    <section class="section">
+      <div class="wrap">
+        <h2 class="h2 reveal">Your sales stack, <span class="muted">in one place.</span></h2>
+        <div class="versus">
+          <div class="vs-card old reveal">
+            <p class="kicker">The usual way</p>
+            <ul>
+              <li>Lead database subscription</li>
+              <li>Separate CRM in the cloud</li>
+              <li>Scraper tools and exports</li>
+              <li>Your customer list on someone else's server</li>
+            </ul>
+          </div>
+          <div class="vs-card new reveal">
+            <p class="kicker">OS20</p>
+            <div class="pipe" aria-label="Lead pipeline">
+              <span>Search</span><i></i><span>Read sites</span><i></i><span>Score</span><i></i><span>Save to CRM</span>
+            </div>
+            <ul>
+              <li>One Docker install on your computer</li>
+              <li>Live web search with your own key</li>
+              <li>AI scoring with the model you choose</li>
+              <li>Postgres database you own</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<!-- FAQ CTA -->
-<section class="faq-cta" data-od-id="faq">
-  <div class="faq-inner">
-    <div class="cta-row">
-      <h2>Bring your own AI.<br>Start building, with OS20</h2>
-      <div style="display:flex;gap:10px"><a class="btn btn-white btn-lg" href="#install">GET STARTED</a><a class="btn btn-outline btn-lg" href="product.html">TALK TO US</a></div>
-    </div>
-    <div class="faq" data-od-id="faq-list">
-      <div class="faq-item open"><button class="faq-q"><span>Is OS20 really open source?</span><span class="chev">⌃</span></button><div class="faq-a">Yes — AGPL-3.0 core, MIT for many packages. Self-host for full control, or let OS20 run it. Your data is always yours.</div></div>
-      <div class="faq-item"><button class="faq-q"><span>Do I need a separate AI subscription?</span><span class="chev">⌄</span></button><div class="faq-a">No. OS20 is Bring-Your-Own-Key: plug in the OpenAI, Anthropic, Google, OpenRouter, Groq, Mistral, or Ollama keys you already have. No lock-in to one vendor.</div></div>
-      <div class="faq-item"><button class="faq-q"><span>Where does my data live?</span><span class="chev">⌄</span></button><div class="faq-a">In your own Postgres database. Self-host on your VPC or use OS20 Cloud — same model, same API, full export anytime.</div></div>
-      <div class="faq-item"><button class="faq-q"><span>Can it build workflows and scrape leads?</span><span class="chev">⌄</span></button><div class="faq-a">Yes. Build visual workflows with AI-agent steps, HTTP/scraping actions, triggers, and filters. Find and enrich leads from the web, all inside OS20.</div></div>
-      <div class="faq-item"><button class="faq-q"><span>Does OS20 work with ChatGPT, Claude, and Cursor?</span><span class="chev">⌄</span></button><div class="faq-a">Yes — connect via API or MCP, enrich records, draft emails, and build workflows with your preferred tools.</div></div>
-      <div class="faq-item"><button class="faq-q"><span>How long does it take to get started?</span><span class="chev">⌄</span></button><div class="faq-a">Minutes. Import from CSV or migrate from Salesforce / HubSpot with our guides, then connect your AI keys.</div></div>
-    </div>
-  </div>
-</section>
-</main>
+    <!-- STEPS -->
+    <section class="section" id="how">
+      <div class="wrap">
+        <h2 class="h2 reveal">Four steps. <span class="muted">About five minutes.</span></h2>
+        <ol class="steps">
+          <li class="step reveal"><span class="num">01</span><div><h3>Install</h3><p>Run one command. Docker starts OS20 at localhost:3010.</p></div><code>npx os20-cli</code></li>
+          <li class="step reveal"><span class="num">02</span><div><h3>Add your keys</h3><p>Paste an AI key, or use Ollama with no key. Add a search key for better results.</p></div><code>Settings &rsaquo; AI Providers</code></li>
+          <li class="step reveal"><span class="num">03</span><div><h3>Ask AI</h3><p>Describe your ideal customer in plain words.</p></div><code>"find leads for..."</code></li>
+          <li class="step reveal"><span class="num">04</span><div><h3>Own your CRM</h3><p>Leads land in Companies. Add people, deals, tasks and workflows.</p></div><code>/objects/companies</code></li>
+        </ol>
+      </div>
+    </section>
 
-<footer class="site-footer" data-od-id="footer">
-  <div class="footer-grid">
-    <div data-od-id="footer-sitemap"><h4>SITEMAP</h4><a href="index.html">Home</a><a href="product.html">Product</a><a href="docs.html">Docs</a><a href="#">Why OS20</a></div>
-    <div data-od-id="footer-help"><h4>PRODUCT</h4><a href="product.html">AI &amp; Agents</a><a href="product.html">Workflows</a><a href="product.html">Lead Generation</a><a href="product.html">Self-hosting</a></div>
-    <div data-od-id="footer-legal"><h4>LEGAL</h4><a href="#">Privacy Policy</a><a href="#">Terms and Conditions</a><a href="#">Trust Center</a></div>
-    <div data-od-id="footer-connect"><h4>CONNECT</h4><a href="#">LinkedIn</a><div class="footer-ctas" style="margin-top:14px"><a class="btn btn-white btn-lg" href="#install" style="width:fit-content">GET STARTED</a></div></div>
-  </div>
-  <div class="footer-bottom" data-od-id="footer-bottom">
-    <div style="display:flex;gap:10px;align-items:center">© 2026 – OS20</div>
-    <nav><a href="https://github.com/omyvnss/os20" aria-label="GitHub">GH</a></nav>
-  </div>
-</footer>
+    <!-- AGENT CARD -->
+    <section class="section">
+      <div class="wrap split">
+        <div class="agent reveal" data-agent>
+          <div class="agent-head"><span>Lead run</span><span class="live">running</span></div>
+          <ol>
+            <li>Search queries built from your request</li>
+            <li>Directories and articles filtered out</li>
+            <li>Company sites read in parallel</li>
+            <li>Fit scored by your AI model</li>
+            <li>Duplicates skipped, companies saved</li>
+          </ol>
+        </div>
+        <div class="split-copy reveal">
+          <p class="kicker">Under the hood</p>
+          <h2 class="h2">Built to skip the noise.</h2>
+          <p class="lead">OS20 drops listicles, directories and duplicate domains before it spends a single AI call. You only see real company websites.</p>
+        </div>
+      </div>
+    </section>
 
-<div id="cmd-palette" role="dialog" aria-modal="true" aria-label="Command palette" style="display:none;position:fixed;inset:0;z-index:100;background:#1c1c1c60;backdrop-filter:blur(6px);align-items:flex-start;justify-content:center;padding-top:18vh">
-  <div style="width:min(640px,92vw);background:#fff;border:1px solid #1c1c1c10;border-radius:8px;box-shadow:0 24px 64px #00000020;overflow:hidden">
-    <div style="display:flex;align-items:center;gap:10px;padding:14px;border-bottom:1px solid #1c1c1c08"><span style="font-family:var(--font-mono);font-size:11px;opacity:.6">⌘K</span><input placeholder="Search commands, docs, people…" style="flex:1;border:none;outline:none;font-size:14px" aria-label="Search commands"><span style="font-size:11px;border:1px solid #1c1c1c12;padding:3px 6px;border-radius:4px;opacity:.6">ESC</span></div>
-    <div style="padding:8px;display:grid;gap:4px">
-      <a href="product.html" style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-radius:6px;background:#f4f4f4"><span><b style="font-size:13px">Go to Product</b><span style="font-size:12px;opacity:.6;margin-left:8px">→ AI &amp; workflows</span></span><span style="font-size:11px;opacity:.4">↵</span></a>
-      <a href="docs.html" style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-radius:6px"><span><b style="font-size:13px">Open Docs</b><span style="font-size:12px;opacity:.6;margin-left:8px">→ introduction</span></span><span style="font-size:11px;opacity:.4">↗</span></a>
-      <a href="index.html" style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-radius:6px"><span><b style="font-size:13px">Go to Home</b><span style="font-size:12px;opacity:.6;margin-left:8px">→ BYOK AI CRM</span></span><span style="font-size:11px;opacity:.4">↵</span></a>
+    <!-- DIFFERENT -->
+    <section class="section" id="different">
+      <div class="wrap">
+        <h2 class="h2 reveal">Why OS20 is different</h2>
+        <div class="cards">
+          <article class="card reveal"><span class="ic">01</span><h3>Local first</h3><p>Runs on your computer. Ports bind to 127.0.0.1 only.</p></article>
+          <article class="card reveal"><span class="ic">02</span><h3>Your keys, encrypted</h3><p>API keys are stored with AES-GCM and never shown again after saving.</p></article>
+          <article class="card reveal"><span class="ic">03</span><h3>Any model</h3><p>OpenAI, Anthropic, Gemini, OpenRouter, Groq or a local Ollama model.</p></article>
+          <article class="card reveal"><span class="ic">04</span><h3>A full CRM</h3><p>Companies, people, opportunities, tasks, notes, workflows and an API.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <div class="wrap faq-wrap">
+        <h2 class="h2 reveal">Questions</h2>
+        <div class="faq">
+          <details class="reveal"><summary>Is OS20 free?</summary><p>Yes. OS20 is open source under AGPL-3.0. You pay only your own AI or search provider, and Ollama costs nothing.</p></details>
+          <details class="reveal"><summary>Where is my data stored?</summary><p>In a Postgres database inside Docker on your machine. Nothing is sent to us.</p></details>
+          <details class="reveal"><summary>What do I need to install it?</summary><p>Docker Desktop (or Docker Engine on Linux) and Node.js 18+ for the npx command.</p></details>
+          <details class="reveal"><summary>Do I need a search API key?</summary><p>No, but it helps. Without one OS20 uses free search, which can be rate limited. Firecrawl, Tavily, Brave or SerpAPI give steadier results.</p></details>
+          <details class="reveal"><summary>Can I use it without any AI key?</summary><p>Yes. Run Ollama locally and OS20 picks it up. Leads are still found without AI, just not ranked by fit.</p></details>
+          <details class="reveal"><summary>Is there a login?</summary><p>No. OS20 opens straight into your workspace on localhost.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOUNDERS -->
+    <section class="section founders-sec">
+      <div class="wrap">
+        <div class="founder reveal">
+          <div class="founder-copy">
+            <p class="kicker">Who builds this</p>
+            <h2 class="h2">Made by git11.</h2>
+            <p class="lead">We build tools that run on your own machine. OS20 started because finding leads should not need three subscriptions and a spreadsheet.</p>
+            <a class="btn btn-ghost" href="https://git11.xyz">git11.xyz</a>
+          </div>
+          <div class="people">
+            <div class="person"><span class="avatar">OY</span><div><b>Om Yaduvanshi</b><span>Co-founder, CEO</span></div></div>
+            <div class="person"><span class="avatar">SR</span><div><b>Shreyash Raj Shekhar</b><span>Co-founder, CTO</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section cta">
+      <div class="wrap center">
+        <h2 class="h2 reveal">Your next customers are on the web.<br><span class="shift">Go get them.</span></h2>
+        <div class="cta-row reveal">
+          <a class="btn btn-brand" href="#install">Install OS20</a>
+          <a class="btn btn-ghost" href="http://localhost:3010">Open my dashboard</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="foot-top">
+        <div class="brand"><img src="img/logo.svg" alt="" width="22" height="22"><span>OS20</span></div>
+        <nav class="foot-links" aria-label="Footer">
+          <a href="https://github.com/omyvnss/os20">GitHub</a>
+          <a href="https://github.com/omyvnss/os20#readme">Docs</a>
+          <a href="https://github.com/omyvnss/os20/blob/main/LICENSE">License</a>
+          <a href="https://git11.xyz">git11.xyz</a>
+        </nav>
+      </div>
+      <canvas class="pixels" data-pixels aria-hidden="true"></canvas>
+      <p class="foot-note">OS20 is open source under AGPL-3.0.</p>
     </div>
-  </div>
-</div>
+  </footer>
 
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
