@@ -44,7 +44,10 @@
     '<path d="M3 9.5c1.7-2.4 3.3-2.4 5 0s3.3 2.4 5 0M3 6.5c1.7-2.4 3.3-2.4 5 0s3.3 2.4 5 0" stroke="#fff" stroke-width="1.7" fill="none" stroke-linecap="round"/>',
   ];
   const brandColors = ['#0e9f9a', '#1f2937', '#2563eb', '#ea580c', '#7c3aed', '#e11d48', '#475569', '#16a34a', '#db2777', '#ca8a04', '#0284c7', '#4f46e5'];
+  let realLogo;
   const company = (name) => {
+    realLogo ??= Object.fromEntries(found.map(([n, , , file]) => [n, file]));
+    if (realLogo[name]) return `<span class="chip"><img class="logo-mark" src="img/companies/${realLogo[name]}.png" alt="" loading="lazy">${name}</span>`;
     const i = Math.max(0, companyNames.indexOf(name));
     return `<span class="chip"><svg class="logo-mark" viewBox="0 0 16 16" style="background:${brandColors[i]}">${marks[i]}</svg>${name}</span>`;
   };
@@ -147,14 +150,13 @@
     ['Lumen Logistics', 'lumenlogistics.com', '2 days ago', 'Rotterdam'],
   ];
   const found = [
-    ['Northwind Dental Cloud', 'northwinddental.io', 92],
-    ['Sable Security', 'sablesec.io', 90],
-    ['Harbor Analytics', 'harboranalytics.co', 87],
-    ['Atlas Field Service', 'atlasfield.io', 84],
-    ['Kite Payments', 'kitepay.eu', 81],
-    ['Meridian Health OS', 'meridianhealth.app', 77],
-    ['Pinecrest Legal', 'pinecrestlegal.de', 74],
-    ['Verde Commerce', 'verdecommerce.shop', 71],
+    ['Contentful', 'contentful.com', 91, 'contentful'],
+    ['n8n', 'n8n.io', 89, 'n8n'],
+    ['Parloa', 'parloa.com', 86, 'parloa'],
+    ['Leapsome', 'leapsome.com', 84, 'leapsome'],
+    ['Candis', 'candis.io', 81, 'candis'],
+    ['Mambu', 'mambu.com', 78, 'mambu'],
+    ['Taxfix', 'taxfix.de', 74, 'taxfix'],
   ];
   const navIco = (view) => $(`.os-nav[data-view="${view}"] .os-ico`, lead).outerHTML;
   const views = {
@@ -289,7 +291,7 @@
     await sleep(500);
     const answer = push(el('div', 'a-msg'));
     await streamText(answer, fresh.length
-      ? `I found ${found.length} SaaS companies in Berlin and saved them to Companies. Best fits: Northwind Dental Cloud (92), Sable Security (90) and Harbor Analytics (87).`
+      ? `I found ${found.length} SaaS companies in Berlin and saved them to Companies. Best fits: Contentful (91), n8n (89) and Parloa (86).`
       : 'These companies are already in your Companies, so nothing new was saved.');
 
     const reset = push(el('button', 'os-reset', 'Reset demo'));
@@ -297,7 +299,7 @@
     reset.addEventListener('click', () => {
       companyRows = [...existing];
       log.innerHTML = '<div class="os-empty" data-empty><p>What can I help you with?</p><span>Create a workflow</span><span>Create a record</span></div>';
-      input.value = 'Find SaaS companies in Berlin with 10 to 200 people';
+      input.value = 'Find SaaS companies in Berlin';
       input.disabled = false;
       send.disabled = false;
       sendLabel.textContent = 'Press Enter';
