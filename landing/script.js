@@ -65,19 +65,19 @@
       t: '“The flexibility is really what made the difference. Our needs evolve very fast. I discover a new need and in two clicks I address it.”',
       n: 'We didn’t want to patch — we wanted to own',
       r: 'Founding team, NetZero',
-      img: 'assets/images/twenty.com/ray-damm-7e8235a7d4.webp',
+      img: 'assets/images/os20.local/ray-damm-7e8235a7d4.webp',
     },
     {
       t: '“We shipped W3Grads in weeks, not quarters. OS20 gave us the operational backbone without the lock-in.”',
       n: 'VP of Engineering',
       r: 'W3villa Technologies',
-      img: 'assets/images/twenty.com/ping-li-d73dfe5c63.webp',
+      img: 'assets/images/os20.local/ping-li-d73dfe5c63.webp',
     },
     {
       t: '“From Salesforce to self-hosted in days — AI did the mapping, we kept the control.”',
       n: 'Principal and Founder',
       r: 'Alternative Partners',
-      img: 'assets/images/twenty.com/anonymous-laura-66d18df0a2.webp',
+      img: 'assets/images/os20.local/anonymous-laura-66d18df0a2.webp',
     },
   ];
   const qEl = document.querySelector('.t-quote');
@@ -282,3 +282,73 @@
   ro.observe(c);
   draw();
 })();
+
+// Install command: tabs (arrow keys) + copy with a fallback for non-HTTPS pages.
+(() => {
+  const root = document.getElementById('install');
+  if (!root) return;
+  const tabs = [...root.querySelectorAll('.install-tab')];
+  const status = root.querySelector('[data-install-status]');
+  const select = (tab) => {
+    tabs.forEach((candidate) => {
+      const selected = candidate === tab;
+      candidate.setAttribute('aria-selected', String(selected));
+      candidate.tabIndex = selected ? 0 : -1;
+      document.getElementById(candidate.getAttribute('aria-controls')).hidden = !selected;
+    });
+  };
+  tabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => select(tab));
+    tab.addEventListener('keydown', (event) => {
+      if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') return;
+      const step = event.key === 'ArrowRight' ? 1 : tabs.length - 1;
+      const next = tabs[(index + step) % tabs.length];
+      select(next);
+      next.focus();
+    });
+  });
+  const copyText = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch {
+      const area = document.createElement('textarea');
+      area.value = text;
+      area.setAttribute('readonly', '');
+      area.style.position = 'fixed';
+      area.style.opacity = '0';
+      document.body.appendChild(area);
+      area.select();
+      const copied = document.execCommand('copy');
+      area.remove();
+      return copied;
+    }
+  };
+  root.querySelectorAll('[data-install-copy]').forEach((button) => {
+    button.addEventListener('click', async () => {
+      const command = button.parentElement.querySelector('[data-install-cmd]').textContent;
+      const copied = await copyText(command);
+      button.textContent = copied ? 'Copied' : 'Select and copy';
+      if (status) status.textContent = copied ? 'Install command copied' : 'Copy failed. Select the command and copy it.';
+      setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+    });
+  });
+})();
+
+// Served by an OS20 install (localhost:3010/landing/): link straight to the app.
+if (location.pathname.startsWith('/landing/')) {
+  document.querySelectorAll('[data-app-link]').forEach((link) => {
+    link.hidden = false;
+  });
+}
+
+// Drop images whose files are missing so pages never show broken icons.
+document.querySelectorAll('img').forEach((image) => {
+  const removeIfBroken = () => image.remove();
+
+  if (image.complete && image.naturalWidth === 0) {
+    removeIfBroken();
+  } else {
+    image.addEventListener('error', removeIfBroken, { once: true });
+  }
+});

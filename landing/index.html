@@ -6,8 +6,8 @@
 <title>OS20 | Bring Your Own AI. Run a modern CRM.</title>
 <meta name="description" content="OS20 is a modern, self-hosted CRM that runs on your own AI models and your own Postgres. Workflows, lead scraping, AI agents — all yours.">
 <meta name="theme-color" content="#1c1c1c"><meta name="color-scheme" content="light dark">
-<link rel="preload" href="assets/fonts/twenty.com/host_grotesk_latin_variable-s.p.15va9ht5r_l-h-2850a099a5.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/twenty.com/aleo_latin_300-s.p.0g17h05gubla7-dbe0205df2.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/os20.local/host_grotesk_latin_variable-s.p.15va9ht5r_l-h-2850a099a5.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/os20.local/aleo_latin_300-s.p.0g17h05gubla7-dbe0205df2.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
 <script>document.documentElement.dataset.theme = (localStorage.getItem('od-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));</script>
 </head>
@@ -33,8 +33,29 @@
       <div class="eyebrow">OS20 — BRING YOUR OWN AI CRM</div>
       <h1 data-od-id="hero-title">Run your CRM<br>on your own AI.<br>Your data stays yours.</h1>
       <p>OS20 is the modern CRM that connects to the AI models you already use — OpenAI, Anthropic, Google, OpenRouter, Groq, Ollama. Keep your records in your own Postgres. Automate with workflows, scrape leads, and ship an AI agent in minutes.</p>
+      <div class="install" id="install" data-od-id="hero-install">
+        <div class="install-head">
+          <span class="install-label" id="install-label">INSTALL IN ONE COMMAND</span>
+          <div class="install-tabs" role="tablist" aria-labelledby="install-label">
+            <button type="button" class="install-tab" role="tab" id="install-tab-curl" aria-selected="true" aria-controls="install-panel-curl">macOS / Linux</button>
+            <button type="button" class="install-tab" role="tab" id="install-tab-npx" aria-selected="false" aria-controls="install-panel-npx" tabindex="-1">npx</button>
+          </div>
+        </div>
+        <div class="install-panel" role="tabpanel" id="install-panel-curl" aria-labelledby="install-tab-curl">
+          <pre class="install-cmd"><span class="install-prompt" aria-hidden="true">$</span><code data-install-cmd>curl -fsSL https://raw.githubusercontent.com/omyvnss/os20/main/install.sh | bash</code></pre>
+          <button type="button" class="install-copy" data-install-copy aria-label="Copy install command">Copy</button>
+        </div>
+        <div class="install-panel" role="tabpanel" id="install-panel-npx" aria-labelledby="install-tab-npx" hidden>
+          <pre class="install-cmd"><span class="install-prompt" aria-hidden="true">$</span><code data-install-cmd>npx os20-cli</code></pre>
+          <button type="button" class="install-copy" data-install-copy aria-label="Copy npx command">Copy</button>
+        </div>
+        <p class="install-note">Requires <a href="https://docs.docker.com/get-docker/" target="_blank" rel="noopener">Docker</a>. Then open <a href="http://localhost:3010">localhost:3010</a>. Windows: use WSL2 or Git Bash, or <code>npx os20-cli</code> with Node 18+.</p>
+        <span class="sr-only" role="status" aria-live="polite" data-install-status></span>
+      </div>
       <div class="hero-cta" data-od-id="hero-cta">
-        <a class="btn btn-dark btn-lg" href="http://localhost:3010/welcome">GET STARTED</a>
+        <a class="btn btn-dark btn-lg" href="/welcome" data-app-link hidden>OPEN OS20</a>
+        <a class="btn btn-ghost btn-lg" href="/" data-app-link hidden>DASHBOARD</a>
+        <a class="btn btn-ghost btn-lg" href="#how-it-works">HOW IT WORKS</a>
         <a class="btn btn-ghost btn-lg" href="product.html">SEE IT WORK</a>
       </div>
     </div>
@@ -106,6 +127,19 @@
   </div>
 </section>
 
+<!-- HOW IT WORKS -->
+<section class="section how" id="how-it-works" data-od-id="how-it-works">
+  <div class="section-inner">
+    <div class="kicker">HOW IT WORKS</div>
+    <h2>From install to leads in three steps</h2>
+    <ol class="cards3 how-steps">
+      <li class="card"><div class="how-num">01</div><h3>Install</h3><p>Paste the command in a terminal. OS20 downloads its Docker images and runs at <a href="http://localhost:3010">localhost:3010</a>. No account, no login.</p></li>
+      <li class="card"><div class="how-num">02</div><h3>Add your AI + search keys</h3><p>Settings → AI Providers: OpenRouter, OpenAI, Anthropic, Google Gemini, Groq, or local Ollama. Settings → Web Search APIs: Firecrawl, Tavily, Brave, or SerpAPI.</p></li>
+      <li class="card"><div class="how-num">03</div><h3>Ask AI to find leads</h3><p>Describe who you sell to in the Ask AI chat. It searches the web, scores matches, and saves them to your CRM. Data stays on your machine.</p></li>
+    </ol>
+  </div>
+</section>
+
 <!-- PROBLEM -->
 <section class="section problem" data-od-id="problem">
   <div class="section-inner">
@@ -113,14 +147,14 @@
     <h2>Enterprise CRMs hold your data hostage. Build your own and you drown in maintenance.</h2>
     <div class="problem-grid">
       <div class="problem-card" data-od-id="problem-card-monolith">
-        <img src="assets/images/twenty.com/monolith-problem-f588e27db2.webp" alt="The Giant Monolith" loading="lazy" decoding="async">
+        <img src="assets/images/os20.local/monolith-problem-f588e27db2.webp" alt="The Giant Monolith" loading="lazy" decoding="async">
         <div class="pc-body">
           <h3>The Giant Monolith</h3>
           <p>Salesforce and its peers own your data, lock you into their roadmap, and charge a premium. Adapt your business to the CRM — not the other way around.</p>
         </div>
       </div>
       <div class="problem-card" data-od-id="problem-card-burden">
-        <img src="assets/images/twenty.com/hero-bridge-507b7f628a.webp" alt="The In-house Burden" loading="lazy" decoding="async">
+        <img src="assets/images/os20.local/hero-bridge-507b7f628a.webp" alt="The In-house Burden" loading="lazy" decoding="async">
         <div class="pc-body">
           <h3>The In-house Burden</h3>
           <p>DIY CRMs fail on the parts nobody builds first: auth, permissions, migrations, and edge cases. V1 ships fast; the next year is maintenance.</p>
@@ -169,7 +203,7 @@
     <div class="mock-dark" data-od-id="mock-editor">
       <div class="mock-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:12px;color:#fff;font-family:var(--font-mono);font-size:11px">~/os20 — add-lead-workflow</span><span style="margin-left:auto;background:#ffffff12;color:#fff;font-size:11px;padding:3px 8px;border-radius:999px">BYOK</span></div>
       <div class="mock-canvas">
-        <img src="assets/images/twenty.com/download-worker-41b50ccce2.webp" alt="OS20 workflow editor" loading="lazy">
+        <img src="assets/images/os20.local/download-worker-41b50ccce2.webp" alt="OS20 workflow editor" loading="lazy">
       </div>
     </div>
   </div>
@@ -212,9 +246,9 @@
     <div class="kicker" style="opacity:.5">IN PRODUCTION</div>
     <h2>Teams power company-wide change with OS20</h2>
     <div class="case-grid">
-      <article class="case-card" data-od-id="case-w3villa"><img src="assets/images/twenty.com/environment-01a2b09040.jpg" alt="W3villa" loading="lazy" decoding="async"><div class="case-body"><div style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;opacity:.6">W3VILLA</div><h3>Ship a product on OS20</h3><p>W3villa built W3Grads for AI mock interviews at scale, with OS20 as the operational backbone.</p><a class="btn btn-outline btn-lg" href="#">READ THE CASE</a></div></article>
-      <article class="case-card" data-od-id="case-act"><img src="assets/images/twenty.com/environment-01a2b09040.jpg" alt="AC&T" style="filter:hue-rotate(30deg) brightness(.9)" loading="lazy" decoding="async"><div class="case-body"><div style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;opacity:.6">AC&amp;T</div><h3>Own your CRM end to end</h3><p>AC&amp;T replaced a shuttered vendor CRM with self-hosted OS20 and cut CRM costs by more than 90%.</p><a class="btn btn-outline btn-lg" href="#">READ THE CASE</a></div></article>
-      <article class="case-card" data-od-id="case-netzero"><img src="assets/images/twenty.com/environment-01a2b09040.jpg" alt="NetZero" style="filter:hue-rotate(80deg) brightness(.92)" loading="lazy" decoding="async"><div class="case-body"><div style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;opacity:.6">NETZERO</div><h3>Grow with a flexible foundation</h3><p>NetZero runs a modular OS20 setup across carbon credits, ag products, and industrial systems.</p><a class="btn btn-outline btn-lg" href="#">READ THE CASE</a></div></article>
+      <article class="case-card" data-od-id="case-w3villa"><img src="assets/images/os20.local/environment-01a2b09040.jpg" alt="W3villa" loading="lazy" decoding="async"><div class="case-body"><div style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;opacity:.6">W3VILLA</div><h3>Ship a product on OS20</h3><p>W3villa built W3Grads for AI mock interviews at scale, with OS20 as the operational backbone.</p><a class="btn btn-outline btn-lg" href="#">READ THE CASE</a></div></article>
+      <article class="case-card" data-od-id="case-act"><img src="assets/images/os20.local/environment-01a2b09040.jpg" alt="AC&T" style="filter:hue-rotate(30deg) brightness(.9)" loading="lazy" decoding="async"><div class="case-body"><div style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;opacity:.6">AC&amp;T</div><h3>Own your CRM end to end</h3><p>AC&amp;T replaced a shuttered vendor CRM with self-hosted OS20 and cut CRM costs by more than 90%.</p><a class="btn btn-outline btn-lg" href="#">READ THE CASE</a></div></article>
+      <article class="case-card" data-od-id="case-netzero"><img src="assets/images/os20.local/environment-01a2b09040.jpg" alt="NetZero" style="filter:hue-rotate(80deg) brightness(.92)" loading="lazy" decoding="async"><div class="case-body"><div style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;opacity:.6">NETZERO</div><h3>Grow with a flexible foundation</h3><p>NetZero runs a modular OS20 setup across carbon credits, ag products, and industrial systems.</p><a class="btn btn-outline btn-lg" href="#">READ THE CASE</a></div></article>
     </div>
   </div>
 </section>
@@ -225,7 +259,7 @@
     <div>
       <div class="t-badge">1 / 3 — REAL CUSTOMER STORIES</div>
       <div class="t-quote" style="margin-top:14px">“The flexibility is really what made the difference. Our needs evolve very fast. I discover a new need and in two clicks I can address it. That is a real advantage when you're moving quickly.”</div>
-      <div class="t-person"><img src="assets/images/twenty.com/ray-damm-7e8235a7d4.webp" alt=""><div><b style="font-size:13px">We didn’t want to patch — we wanted to own</b><div style="font-size:12px;opacity:.5">Founding team, NetZero</div></div></div>
+      <div class="t-person"><img src="assets/images/os20.local/ray-damm-7e8235a7d4.webp" alt=""><div><b style="font-size:13px">We didn’t want to patch — we wanted to own</b><div style="font-size:12px;opacity:.5">Founding team, NetZero</div></div></div>
     </div>
     <div style="text-align:right">
       <div class="t-nav"><button aria-label="Previous">‹</button><button aria-label="Next">›</button></div>
@@ -238,7 +272,7 @@
   <div class="faq-inner">
     <div class="cta-row">
       <h2>Bring your own AI.<br>Start building, with OS20</h2>
-      <div style="display:flex;gap:10px"><a class="btn btn-white btn-lg" href="http://localhost:3010/welcome">GET STARTED</a><a class="btn btn-outline btn-lg" href="product.html">TALK TO US</a></div>
+      <div style="display:flex;gap:10px"><a class="btn btn-white btn-lg" href="#install">GET STARTED</a><a class="btn btn-outline btn-lg" href="product.html">TALK TO US</a></div>
     </div>
     <div class="faq" data-od-id="faq-list">
       <div class="faq-item open"><button class="faq-q"><span>Is OS20 really open source?</span><span class="chev">⌃</span></button><div class="faq-a">Yes — AGPL-3.0 core, MIT for many packages. Self-host for full control, or let OS20 run it. Your data is always yours.</div></div>
@@ -257,7 +291,7 @@
     <div data-od-id="footer-sitemap"><h4>SITEMAP</h4><a href="index.html">Home</a><a href="product.html">Product</a><a href="docs.html">Docs</a><a href="#">Why OS20</a></div>
     <div data-od-id="footer-help"><h4>PRODUCT</h4><a href="product.html">AI &amp; Agents</a><a href="product.html">Workflows</a><a href="product.html">Lead Generation</a><a href="product.html">Self-hosting</a></div>
     <div data-od-id="footer-legal"><h4>LEGAL</h4><a href="#">Privacy Policy</a><a href="#">Terms and Conditions</a><a href="#">Trust Center</a></div>
-    <div data-od-id="footer-connect"><h4>CONNECT</h4><a href="#">LinkedIn</a><div class="footer-ctas" style="margin-top:14px"><a class="btn btn-white btn-lg" href="http://localhost:3010/welcome" style="width:fit-content">GET STARTED</a></div></div>
+    <div data-od-id="footer-connect"><h4>CONNECT</h4><a href="#">LinkedIn</a><div class="footer-ctas" style="margin-top:14px"><a class="btn btn-white btn-lg" href="#install" style="width:fit-content">GET STARTED</a></div></div>
   </div>
   <div class="footer-bottom" data-od-id="footer-bottom">
     <div style="display:flex;gap:10px;align-items:center">© 2026 – OS20</div>

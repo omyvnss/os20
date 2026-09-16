@@ -307,7 +307,7 @@
     </p>
 
     <div class="install-box">
-      <code>npx os20</code>
+      <code>npx os20-cli</code>
       <button class="copy-btn" onclick="copyInstall()">Copy</button>
     </div>
 
@@ -351,7 +351,7 @@
   <script>
     function copyInstall() {
       const btn = document.querySelector('.copy-btn');
-      navigator.clipboard.writeText('npx os20').then(() => {
+      navigator.clipboard.writeText('npx os20-cli').then(() => {
         btn.textContent = 'Copied!';
         btn.classList.add('copied');
         setTimeout(() => {
