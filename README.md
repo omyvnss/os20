@@ -147,6 +147,16 @@ npx os20-cli update     # Pull latest images & recreate containers
 npx os20-cli reset      # DELETE all data, start fresh
 ```
 
+When a newer release is out, OS20 shows an "update available" banner in the app and the
+current version under Settings > Community. It asks the GitHub Releases API for the latest
+version at most every 12 hours; only the version number is fetched, and nothing about you
+or your data is sent. Updating keeps your data: `update` backs up the database first.
+
+| Variable | Default | Purpose |
+|---|---|---|
+| `OS20_UPDATE_CHECK` | `true` | Set to `false` to turn off the update check |
+| `OS20_UPDATE_REPO` | `omyvnss/os20` | GitHub repo whose releases are checked (for forks) |
+
 Secrets live in `~/.os20/.env`, shared by the CLI and `install.sh`. Keep that file: changing
 `APP_SECRET` makes saved API keys unreadable.
 

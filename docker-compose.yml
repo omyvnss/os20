@@ -23,6 +23,10 @@ x-os20-env: &os20-env
   OS20_ALLOWED_HOSTS: ${OS20_ALLOWED_HOSTS:-}
   OS20_LEADGEN_URL: http://os20-leadgen:8120
   OS20_LEADGEN_TOKEN: ${OS20_LEADGEN_TOKEN:-}
+  # Checks GitHub Releases twice a day for a newer OS20 version. Only the version
+  # number is fetched; nothing about you is sent. Set to "false" to turn it off.
+  OS20_UPDATE_CHECK: ${OS20_UPDATE_CHECK:-true}
+  OS20_UPDATE_REPO: ${OS20_UPDATE_REPO:-omyvnss/os20}
 
 services:
   os20:
