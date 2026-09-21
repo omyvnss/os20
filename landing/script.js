@@ -912,3 +912,27 @@
     }
   }, 1200);
 })();
+
+/* Logo spin: a quick ramp up, a fast turn, then a long ease out. */
+(() => {
+  const mark = document.querySelector('[data-logo-spin]');
+  if (!mark || !mark.animate) return;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  const currentAngle = () => {
+    const m = getComputedStyle(mark).transform;
+    if (!m || m === 'none') return 0;
+    const [a, b] = m.slice(m.indexOf('(') + 1, -1).split(',').map(Number);
+    return (Math.atan2(b, a) * 180) / Math.PI;
+  };
+  let spin = null;
+  mark.style.transformOrigin = '50% 50%';
+  mark.addEventListener('click', () => {
+    if (reduce.matches) return;
+    const from = currentAngle();
+    spin?.cancel();
+    spin = mark.animate(
+      [{ transform: `rotate(${from}deg)` }, { transform: `rotate(${from + 720}deg)` }],
+      { duration: 1600, easing: 'cubic-bezier(0.55, 0, 0.12, 1)', fill: 'forwards' },
+    );
+  });
+})();

@@ -1,3 +1,10 @@
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="landing/img/logo-white.svg">
+    <img src="landing/img/logo-dark.svg" alt="OS20" width="88" height="88">
+  </picture>
+</p>
+
 # OS20 — Open-Source CRM with AI Lead Engine
 
 ![OS20](https://img.shields.io/badge/OS20-Bring%20Your%20Own%20AI-2ea44f?style=for-the-badge)

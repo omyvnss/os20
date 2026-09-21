@@ -77,21 +77,21 @@ svg { overflow: visible; }
   display: flex; align-items: center; gap: 22px;
   height: 46px; padding: 0 8px 0 14px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.55);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: 0 8px 30px -12px rgba(0, 0, 0, 0.18);
-  -webkit-backdrop-filter: blur(18px) saturate(1.6); backdrop-filter: blur(18px) saturate(1.6);
+  background: rgba(255, 255, 255, 0.38);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow: 0 10px 34px -14px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  -webkit-backdrop-filter: blur(24px) saturate(1.8); backdrop-filter: blur(24px) saturate(1.8);
   transition: top 0.5s var(--spring), height 0.5s var(--spring), gap 0.5s var(--spring), padding 0.5s var(--spring), background 0.4s ease, color 0.4s ease;
 }
-.island-logo { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 14px; letter-spacing: 0.06em; }
-.island-logo img { width: 22px; height: 22px; transition: width 0.5s var(--spring), height 0.5s var(--spring); }
+.island-logo { display: inline-flex; align-items: center; gap: 8px; color: inherit; }
+.island-mark { width: 22px; height: 22px; flex: none; color: currentColor; transition: width 0.5s var(--spring), height 0.5s var(--spring); cursor: pointer; }
+.island-word { font-family: 'Geist', 'Inter Tight', system-ui, sans-serif; font-weight: 600; font-size: 15px; letter-spacing: -0.02em; }
 .island-gh { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--black); color: var(--white); font-size: 17px; transition: width 0.5s var(--spring), height 0.5s var(--spring), transform 0.3s ease; }
 .island-gh:hover { transform: scale(1.08); }
 .island.is-compact { top: 6px; height: 36px; gap: 14px; padding: 0 4px 0 10px; }
-.island.is-compact .island-logo img { width: 18px; height: 18px; }
+.island.is-compact .island-mark { width: 18px; height: 18px; }
 .island.is-compact .island-gh { width: 28px; height: 28px; font-size: 15px; }
-.island.on-dark { background: rgba(40, 40, 40, 0.55); color: var(--white); border-color: rgba(255, 255, 255, 0.1); }
-.island.on-dark .island-logo img { filter: invert(1); }
+.island.on-dark { background: rgba(28, 28, 30, 0.42); color: var(--white); border-color: rgba(255, 255, 255, 0.12); box-shadow: 0 10px 34px -14px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08); }
 .island.on-dark .island-gh { background: var(--white); color: var(--black); }
 
 /* Hero */
