@@ -84,11 +84,7 @@
 
   /* Island + chapter menu */
   const island = $('[data-island]');
-  const darkZones = $$('.chapter.dark, .cta, .footer');
-  const menu = $('[data-chapters]');
-  const menuLinks = $$('a', menu);
-  const chapters = $$('.chapter');
-  const panels = $$('.panel');
+  const darkZones = $$('.chapter.dark, .cta');
   let ticking = false;
   const onScroll = () => {
     ticking = false;
@@ -97,19 +93,6 @@
       const r = z.getBoundingClientRect();
       return r.top <= 30 && r.bottom >= 30;
     }));
-    const probe = innerHeight * 0.6;
-    const current = chapters.find((c) => {
-      const r = c.getBoundingClientRect();
-      return r.top <= probe && r.bottom >= probe;
-    });
-    const overPanel = panels.some((p) => {
-      const r = p.getBoundingClientRect();
-      return r.top < innerHeight && r.bottom > innerHeight - 240;
-    });
-    menu.classList.toggle('is-visible', Boolean(current) && !overPanel);
-    if (!current) return;
-    menu.classList.toggle('on-dark', current.classList.contains('dark'));
-    menuLinks.forEach((l) => l.classList.toggle('is-active', l.dataset.chapter === current.id));
   };
   addEventListener('scroll', () => {
     if (!ticking) requestAnimationFrame(onScroll);
@@ -913,26 +896,16 @@
   }, 1200);
 })();
 
-/* Logo spin: a quick ramp up, a fast turn, then a long ease out. */
+/* Logo spin on every page load: a quick ramp up, a fast turn, then a long ease out. */
 (() => {
   const mark = document.querySelector('[data-logo-spin]');
   if (!mark || !mark.animate) return;
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
-  const currentAngle = () => {
-    const m = getComputedStyle(mark).transform;
-    if (!m || m === 'none') return 0;
-    const [a, b] = m.slice(m.indexOf('(') + 1, -1).split(',').map(Number);
-    return (Math.atan2(b, a) * 180) / Math.PI;
-  };
-  let spin = null;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   mark.style.transformOrigin = '50% 50%';
-  mark.addEventListener('click', () => {
-    if (reduce.matches) return;
-    const from = currentAngle();
-    spin?.cancel();
-    spin = mark.animate(
-      [{ transform: `rotate(${from}deg)` }, { transform: `rotate(${from + 720}deg)` }],
-      { duration: 1600, easing: 'cubic-bezier(0.55, 0, 0.12, 1)', fill: 'forwards' },
-    );
-  });
+  const spin = () => mark.animate(
+    [{ transform: 'rotate(0deg)' }, { transform: 'rotate(720deg)' }],
+    { duration: 1600, delay: 250, easing: 'cubic-bezier(0.55, 0, 0.12, 1)' },
+  );
+  if (document.readyState === 'complete') spin();
+  else addEventListener('load', spin, { once: true });
 })();
