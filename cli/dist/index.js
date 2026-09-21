@@ -4,12 +4,23 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const child_process_1 = require("child_process");
 const commander_1 = require("commander");
 const fs_1 = require("fs");
+const crypto_1 = require("crypto");
 const path_1 = require("path");
 const os_1 = require("os");
 const OS20_DIR = (0, path_1.join)((0, os_1.homedir)(), '.os20');
 const APP_DIR = (0, path_1.join)(OS20_DIR, 'app');
 const REPO_URL = process.env.OS20_REPO_URL || 'https://github.com/omyvnss/os20.git';
 const DEFAULT_PORT = 3010;
+const ENV_FILE = (0, path_1.join)(OS20_DIR, '.env');
+// Secrets shared with install.sh. Generated once: APP_SECRET encrypts stored
+// API keys, so it must never change after the first start.
+function ensureEnvFile() {
+    if (!(0, fs_1.existsSync)(ENV_FILE)) {
+        const secret = () => (0, crypto_1.randomBytes)(32).toString('hex');
+        (0, fs_1.writeFileSync)(ENV_FILE, `APP_SECRET=${secret()}\nPGDB_ENCRYPTION_KEY=${secret()}\nOS20_LEADGEN_TOKEN=${secret()}\n`, { mode: 0o600 });
+    }
+    (0, fs_1.copyFileSync)(ENV_FILE, (0, path_1.join)(APP_DIR, '.env'));
+}
 function checkDocker() {
     try {
         (0, child_process_1.execSync)('docker --version', { stdio: 'ignore' });
@@ -78,13 +89,34 @@ function ensureApp() {
     }
     return true;
 }
+const BACKUP_DIR = (0, path_1.join)(OS20_DIR, 'backups');
+const BACKUPS_TO_KEEP = 5;
+// The database lives in a Docker volume that survives updates. A dump before
+// every update is the safety net if a new version ever breaks something.
+function backupDatabase() {
+    (0, fs_1.mkdirSync)(BACKUP_DIR, { recursive: true });
+    const stamp = new Date().toISOString().replace(/[:.]/g, '-');
+    const file = (0, path_1.join)(BACKUP_DIR, `os20-${stamp}.sql.gz`);
+    try {
+        (0, child_process_1.execSync)(`docker compose exec -T db pg_dump -U postgres -d os20 --clean --if-exists | gzip > "${file}"`, { cwd: APP_DIR, stdio: ['ignore', 'ignore', 'inherit'], shell: '/bin/sh' });
+    }
+    catch {
+        return null;
+    }
+    (0, fs_1.readdirSync)(BACKUP_DIR)
+        .filter((name) => name.endsWith('.sql.gz'))
+        .sort()
+        .slice(0, -BACKUPS_TO_KEEP)
+        .forEach((name) => (0, fs_1.unlinkSync)((0, path_1.join)(BACKUP_DIR, name)));
+    return file;
+}
 const program = new commander_1.Command();
 program
     .name('os20')
     .description('OS20 — Open Source CRM. One command to install.')
     .version('1.0.0');
 program
-    .command('start')
+    .command('start', { isDefault: true })
     .description('Start OS20 CRM')
     .option('-p, --port <port>', 'Port for the CRM', String(DEFAULT_PORT))
     .action(async (options) => {
@@ -102,6 +134,7 @@ program
     if (!ensureApp()) {
         process.exit(1);
     }
+    ensureEnvFile();
     console.log('  🐳 Starting services...');
     try {
         (0, child_process_1.execSync)('docker compose up -d', { cwd: APP_DIR, stdio: 'inherit' });
@@ -166,8 +199,16 @@ program
     if (!ensureApp()) {
         process.exit(1);
     }
+    const backup = backupDatabase();
+    if (backup) {
+        console.log(`  💾 Backup saved: ${backup}\n`);
+    }
+    else {
+        console.log('  ⚠️  No backup made (OS20 is not running). Continuing.\n');
+    }
     try {
         (0, child_process_1.execSync)('git pull --ff-only', { cwd: APP_DIR, stdio: 'inherit' });
+        ensureEnvFile();
         (0, child_process_1.execSync)('docker compose pull', {
             cwd: APP_DIR,
             stdio: 'inherit',
@@ -180,6 +221,41 @@ program
     }
     catch {
         console.error('\n  ❌ Failed to update OS20.\n');
+    }
+});
+program
+    .command('backup')
+    .description('Save a backup of your OS20 data')
+    .action(() => {
+    const backup = backupDatabase();
+    if (backup) {
+        console.log(`\n  💾 Backup saved: ${backup}\n`);
+    }
+    else {
+        console.error('\n  ❌ Backup failed. Is OS20 running? Try: os20 start\n');
+        process.exit(1);
+    }
+});
+program
+    .command('restore <file>')
+    .description('Restore OS20 data from a backup file')
+    .action((file) => {
+    if (!(0, fs_1.existsSync)(file)) {
+        console.error(`\n  ❌ File not found: ${file}\n`);
+        process.exit(1);
+    }
+    try {
+        (0, child_process_1.execSync)('docker compose stop os20 os20-worker', {
+            cwd: APP_DIR,
+            stdio: 'inherit',
+        });
+        (0, child_process_1.execSync)(`gunzip -c "${file}" | docker compose exec -T db psql -q -U postgres -d os20`, { cwd: APP_DIR, stdio: ['ignore', 'ignore', 'inherit'], shell: '/bin/sh' });
+        (0, child_process_1.execSync)('docker compose up -d', { cwd: APP_DIR, stdio: 'inherit' });
+        console.log('\n  ✅ Restored. OS20 is starting again.\n');
+    }
+    catch {
+        console.error('\n  ❌ Restore failed.\n');
+        process.exit(1);
     }
 });
 program

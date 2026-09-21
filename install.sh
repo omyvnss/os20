@@ -125,6 +125,21 @@ fi
 # ---------------------------------------------------------------------------
 # Pull images + start services
 # ---------------------------------------------------------------------------
+# Re-running the installer is also how people update. Data lives in Docker
+# volumes and survives, but back up the database first as a safety net.
+if [ -n "$($COMPOSE ps -q db 2>/dev/null)" ]; then
+  BACKUP_DIR="$RUNTIME_DIR/backups"
+  BACKUP_FILE="$BACKUP_DIR/os20-$(date +%Y-%m-%dT%H-%M-%S).sql.gz"
+  mkdir -p "$BACKUP_DIR"
+  if $COMPOSE exec -T db pg_dump -U postgres -d os20 --clean --if-exists | gzip > "$BACKUP_FILE"; then
+    ok "Backup saved → $BACKUP_FILE"
+    ls -1t "$BACKUP_DIR"/os20-*.sql.gz 2>/dev/null | tail -n +6 | xargs rm -f
+  else
+    rm -f "$BACKUP_FILE"
+    warn "Could not back up the database. Continuing with the update."
+  fi
+fi
+
 log "Pulling pre-built images from GHCR..."
 $COMPOSE pull 2>/dev/null || {
   err "Failed to pull images. Check your network / Docker login state."

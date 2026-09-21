@@ -98,7 +98,7 @@ Built on **[Scout](https://github.com/kiryano/Scout)** (MIT) + **[ScrapeGraphAI]
 Zero recurring cost. The system uses YOUR API keys for AI:
 
 1. Open **http://localhost:3010** → Settings → AI Providers
-2. Save a key for OpenRouter, OpenAI, Anthropic, Google, Groq, or OmniRoute
+2. Save a key for OpenRouter, OpenAI, Anthropic, Google, or Groq
 3. AI chat, workflow AI steps, lead scoring, and outreach use it automatically
 
 Keys are encrypted with your `APP_SECRET` and never shown again after saving.
@@ -106,8 +106,6 @@ Keys are encrypted with your `APP_SECRET` and never shown again after saving.
 **Local models:**
 - **Ollama** is reached at `host.docker.internal:11434`. On Linux, start Ollama with
   `OLLAMA_HOST=0.0.0.0` so the container can connect.
-- **OmniRoute** is reached at `host.docker.internal:20128/v1`. Save any value as its key if
-  your router runs without auth.
 
 Without any key, lead scoring falls back to a heuristic score (no AI).
 

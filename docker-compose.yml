@@ -27,7 +27,7 @@ x-os20-env: &os20-env
 services:
   os20:
     image: ghcr.io/omyvnss/os20:latest
-    # Lets the container reach Ollama/OmniRoute on the host (needed on Linux).
+    # Lets the container reach Ollama on the host (needed on Linux).
     extra_hosts:
       - "host.docker.internal:host-gateway"
     ports:
@@ -85,6 +85,9 @@ services:
       interval: 10s
       timeout: 5s
       retries: 10
+    depends_on:
+      os20:
+        condition: service_healthy
     restart: unless-stopped
 
   db:
