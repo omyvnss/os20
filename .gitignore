@@ -4,6 +4,13 @@ node_modules/
 
 # Env / secrets — never commit real keys
 .env
+.env.*
+!.env.example
+.vercel/
+*.pem
 
 # Build artifacts (committed dist is intentional for os20-cli)
 *.tsbuildinfo
+
+# Local agent notes
+CLAUDE.md
