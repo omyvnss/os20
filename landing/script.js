@@ -77,14 +77,14 @@
     tabs.forEach((t) => t.classList.toggle('is-on', t === tab));
     cmdOut.textContent = tab.dataset.cmd;
   }));
-  $('[data-copy-cmd]').addEventListener('click', () => copy(cmdOut.textContent));
+  $('[data-copy-cmd]')?.addEventListener('click', () => copy(cmdOut.textContent));
 
   /* Pause looping animations while offscreen */
   $$('.integrations, .scard').forEach((node) => whenVisible(node, (v) => node.classList.toggle('is-paused', !v), 0));
 
   /* Island + chapter menu */
   const island = $('[data-island]');
-  const darkZones = $$('.chapter.dark, .cta');
+  const darkZones = $$('.chapter.dark');
   let ticking = false;
   const onScroll = () => {
     ticking = false;
@@ -908,4 +908,16 @@
   );
   if (document.readyState === 'complete') spin();
   else addEventListener('load', spin, { once: true });
+})();
+
+/* FAQ accordion: animates height with a grid row transition. */
+(() => {
+  document.querySelectorAll('.faq-item').forEach((item) => {
+    const button = item.querySelector('.faq-q');
+    button.addEventListener('click', () => {
+      const open = !item.classList.contains('is-open');
+      item.classList.toggle('is-open', open);
+      button.setAttribute('aria-expanded', String(open));
+    });
+  });
 })();

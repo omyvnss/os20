@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@500;600&family=Inter+Tight:ital,wght@0,400;0,500;0,700;1,400&family=Instrument+Serif&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260922b">
+  <link rel="stylesheet" href="styles.css?v=20260922c">
 </head>
 <body>
   <header class="island" data-island>
@@ -343,36 +343,37 @@
 
     <!-- FAQ -->
     <section class="faq" id="faq">
-      <h3 class="reveal">Frequently Asked Questions</h3>
+      <div class="faq-head reveal"><h3>Questions</h3><p>Everything you need to know before you install.</p></div>
       <div class="faq-card reveal">
-        <details><summary>What do I need to run OS20?</summary><p>Docker Desktop (or Docker Engine on Linux) and Node.js 18 or newer. Then run <code>npx os20-cli</code> and open localhost:3010.</p></details>
-        <details><summary>Is OS20 free?</summary><p>Yes. OS20 is open source under AGPL-3.0. You only pay your own AI or search provider, and local Ollama models cost nothing.</p></details>
-        <details><summary>Where is my data stored?</summary><p>In a Postgres database inside Docker on your computer. OS20 has no cloud account and sends nothing to us.</p></details>
-        <details><summary>Which AI models and search APIs work?</summary><p>Claude, ChatGPT, Gemini, OpenRouter, Groq and any local Ollama model. For search: Firecrawl, Tavily, Brave or SerpApi. A search key is optional but gives steadier results.</p></details>
-        <details><summary>Do I need to sign up or log in?</summary><p>No. OS20 opens straight into your workspace on localhost.</p></details>
+        <div class="faq-item">
+          <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a0" id="faq-q0"><span>What do I need to run OS20?</span><i aria-hidden="true"></i></button>
+          <div class="faq-a" id="faq-a0" role="region" aria-labelledby="faq-q0"><div><p>Docker Desktop (or Docker Engine on Linux) and Node.js 18 or newer. Then run <code>npx os20-cli</code> and open localhost:3010.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a1" id="faq-q1"><span>Is OS20 free?</span><i aria-hidden="true"></i></button>
+          <div class="faq-a" id="faq-a1" role="region" aria-labelledby="faq-q1"><div><p>Yes. OS20 is open source under AGPL-3.0. You only pay your own AI or search provider, and local Ollama models cost nothing.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a2" id="faq-q2"><span>Where is my data stored?</span><i aria-hidden="true"></i></button>
+          <div class="faq-a" id="faq-a2" role="region" aria-labelledby="faq-q2"><div><p>In a Postgres database inside Docker on your computer. OS20 has no cloud account and sends nothing to us.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a3" id="faq-q3"><span>Which AI models and search APIs work?</span><i aria-hidden="true"></i></button>
+          <div class="faq-a" id="faq-a3" role="region" aria-labelledby="faq-q3"><div><p>Claude, ChatGPT, Gemini, OpenRouter, Groq and any local Ollama model. For search: Firecrawl, Tavily, Brave or SerpApi. A search key is optional but gives steadier results.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a4" id="faq-q4"><span>Do I need to sign up or log in?</span><i aria-hidden="true"></i></button>
+          <div class="faq-a" id="faq-a4" role="region" aria-labelledby="faq-q4"><div><p>No. OS20 opens straight into your workspace on localhost.</p></div></div>
+        </div>
       </div>
     </section>
 
-    <!-- CTA -->
-    <section class="cta">
-      <div class="cta-copy">
-        <h4 class="reveal">Run your CRM on your <br>own machine today</h4>
-        <div class="cmd reveal">
-          <span class="cmd-tabs"><button type="button" class="is-on" data-cmd="npx os20-cli">npx</button><button type="button" data-cmd="curl -fsSL https://raw.githubusercontent.com/omyvnss/os20/main/install.sh | bash">curl</button></span>
-          <div class="cmd-row"><span>$</span><code data-cmd-out>npx os20-cli</code><button type="button" data-copy-cmd>Copy</button></div>
-        </div>
-        <div class="cta-buttons reveal">
-          <a class="btn btn-ghost" href="https://github.com/omyvnss/os20"><i class="lg" style="--src:url(img/logos/si-github.svg)"></i>View on GitHub</a>
-        </div>
-      </div>
-      <div class="cta-shot reveal"><img src="img/companies.png" alt="OS20 Companies view with saved companies" width="2880" height="1800" loading="lazy"></div>
-    </section>
   </main>
 
   <footer class="footer">
     <div class="foot-card">
       <div class="foot-news">
-        <h3>Get updates on new releases, lead engine upgrades and everything we ship.</h3>
+        <h3>New releases and lead engine upgrades, as they ship.</h3>
         <a class="foot-field" href="https://github.com/omyvnss/os20/releases">
           <span>Watch releases on GitHub</span>
           <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
@@ -404,6 +405,6 @@
   </footer>
 
   <div class="toast" role="status" aria-live="polite" data-toast></div>
-  <script src="script.js?v=20260922b"></script>
+  <script src="script.js?v=20260922c"></script>
 </body>
 </html>
