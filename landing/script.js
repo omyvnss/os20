@@ -921,3 +921,24 @@
     });
   });
 })();
+
+/* Logo spin on click: faster than the load spin, continues from the current angle. */
+(() => {
+  const mark = document.querySelector('[data-logo-spin]');
+  if (!mark || !mark.animate) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const currentAngle = () => {
+    const m = getComputedStyle(mark).transform;
+    if (!m || m === 'none') return 0;
+    const [a, b] = m.slice(m.indexOf('(') + 1, -1).split(',').map(Number);
+    return (Math.atan2(b, a) * 180) / Math.PI;
+  };
+  mark.addEventListener('click', () => {
+    const from = currentAngle();
+    mark.getAnimations().forEach((animation) => animation.cancel());
+    mark.animate(
+      [{ transform: `rotate(${from}deg)` }, { transform: `rotate(${from + 720}deg)` }],
+      { duration: 1100, easing: 'cubic-bezier(0.5, 0, 0.1, 1)' },
+    );
+  });
+})();

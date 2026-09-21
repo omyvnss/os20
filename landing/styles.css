@@ -85,7 +85,7 @@ svg { overflow: visible; }
   transition: top 0.45s var(--spring), background 0.35s ease, color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
 }
 .island-logo { display: inline-flex; align-items: center; gap: 7px; margin-right: 14px; color: inherit; }
-.island-mark { display: block; width: 18px; height: 18px; flex: none; color: currentColor; }
+.island-mark { display: block; width: 18px; height: 18px; flex: none; color: currentColor; cursor: pointer; }
 .island-word { font-family: 'Geist', 'Inter Tight', system-ui, sans-serif; font-weight: 600; font-size: 15px; line-height: 1; letter-spacing: -0.03em; }
 .island-links { display: flex; align-items: center; gap: 2px; }
 .island-links a { padding: 6px 10px; border-radius: 6px; font-size: 13px; line-height: 1; color: inherit; opacity: 0.72; transition: opacity 0.2s ease, background 0.2s ease; }
@@ -513,19 +513,19 @@ svg { overflow: visible; }
 
 /* FAQ */
 .faq { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.8fr); gap: clamp(2rem, 5vw, 5rem); max-width: 1120px; margin: 0 auto; padding: clamp(4.5rem, 8vw, 7rem) var(--gutter); }
-.faq-head h3 { font-size: clamp(1.75rem, 2.6vw, 2.4rem); line-height: 1.08; letter-spacing: -0.03em; }
-.faq-head p { margin-top: 0.75rem; max-width: 18rem; color: var(--gray-500); font-size: 15px; line-height: 1.45; }
-.faq-card { background: var(--white); border-radius: 14px; border: 1px solid rgba(0, 0, 0, 0.05); overflow: hidden; }
+.faq-head h3 { font-size: clamp(2.1rem, 3.2vw, 3rem); line-height: 1.08; letter-spacing: -0.03em; }
+.faq-head p { margin-top: 0.9rem; max-width: 20rem; color: var(--gray-500); font-size: 17px; line-height: 1.45; }
+.faq-card { background: var(--white); border-radius: 16px; border: 1px solid rgba(0, 0, 0, 0.05); overflow: hidden; }
 .faq-item + .faq-item { border-top: 1px solid rgba(0, 0, 0, 0.06); }
-.faq-q { display: flex; align-items: center; justify-content: space-between; gap: 1rem; width: 100%; padding: 19px 22px; text-align: left; font-size: 16px; font-weight: 500; letter-spacing: -0.01em; transition: background 0.2s ease; }
+.faq-q { display: flex; align-items: center; justify-content: space-between; gap: 1rem; width: 100%; padding: 24px 28px; text-align: left; font-size: 19px; font-weight: 500; letter-spacing: -0.01em; transition: background 0.2s ease; }
 .faq-q:hover { background: rgba(0, 0, 0, 0.018); }
-.faq-q i { position: relative; width: 12px; height: 12px; flex: none; }
-.faq-q i::before, .faq-q i::after { content: ''; position: absolute; left: 0; top: 50%; width: 12px; height: 1.5px; margin-top: -0.75px; border-radius: 1px; background: currentColor; transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s ease; }
+.faq-q i { position: relative; width: 14px; height: 14px; flex: none; }
+.faq-q i::before, .faq-q i::after { content: ''; position: absolute; left: 0; top: 6px; width: 14px; height: 2px; border-radius: 1px; background: currentColor; transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s ease; }
 .faq-q i::after { transform: rotate(90deg); }
 .faq-q[aria-expanded="true"] i::after { transform: rotate(0deg); opacity: 0; }
 .faq-a { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.45s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .faq-a > div { overflow: hidden; }
-.faq-a p { max-width: 40rem; padding: 0 22px 20px; color: var(--gray-500); font-size: 15px; line-height: 1.55; opacity: 0; transform: translateY(-4px); transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.faq-a p { max-width: 44rem; padding: 0 28px 24px; color: var(--gray-500); font-size: 17px; line-height: 1.55; opacity: 0; transform: translateY(-4px); transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .faq-item.is-open .faq-a { grid-template-rows: 1fr; }
 .faq-item.is-open .faq-a p { opacity: 1; transform: none; transition-delay: 0.05s; }
 
