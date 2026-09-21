@@ -3,7 +3,7 @@ import { writeFileSync } from 'fs';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
-// Renders the hero skyline from city.png: node render.mjs 3200
+// Renders the hero skyline from city.png: node render.mjs 3200 (WASH=0 to skip the white fade)
 // Needs Playwright (npx playwright install chromium).
 const DIR = dirname(fileURLToPath(import.meta.url));
 const WIDTH = Number(process.argv[2] ?? 3200);
@@ -12,7 +12,7 @@ const browser = await chromium.launch();
 const page = await browser.newPage();
 await page.goto(`file://${DIR}/city.png`);
 
-const dataUrl = await page.evaluate(async (WIDTH) => {
+const dataUrl = await page.evaluate(async ({ WIDTH, WASH }) => {
   const img = document.querySelector('img');
   await img.decode();
   const HEIGHT = Math.round((WIDTH * img.naturalHeight) / img.naturalWidth);
@@ -72,12 +72,12 @@ const dataUrl = await page.evaluate(async (WIDTH) => {
   });
   const WHITE = [255, 255, 255];
   const whiteWash = (x, y) => {
+    if (!WASH || y >= skyline[x]) return 0;
     const u = x / cols;
-    const clearance = Math.min(1, Math.max(0, (skyline[x] - y) / (rows * 0.08)));
+    const leftHalf = Math.max(0, Math.min(1, (0.58 - u) / 0.58)) ** 1.1;
+    const clearance = Math.min(1, Math.max(0, (skyline[x] - y) / (rows * 0.1)));
     const toward = Math.max(0, 1 - y / Math.max(1, skySmooth[x]));
-    const diagonal = (0.12 + 0.62 * (1 - u) ** 1.3) * toward ** 1.25;
-    const topEdge = 0.42 * Math.max(0, 1 - y / (rows * 0.22)) ** 1.8;
-    return Math.min(0.72, Math.max(diagonal, topEdge)) * clearance;
+    return Math.min(0.82, 0.85 * leftHalf * toward ** 0.9) * clearance;
   };
 
   const out = document.createElement('canvas');
@@ -134,8 +134,8 @@ const dataUrl = await page.evaluate(async (WIDTH) => {
   }
 
   return out.toDataURL('image/png');
-}, WIDTH);
+}, { WIDTH, WASH: process.env.WASH !== '0' });
 
-writeFileSync(`${DIR}/skyline-ascii-${WIDTH}.png`, Buffer.from(dataUrl.split(',')[1], 'base64'));
+writeFileSync(`${DIR}/skyline-ascii-${WIDTH}${process.env.WASH === '0' ? '-nowash' : ''}.png`, Buffer.from(dataUrl.split(',')[1], 'base64'));
 await browser.close();
 console.log('done', WIDTH);
