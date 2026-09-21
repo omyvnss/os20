@@ -96,7 +96,7 @@ svg { overflow: visible; }
 
 /* Hero */
 .hero { display: flex; flex-direction: column; height: 100svh; min-height: 40rem; padding-top: 72px; background: var(--white); }
-.scene { position: relative; flex: 1; min-height: 14rem; overflow: hidden; background: #e9b3a6; }
+.scene { position: relative; flex: 1; min-height: 14rem; overflow: hidden; background: #f4dcd6; }
 .scene img { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: auto; min-height: 100%; object-fit: cover; object-position: 50% 100%; }
 .hero-body { display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; padding: max(2rem, 3.2vh) max(1.5rem, 4.2vw) max(2rem, 3.6vh); }
 .hero-title { font-family: 'Instrument Serif', Georgia, serif; font-size: clamp(2.6rem, 4.7vw, 5rem); line-height: 1; letter-spacing: -0.01em; color: #111; }

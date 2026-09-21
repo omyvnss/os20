@@ -59,6 +59,27 @@ const dataUrl = await page.evaluate(async (WIDTH) => {
   }
   const groundStart = Math.round(rows * 0.9);
 
+  const WINDOW = Math.round(cols * 0.06);
+  const localTop = skyline.map((_, x) => {
+    let top = rows;
+    for (let k = Math.max(0, x - WINDOW); k <= Math.min(cols - 1, x + WINDOW); k++) top = Math.min(top, skyline[k]);
+    return top;
+  });
+  const skySmooth = localTop.map((_, x) => {
+    let sum = 0, n = 0;
+    for (let k = Math.max(0, x - WINDOW * 2); k <= Math.min(cols - 1, x + WINDOW * 2); k++) { sum += localTop[k]; n++; }
+    return Math.min(sum / n, localTop[x]);
+  });
+  const WHITE = [255, 255, 255];
+  const whiteWash = (x, y) => {
+    const u = x / cols;
+    const clearance = Math.min(1, Math.max(0, (skyline[x] - y) / (rows * 0.08)));
+    const toward = Math.max(0, 1 - y / Math.max(1, skySmooth[x]));
+    const diagonal = (0.12 + 0.62 * (1 - u) ** 1.3) * toward ** 1.25;
+    const topEdge = 0.42 * Math.max(0, 1 - y / (rows * 0.22)) ** 1.8;
+    return Math.min(0.72, Math.max(diagonal, topEdge)) * clearance;
+  };
+
   const out = document.createElement('canvas');
   out.width = WIDTH;
   out.height = HEIGHT;
@@ -101,7 +122,8 @@ const dataUrl = await page.evaluate(async (WIDTH) => {
       }
 
       const jitter = (rand() - 0.5) * 8;
-      const fill = base.map((v) => Math.max(0, Math.min(255, v + jitter)));
+      let fill = base.map((v) => Math.max(0, Math.min(255, v + jitter)));
+      if (isSky && y < groundStart) fill = mix(fill, WHITE, whiteWash(x, y));
       ctx.fillStyle = `rgb(${fill.join(',')})`;
       ctx.fillRect(x * CELL_W, y * CELL_H, CELL_W + 1, CELL_H + 1);
 
