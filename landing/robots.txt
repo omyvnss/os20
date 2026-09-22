@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://os20.git11.xyz/sitemap.xml

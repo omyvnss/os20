@@ -1,0 +1,26 @@
+# OS20
+
+> OS20 is a free, open source (AGPL-3.0) CRM with an AI lead engine. It runs on your own computer with Docker. You bring your own AI key (OpenRouter, OpenAI, Anthropic, Gemini, Groq, or local Ollama) and a search key (Tavily, Firecrawl, Brave, SerpAPI, optional Google Places). There are no accounts, no payments and no OS20 cloud.
+
+## What it does
+
+- Finds companies from a plain-language request: searches the web, reads each company website, scores the fit with your AI and saves good matches to the CRM.
+- Finds people on company websites and labels each email as found, guessed, verified or invalid.
+- Drafts outreach emails you review and send from your own mail account.
+- Includes a full CRM: companies, people, opportunities, tasks, notes, workflows and dashboards.
+
+## Install
+
+- npx os20-cli
+- curl -fsSL https://raw.githubusercontent.com/omyvnss/os20/main/install.sh | bash
+
+Then open http://localhost:3010.
+
+## Links
+
+- Website: https://os20.git11.xyz
+- Source code: https://github.com/omyvnss/os20
+- Releases: https://github.com/omyvnss/os20/releases
+- Privacy: https://os20.git11.xyz/privacy
+- Terms: https://os20.git11.xyz/terms
+- Made by Om Yaduvanshi: https://omyvnss.xyz

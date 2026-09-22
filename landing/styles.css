@@ -715,3 +715,29 @@ svg { overflow: visible; }
   *, *::before, *::after { animation-duration: 0.001s !important; animation-iteration-count: 1 !important; transition-duration: 0.001s !important; }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* Skip link for keyboard users */
+.skip-link { position: fixed; top: 10px; left: 10px; z-index: 100; padding: 10px 14px; border-radius: 8px; background: #111; color: #fff; font-size: 14px; transform: translateY(-160%); transition: transform 0.2s ease; }
+.skip-link:focus { transform: none; }
+
+/* Doc pages: 404, privacy, terms */
+.doc-page { min-height: 100vh; display: flex; flex-direction: column; background: var(--gray-100); }
+.doc-back { display: inline-flex; align-items: center; margin-left: 8px; }
+.doc { flex: 1; width: 100%; max-width: 780px; margin: 0 auto; padding: 104px var(--gutter) 48px; }
+.doc-card { padding: clamp(1.75rem, 4vw, 3rem); border-radius: 18px; background: var(--white); }
+.doc-kicker { margin-bottom: 0.75rem; color: #6b6b72; font-size: 14px; }
+.doc h1 { margin-bottom: 1rem; font-size: clamp(2rem, 4vw, 2.75rem); line-height: 1.08; letter-spacing: -0.03em; }
+.doc h2 { margin: 2rem 0 0.6rem; font-size: 20px; font-weight: 500; letter-spacing: -0.015em; }
+.doc p, .doc li { color: #45454b; font-size: 16.5px; line-height: 1.6; }
+.doc ul { display: grid; gap: 0.5rem; padding-left: 1.2rem; }
+.doc a { color: #111; text-decoration: underline; text-decoration-color: rgba(17, 17, 17, 0.3); text-underline-offset: 3px; }
+.doc a:hover { text-decoration-color: #111; }
+.doc code { padding: 1px 6px; border-radius: 5px; background: #f1f1f2; font-size: 0.88em; }
+.doc-404 { text-align: center; padding-top: clamp(2.5rem, 6vw, 4rem); padding-bottom: clamp(2.5rem, 6vw, 4rem); }
+.doc-404 p { max-width: 30rem; margin: 0 auto; }
+.doc-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 1.75rem; }
+.doc-actions .hbtn { text-decoration: none; }
+.doc-actions .hbtn.dark { color: #fff; font-family: var(--font); font-size: 15px; }
+.doc-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.75rem 1.5rem; max-width: 780px; width: 100%; margin: 0 auto; padding: 0 var(--gutter) 32px; color: #6b6b72; font-size: 14px; }
+.doc-foot nav { display: flex; gap: 1.25rem; }
+.doc-foot a { color: #45454b; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(17, 17, 17, 0.25); }
