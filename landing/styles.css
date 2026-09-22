@@ -514,27 +514,16 @@ svg { overflow: visible; }
 
 /* Founder */
 .founder { max-width: 1120px; margin: 0 auto; padding: clamp(4.5rem, 8vw, 7rem) var(--gutter) 0; }
-.founder-title { margin-bottom: clamp(1.75rem, 3vw, 2.5rem); font-size: clamp(2.1rem, 3.2vw, 3rem); line-height: 1.08; letter-spacing: -0.03em; }
-.founder-grid { display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr); gap: 12px; align-items: stretch; }
-.founder-card { position: relative; min-width: 0; min-height: 380px; border-radius: 18px; overflow: hidden; background: #d9d9d9; }
-.founder-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; filter: grayscale(1) contrast(1.06) brightness(1.02); }
-.founder-links { position: absolute; top: 14px; left: 14px; display: flex; gap: 6px; }
-.founder-links a { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 7px; background: rgba(255, 255, 255, 0.72); color: #111; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); transition: background 0.2s ease; }
-.founder-links a:hover { background: #fff; }
-.founder-links svg { width: 14px; height: 14px; fill: currentColor; }
-.founder-links svg[fill="none"] { fill: none; }
-.founder-bar { position: absolute; left: 14px; right: 14px; bottom: 14px; display: grid; gap: 3px; padding: 14px 16px; border-radius: 12px; background: rgba(40, 40, 40, 0.42); border: 1px solid rgba(255, 255, 255, 0.14); color: #fff; -webkit-backdrop-filter: blur(16px) saturate(1.2); backdrop-filter: blur(16px) saturate(1.2); }
-.founder-bar strong { font-size: 20px; font-weight: 500; letter-spacing: -0.02em; }
-.founder-bar span { font-size: 14px; color: rgba(255, 255, 255, 0.78); }
-.founder-notes { display: grid; gap: 12px; }
-.note { padding: 22px 26px; border-radius: 18px; background: var(--white); }
-.note h4 { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; font-size: 18px; font-weight: 500; letter-spacing: -0.015em; }
-.note-ico { display: grid; place-items: center; width: 34px; height: 34px; flex: none; border-radius: 50%; background: #f1f1f2; }
-.note-ico svg { width: 15px; height: 15px; fill: none; stroke: #111; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-.note ul { display: grid; gap: 6px; margin: 0; padding: 0 0 0 1.1rem; color: #55555c; font-size: 15.5px; line-height: 1.45; }
-.note li::marker { color: #9a9aa0; }
-.note a { color: #111; text-decoration: underline; text-decoration-color: rgba(17, 17, 17, 0.25); text-underline-offset: 3px; }
-.note a:hover { text-decoration-color: #111; }
+.founder-note { max-width: 44rem; margin: 0 auto; padding: clamp(1.75rem, 3vw, 2.5rem) clamp(1.5rem, 3vw, 2.5rem); border-radius: 18px; background: var(--white); }
+.founder-kicker { margin-bottom: 1rem; color: #8a8a8e; font-size: 14px; font-weight: 500; letter-spacing: 0; }
+.founder-text { font-size: clamp(1.2rem, 1.7vw, 1.45rem); line-height: 1.5; letter-spacing: -0.015em; color: #141414; }
+.founder-past { margin-top: 1rem; color: #55555c; font-size: 16px; line-height: 1.5; }
+.founder-past a, .founder-links a { color: #141414; text-decoration: underline; text-decoration-color: rgba(20, 20, 20, 0.25); text-underline-offset: 3px; transition: text-decoration-color 0.2s ease; }
+.founder-past a:hover, .founder-links a:hover { text-decoration-color: #141414; }
+.founder-sign { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem 1.5rem; margin-top: 1.75rem; padding-top: 1.25rem; border-top: 1px solid rgba(0, 0, 0, 0.07); font-size: 15px; }
+.founder-sign > span { color: #55555c; }
+.founder-links { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; }
+.founder-links a { display: inline-block; padding: 6px 0; }
 
 /* FAQ */
 .faq { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.8fr); gap: clamp(2rem, 5vw, 5rem); max-width: 1120px; margin: 0 auto; padding: clamp(4.5rem, 8vw, 7rem) var(--gutter); }
@@ -703,12 +692,9 @@ svg { overflow: visible; }
   .faq-q { padding: 20px; font-size: 17px; }
   .faq-a p { padding: 0 20px 20px; font-size: 16px; }
   .founder { padding-top: 3.5rem; }
-  .founder-links a { width: 40px; height: 40px; border-radius: 9px; }
+  .founder-links a { padding: 10px 0; }
   .integrations { padding: 3.5rem 0 3.5rem; }
   .essentials { margin-top: 2.75rem; }
-  .founder-grid { grid-template-columns: 1fr; }
-  .founder-card { min-height: 0; height: min(calc(100vw - 2.5rem), 340px); }
-  .note { padding: 18px 20px; }
   .pill { padding: 16px; }
   .brand-tile { gap: 3vw; }
   .pill { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
