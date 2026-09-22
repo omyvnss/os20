@@ -12,5 +12,3 @@ node_modules/
 # Build artifacts (committed dist is intentional for os20-cli)
 *.tsbuildinfo
 
-# Local agent notes
-CLAUDE.md
