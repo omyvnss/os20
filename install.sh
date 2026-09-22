@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Everything this script creates (.env with secrets, database backups) is
+# private to the current user.
+umask 077
+
 # ============================================================================
 # OS20 + Lead Engine — One-Command Install
 # ============================================================================
@@ -109,17 +113,48 @@ if ! grep -q 'ghcr.io/omyvnss' docker-compose.yml; then
 fi
 
 # ---------------------------------------------------------------------------
-# Generate local secrets (only on first install; keep user's existing .env)
+# Generate local secrets. A new install gets all of them; an existing .env only
+# gets required keys it is missing (older installs had no OS20_LEADGEN_TOKEN).
+# Existing values are never changed: APP_SECRET decrypts the saved API keys.
 # ---------------------------------------------------------------------------
 ENV_FILE="$RUNTIME_DIR/.env"
+
+gen_secret() {
+  openssl rand -hex 32 2>/dev/null || head -c 64 /dev/urandom | base64 | tr -dc 'a-zA-Z0-9' | head -c 64
+}
+
+REQUIRED_KEYS="APP_SECRET OS20_LEADGEN_TOKEN"
 if [ ! -f "$ENV_FILE" ]; then
   log "Generating secrets..."
-  cat > "$ENV_FILE" <<EOF
-APP_SECRET=$(openssl rand -hex 32 2>/dev/null || head -c 64 /dev/urandom | base64 | tr -dc 'a-zA-Z0-9' | head -c 64)
-PGDB_ENCRYPTION_KEY=$(openssl rand -hex 32 2>/dev/null || head -c 64 /dev/urandom | base64 | tr -dc 'a-zA-Z0-9' | head -c 64)
-OS20_LEADGEN_TOKEN=$(openssl rand -hex 32 2>/dev/null || head -c 64 /dev/urandom | base64 | tr -dc 'a-zA-Z0-9' | head -c 64)
-EOF
-  ok "Secrets generated → $ENV_FILE"
+  : > "$ENV_FILE"
+  # Only a brand-new install gets PGDB_ENCRYPTION_KEY. On an existing install an
+  # empty value means older saved keys were encrypted with the built-in legacy
+  # key, and adding a new value would make them unreadable.
+  REQUIRED_KEYS="APP_SECRET PGDB_ENCRYPTION_KEY OS20_LEADGEN_TOKEN"
+fi
+
+ADDED_KEYS=""
+for KEY in $REQUIRED_KEYS; do
+  # A key counts as present only when it has a non-empty value.
+  if ! grep -Eq "^[[:space:]]*${KEY}=[^[:space:]]" "$ENV_FILE"; then
+    if grep -Eq "^[[:space:]]*${KEY}=" "$ENV_FILE"; then
+      # Drop the empty "KEY=" line so the new value is the only one.
+      grep -Ev "^[[:space:]]*${KEY}=" "$ENV_FILE" > "$ENV_FILE.tmp" || true
+      cat "$ENV_FILE.tmp" > "$ENV_FILE"
+      rm -f "$ENV_FILE.tmp"
+    fi
+    # Make sure the file ends with a newline before appending.
+    if [ -s "$ENV_FILE" ] && [ -n "$(tail -c 1 "$ENV_FILE")" ]; then
+      echo "" >> "$ENV_FILE"
+    fi
+    echo "${KEY}=$(gen_secret)" >> "$ENV_FILE"
+    ADDED_KEYS="$ADDED_KEYS $KEY"
+  fi
+done
+chmod 600 "$ENV_FILE"
+
+if [ -n "$ADDED_KEYS" ]; then
+  ok "Secrets added to $ENV_FILE:$ADDED_KEYS"
 fi
 
 # ---------------------------------------------------------------------------
@@ -131,7 +166,11 @@ if [ -n "$($COMPOSE ps -q db 2>/dev/null)" ]; then
   BACKUP_DIR="$RUNTIME_DIR/backups"
   BACKUP_FILE="$BACKUP_DIR/os20-$(date +%Y-%m-%dT%H-%M-%S).sql.gz"
   mkdir -p "$BACKUP_DIR"
+  chmod 700 "$BACKUP_DIR"
+  # Older installs may have world-readable backups; tighten them too.
+  chmod 600 "$BACKUP_DIR"/os20-*.sql.gz 2>/dev/null || true
   if $COMPOSE exec -T db pg_dump -U postgres -d os20 --clean --if-exists | gzip > "$BACKUP_FILE"; then
+    chmod 600 "$BACKUP_FILE"
     ok "Backup saved → $BACKUP_FILE"
     ls -1t "$BACKUP_DIR"/os20-*.sql.gz 2>/dev/null | tail -n +6 | xargs rm -f
   else
@@ -182,7 +221,7 @@ ok "  OS20 + AI Lead Engine is running!"
 ok "============================================"
 echo ""
 ok "  CRM Dashboard:  http://localhost:3010"
-ok "  Lead Engine:     http://localhost:8120/health"
+ok "  Lead Engine:     internal (reached by OS20 over the Docker network)"
 ok "  Auth:            SKIP_AUTH=true (local mode)"
 echo ""
 ok "  To set up BYOK AI scoring:"

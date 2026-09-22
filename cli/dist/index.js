@@ -13,13 +13,94 @@ const REPO_URL = process.env.OS20_REPO_URL || 'https://github.com/omyvnss/os20.g
 const DEFAULT_PORT = 3010;
 const ENV_FILE = (0, path_1.join)(OS20_DIR, '.env');
 // Secrets shared with install.sh. Generated once: APP_SECRET encrypts stored
-// API keys, so it must never change after the first start.
+// API keys, so it must never change after the first start. An existing .env
+// only gets the required keys it is missing (older installs had no
+// OS20_LEADGEN_TOKEN); values that are already set are never touched.
+// PGDB_ENCRYPTION_KEY is only created for a brand-new .env: on an existing
+// install an empty value means older saved keys used the built-in legacy key,
+// and a new value would make them unreadable.
 function ensureEnvFile() {
-    if (!(0, fs_1.existsSync)(ENV_FILE)) {
-        const secret = () => (0, crypto_1.randomBytes)(32).toString('hex');
-        (0, fs_1.writeFileSync)(ENV_FILE, `APP_SECRET=${secret()}\nPGDB_ENCRYPTION_KEY=${secret()}\nOS20_LEADGEN_TOKEN=${secret()}\n`, { mode: 0o600 });
+    const isNew = !(0, fs_1.existsSync)(ENV_FILE);
+    const required = isNew
+        ? ['APP_SECRET', 'PGDB_ENCRYPTION_KEY', 'OS20_LEADGEN_TOKEN']
+        : ['APP_SECRET', 'OS20_LEADGEN_TOKEN'];
+    const original = isNew ? '' : (0, fs_1.readFileSync)(ENV_FILE, 'utf8');
+    let content = original;
+    for (const key of required) {
+        if (new RegExp(`^[ \\t]*${key}=\\S`, 'm').test(content)) {
+            continue;
+        }
+        // Drop an empty "KEY=" line so the new value is the only one.
+        content = content.replace(new RegExp(`^[ \\t]*${key}=.*(\\r?\\n|$)`, 'gm'), '');
+        if (content.length > 0 && !content.endsWith('\n')) {
+            content += '\n';
+        }
+        content += `${key}=${(0, crypto_1.randomBytes)(32).toString('hex')}\n`;
     }
-    (0, fs_1.copyFileSync)(ENV_FILE, (0, path_1.join)(APP_DIR, '.env'));
+    if (isNew || content !== original) {
+        (0, fs_1.writeFileSync)(ENV_FILE, content, { mode: 0o600 });
+    }
+    (0, fs_1.chmodSync)(ENV_FILE, 0o600);
+    const appEnv = (0, path_1.join)(APP_DIR, '.env');
+    (0, fs_1.copyFileSync)(ENV_FILE, appEnv);
+    (0, fs_1.chmodSync)(appEnv, 0o600);
+}
+// Runs `first | second` without a shell, so file names and other arguments are
+// never parsed as shell syntax. With `outputFile`, the output of `second` is
+// written there (mode 0600). Resolves true only when both commands exit 0.
+function runPipeline(first, second, options = {}) {
+    return new Promise((resolve) => {
+        let pending = options.outputFile ? 3 : 2;
+        let ok = true;
+        const done = (success) => {
+            ok = ok && success;
+            pending -= 1;
+            if (pending === 0) {
+                resolve(ok);
+            }
+        };
+        const a = (0, child_process_1.spawn)(first.cmd, first.args, {
+            cwd: options.cwd,
+            stdio: ['ignore', 'pipe', 'inherit'],
+        });
+        const b = (0, child_process_1.spawn)(second.cmd, second.args, {
+            cwd: options.cwd,
+            stdio: ['pipe', options.outputFile ? 'pipe' : 'ignore', 'inherit'],
+        });
+        // Report each process once, whether it fails to start or exits.
+        const watch = (child) => {
+            let reported = false;
+            const report = (success) => {
+                if (!reported) {
+                    reported = true;
+                    done(success);
+                }
+            };
+            child.on('error', () => report(false));
+            child.on('close', (code) => report(code === 0));
+        };
+        watch(a);
+        watch(b);
+        // If the second command exits early the pipe breaks; its exit code decides.
+        b.stdin?.on('error', () => undefined);
+        a.stdout?.on('error', () => undefined);
+        a.stdout?.pipe(b.stdin);
+        a.on('error', () => b.stdin?.end());
+        if (options.outputFile) {
+            const out = (0, fs_1.createWriteStream)(options.outputFile, { mode: 0o600 });
+            let reported = false;
+            const report = (success) => {
+                if (!reported) {
+                    reported = true;
+                    done(success);
+                }
+            };
+            out.on('error', () => report(false));
+            out.on('close', () => report(true));
+            b.stdout?.pipe(out);
+            b.on('error', () => out.end());
+        }
+    });
 }
 function checkDocker() {
     try {
@@ -44,7 +125,7 @@ async function waitForReady(url, timeoutMs) {
     const start = Date.now();
     while (Date.now() - start < timeoutMs) {
         try {
-            const status = (0, child_process_1.execSync)(`curl -s -o /dev/null -w "%{http_code}" ${url}`, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
+            const status = (0, child_process_1.execFileSync)('curl', ['-s', '-o', '/dev/null', '-w', '%{http_code}', url], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
             if (status === '200') {
                 return true;
             }
@@ -59,11 +140,11 @@ async function waitForReady(url, timeoutMs) {
 function openBrowser(url) {
     try {
         if (process.platform === 'darwin')
-            (0, child_process_1.execSync)(`open "${url}"`);
+            (0, child_process_1.execFileSync)('open', [url]);
         else if (process.platform === 'win32')
-            (0, child_process_1.execSync)(`start "" "${url}"`);
+            (0, child_process_1.execFileSync)('cmd', ['/c', 'start', '', url]);
         else
-            (0, child_process_1.execSync)(`xdg-open "${url}"`);
+            (0, child_process_1.execFileSync)('xdg-open', [url]);
     }
     catch {
         console.log(`\n  Open ${url} in your browser`);
@@ -79,7 +160,7 @@ function ensureApp() {
         return false;
     }
     try {
-        (0, child_process_1.execSync)(`git clone --depth 1 ${REPO_URL} "${APP_DIR}"`, {
+        (0, child_process_1.execFileSync)('git', ['clone', '--depth', '1', REPO_URL, APP_DIR], {
             stdio: 'inherit',
         });
     }
@@ -93,18 +174,30 @@ const BACKUP_DIR = (0, path_1.join)(OS20_DIR, 'backups');
 const BACKUPS_TO_KEEP = 5;
 // The database lives in a Docker volume that survives updates. A dump before
 // every update is the safety net if a new version ever breaks something.
-function backupDatabase() {
-    (0, fs_1.mkdirSync)(BACKUP_DIR, { recursive: true });
+// Backups hold the whole CRM, so the folder is 0700 and each file 0600.
+async function backupDatabase() {
+    (0, fs_1.mkdirSync)(BACKUP_DIR, { recursive: true, mode: 0o700 });
+    (0, fs_1.chmodSync)(BACKUP_DIR, 0o700);
     const stamp = new Date().toISOString().replace(/[:.]/g, '-');
     const file = (0, path_1.join)(BACKUP_DIR, `os20-${stamp}.sql.gz`);
-    try {
-        (0, child_process_1.execSync)(`docker compose exec -T db pg_dump -U postgres -d os20 --clean --if-exists | gzip > "${file}"`, { cwd: APP_DIR, stdio: ['ignore', 'ignore', 'inherit'], shell: '/bin/sh' });
-    }
-    catch {
+    const ok = await runPipeline({
+        cmd: 'docker',
+        args: [
+            'compose', 'exec', '-T', 'db',
+            'pg_dump', '-U', 'postgres', '-d', 'os20', '--clean', '--if-exists',
+        ],
+    }, { cmd: 'gzip', args: [] }, { cwd: APP_DIR, outputFile: file });
+    if (!ok) {
+        if ((0, fs_1.existsSync)(file)) {
+            (0, fs_1.unlinkSync)(file);
+        }
         return null;
     }
-    (0, fs_1.readdirSync)(BACKUP_DIR)
-        .filter((name) => name.endsWith('.sql.gz'))
+    (0, fs_1.chmodSync)(file, 0o600);
+    const backups = (0, fs_1.readdirSync)(BACKUP_DIR).filter((name) => name.endsWith('.sql.gz'));
+    // Older versions wrote backups with the default umask; tighten them too.
+    backups.forEach((name) => (0, fs_1.chmodSync)((0, path_1.join)(BACKUP_DIR, name), 0o600));
+    backups
         .sort()
         .slice(0, -BACKUPS_TO_KEEP)
         .forEach((name) => (0, fs_1.unlinkSync)((0, path_1.join)(BACKUP_DIR, name)));
@@ -120,7 +213,11 @@ program
     .description('Start OS20 CRM')
     .option('-p, --port <port>', 'Port for the CRM', String(DEFAULT_PORT))
     .action(async (options) => {
-    const port = options.port;
+    const port = String(options.port);
+    if (!/^\d{1,5}$/.test(port) || Number(port) < 1 || Number(port) > 65535) {
+        console.error(`\n  ❌ Invalid port: ${port}. Use a number from 1 to 65535.\n`);
+        process.exit(1);
+    }
     const url = `http://localhost:${port}`;
     console.log('\n  🚀 Starting OS20...\n');
     if (!checkDocker()) {
@@ -194,12 +291,12 @@ program
 program
     .command('update')
     .description('Update OS20 to latest version')
-    .action(() => {
+    .action(async () => {
     console.log('\n  📦 Updating OS20...\n');
     if (!ensureApp()) {
         process.exit(1);
     }
-    const backup = backupDatabase();
+    const backup = await backupDatabase();
     if (backup) {
         console.log(`  💾 Backup saved: ${backup}\n`);
     }
@@ -226,8 +323,8 @@ program
 program
     .command('backup')
     .description('Save a backup of your OS20 data')
-    .action(() => {
-    const backup = backupDatabase();
+    .action(async () => {
+    const backup = await backupDatabase();
     if (backup) {
         console.log(`\n  💾 Backup saved: ${backup}\n`);
     }
@@ -239,17 +336,26 @@ program
 program
     .command('restore <file>')
     .description('Restore OS20 data from a backup file')
-    .action((file) => {
+    .action(async (file) => {
     if (!(0, fs_1.existsSync)(file)) {
         console.error(`\n  ❌ File not found: ${file}\n`);
         process.exit(1);
     }
+    // The commands run inside APP_DIR, so resolve the path the user gave first.
+    const backupFile = (0, path_1.resolve)(file);
     try {
         (0, child_process_1.execSync)('docker compose stop os20 os20-worker', {
             cwd: APP_DIR,
             stdio: 'inherit',
         });
-        (0, child_process_1.execSync)(`gunzip -c "${file}" | docker compose exec -T db psql -q -U postgres -d os20`, { cwd: APP_DIR, stdio: ['ignore', 'ignore', 'inherit'], shell: '/bin/sh' });
+        // gunzip -c <file> | docker compose exec -T db psql, with no shell.
+        const restored = await runPipeline({ cmd: 'gunzip', args: ['-c', '--', backupFile] }, {
+            cmd: 'docker',
+            args: ['compose', 'exec', '-T', 'db', 'psql', '-q', '-U', 'postgres', '-d', 'os20'],
+        }, { cwd: APP_DIR });
+        if (!restored) {
+            throw new Error('restore pipeline failed');
+        }
         (0, child_process_1.execSync)('docker compose up -d', { cwd: APP_DIR, stdio: 'inherit' });
         console.log('\n  ✅ Restored. OS20 is starting again.\n');
     }
@@ -271,5 +377,8 @@ program
         console.error('  ❌ Failed to reset OS20.\n');
     }
 });
-program.parse();
+program.parseAsync().catch((error) => {
+    console.error(error);
+    process.exit(1);
+});
 //# sourceMappingURL=index.js.map

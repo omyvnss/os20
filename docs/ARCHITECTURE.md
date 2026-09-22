@@ -21,7 +21,7 @@ your data lives, and how the AI layer works.
 │                      │         │                             │
 │               ┌──────▼───┐ ┌───▼──────┐                     │
 │               │ Postgres │ │  Redis   │                     │
-│               │  5433    │ │  6380    │                     │
+│               │ internal │ │ internal │                     │
 │               └──────────┘ └──────────┘                     │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -67,9 +67,13 @@ their API directly.
 
 | Container | Port |
 |-----------|------|
-| OS20 app | `3010` (mapped to internal `3000`) |
-| PostgreSQL | `5433` (mapped to internal `5432`) |
-| Redis | `6380` (mapped to internal `6379`) |
+| OS20 app | `127.0.0.1:3010` (mapped to internal `3000`) |
+| Lead engine | internal only (`os20-leadgen:8120` on the Docker network) |
+| PostgreSQL | internal only (`db:5432` on the Docker network) |
+| Redis | internal only (`redis:6379` on the Docker network) |
+
+Only the app port is published, and only on `127.0.0.1`. For a database shell
+use `docker compose exec db psql -U postgres -d os20`.
 
 Outgoing connections are made only to AI providers **you** configure (and the
 package registry on first install).

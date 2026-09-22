@@ -4,7 +4,9 @@ name: os20
 # APP_SECRET signs sessions and encrypts stored API keys: never change it after
 # the first start, or saved keys can no longer be decrypted.
 x-os20-env: &os20-env
-  NODE_ENV: development
+  # production turns off the GraphQL playground, unauthenticated introspection
+  # and debug error details. Never ship "development" here.
+  NODE_ENV: production
   PG_DATABASE_URL: postgres://postgres:postgres@db:5432/os20
   SERVER_URL: ${OS20_SERVER_URL:-http://localhost:3010}
   FRONT_BASE_URL: ${OS20_SERVER_URL:-http://localhost:3010}
@@ -14,15 +16,19 @@ x-os20-env: &os20-env
   PGDB_ENCRYPTION_KEY: ${PGDB_ENCRYPTION_KEY:-}
   STORAGE_TYPE: local
   ALLOW_PRIVATE_EMAIL_HOSTS: "true"
-  # Workflow code steps run in-process; explicit so NODE_ENV never disables them.
+  # Workflow code steps run in-process (not sandboxed): they can read this
+  # container's environment, including APP_SECRET. Kept on because the two
+  # prefilled workflows use code steps. Set to DISABLED if you do not need them.
   LOGIC_FUNCTION_TYPE: LOCAL
+  # The AI code interpreter has no sandbox locally, so it stays off.
+  CODE_INTERPRETER_TYPE: DISABLED
   # Set to "false" to let workflow HTTP steps reach services on your network.
   OUTBOUND_HTTP_SAFE_MODE_ENABLED: ${OUTBOUND_HTTP_SAFE_MODE_ENABLED:-true}
   # Extra hostnames allowed to open OS20 without login. Only for a reverse
   # proxy that already requires its own authentication.
   OS20_ALLOWED_HOSTS: ${OS20_ALLOWED_HOSTS:-}
   OS20_LEADGEN_URL: http://os20-leadgen:8120
-  OS20_LEADGEN_TOKEN: ${OS20_LEADGEN_TOKEN:-}
+  OS20_LEADGEN_TOKEN: ${OS20_LEADGEN_TOKEN:?OS20_LEADGEN_TOKEN is missing. Re-run install.sh or npx os20-cli, which add it to .env}
   # Checks GitHub Releases twice a day for a newer OS20 version. Only the version
   # number is fetched; nothing about you is sent. Set to "false" to turn it off.
   OS20_UPDATE_CHECK: ${OS20_UPDATE_CHECK:-true}
@@ -79,11 +85,12 @@ services:
 
   os20-leadgen:
     image: ghcr.io/omyvnss/os20-leadgen:latest
-    ports:
-      - "127.0.0.1:8120:8120"
+    # No host port: the server reaches it at http://os20-leadgen:8120 on the
+    # Docker network. Check it with: docker compose exec os20-leadgen python -c
+    # "import urllib.request as u; print(u.urlopen('http://localhost:8120/health').read())"
     environment:
       PYTHONPATH: /app
-      OS20_LEADGEN_TOKEN: ${OS20_LEADGEN_TOKEN:-}
+      OS20_LEADGEN_TOKEN: ${OS20_LEADGEN_TOKEN:?OS20_LEADGEN_TOKEN is missing. Re-run install.sh or npx os20-cli, which add it to .env}
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request as u; u.urlopen('http://localhost:8120/health')"]
       interval: 10s
@@ -98,8 +105,10 @@ services:
     image: postgres:16-alpine
     volumes:
       - db-data:/var/lib/postgresql/data
-    ports:
-      - "127.0.0.1:5433:5432"
+    # No host port: only the app containers talk to the database. For a local
+    # shell use: docker compose exec db psql -U postgres -d os20
+    # The postgres/postgres login is kept because existing volumes were created
+    # with it; changing it here would lock upgraded installs out of their data.
     environment:
       POSTGRES_DB: os20
       POSTGRES_PASSWORD: postgres
@@ -113,8 +122,7 @@ services:
 
   redis:
     image: redis:7-alpine
-    ports:
-      - "127.0.0.1:6380:6379"
+    # No host port: Redis has no password and only the app containers need it.
     restart: unless-stopped
     command: ["--maxmemory-policy", "noeviction"]
     healthcheck:

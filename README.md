@@ -73,9 +73,11 @@ Keep `.env` safe. `APP_SECRET` encrypts the API keys you save, so changing it la
 |---|---|---|
 | OS20 | CRM web app and API | `127.0.0.1:3010` |
 | OS20 worker | Background jobs (Ask AI, workflows) | internal |
-| Lead engine | Company scraping, scoring, email checks | `127.0.0.1:8120` |
-| PostgreSQL | Database | `127.0.0.1:5433` |
-| Redis | Cache and job queue | `127.0.0.1:6380` |
+| Lead engine | Company scraping, scoring, email checks | internal |
+| PostgreSQL | Database | internal |
+| Redis | Cache and job queue | internal |
+
+Only port 3010 is published, and only on `127.0.0.1`. The other services talk over the Docker network. For a database shell, run `docker compose exec db psql -U postgres -d os20` in `~/.os20` (or `~/.os20/app` if you used the CLI).
 
 ## Screenshots
 
@@ -136,7 +138,8 @@ The CLI is `os20-cli` on npm. Run any command with `npx os20-cli <command>`, or 
 ## Privacy
 
 - **Runs on your computer.** Your CRM data stays in a Docker volume on your machine.
-- **Local only by default.** Every port is published on `127.0.0.1`, so other devices on your network cannot reach it.
+- **Local only by default.** Only the app port is published, on `127.0.0.1`, so other devices on your network cannot reach it. The database, Redis and the lead engine are not published at all.
+- **Private secrets and backups.** `~/.os20/.env` and every backup are readable only by your user. The lead engine only answers requests that carry the shared `OS20_LEADGEN_TOKEN`.
 - **No telemetry by default.** Usage telemetry is turned off.
 - **Update check only fetches the version.** OS20 asks the GitHub Releases API for the latest version at most every 12 hours. Nothing about you or your data is sent. Turn it off with `OS20_UPDATE_CHECK=false` in `~/.os20/.env`.
 - **AI and search calls go straight to the provider you pick**, using your key. Use Ollama if you want AI that never leaves your machine.
