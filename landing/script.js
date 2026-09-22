@@ -80,7 +80,7 @@
   $('[data-copy-cmd]')?.addEventListener('click', () => copy(cmdOut.textContent));
 
   /* Pause looping animations while offscreen */
-  $$('.integrations, .scard').forEach((node) => whenVisible(node, (v) => node.classList.toggle('is-paused', !v), 0));
+  $$('.integrations, .scard, .panel').forEach((node) => whenVisible(node, (v) => node.classList.toggle('is-paused', !v), 0));
 
   /* Island + chapter menu */
   const island = $('[data-island]');
@@ -446,21 +446,36 @@
     }
   });
 
+  /* Phones get a narrow single column: the skipped branch is hidden, rows sit closer,
+     the trigger picker slides up from the bottom and the run log docks under the flow. */
+  const COMPACT = { cx: 130, gap: 60, w: 260, fitW: 272, dock: 70 };
   let compact = null;
+  let stageH = 660;
   const layoutNodes = () => {
     const next = canvas.clientWidth < 600;
     if (next === compact) return false;
     compact = next;
-    const cx = compact ? 170 : X;
-    stage.style.width = compact ? '340px' : '760px';
+    wf.classList.toggle('is-compact', compact);
+    const cx = compact ? COMPACT.cx : X;
+    const gap = compact ? COMPACT.gap : GAP;
+    const w = compact ? COMPACT.w : 760;
+    stageH = compact ? Y0 + 8 * gap + 50 : 660;
+    stage.style.width = `${w}px`;
+    stage.style.height = `${stageH}px`;
+    lines.setAttribute('width', w);
+    lines.setAttribute('height', stageH);
     wfNodes.forEach((n) => {
       n.x = compact ? cx : n.x0;
-      if (compact && n.id === 'n7') nodeEl.n7.style.display = 'none';
-      else nodeEl[n.id].style.display = '';
+      n.y = Y0 + n.row * gap;
+      nodeEl[n.id].style.display = compact && n.id === 'n7' ? 'none' : '';
       nodeEl[n.id].style.left = `${n.x}px`;
+      nodeEl[n.id].style.top = `${n.y}px`;
     });
     placeholder.style.left = `${cx}px`;
     if (pathEl.n7) pathEl.n7.style.display = compact ? 'none' : '';
+    (compact ? canvas : stage).append(bubble);
+    bubble.classList.toggle('is-dock', compact);
+    if (compact) bubble.removeAttribute('style');
     return true;
   };
 
@@ -477,8 +492,9 @@
   };
 
   const fit = () => {
-    const width = compact ? 360 : 800;
-    const s = Math.min(1, canvas.clientWidth / width, (canvas.clientHeight - 10) / 620);
+    const s = compact
+      ? Math.min(1, canvas.clientWidth / COMPACT.fitW, (canvas.clientHeight - COMPACT.dock) / (stageH + 8))
+      : Math.min(1, canvas.clientWidth / 800, (canvas.clientHeight - 10) / 620);
     stage.style.setProperty('--s', s.toFixed(3));
   };
 
@@ -534,11 +550,7 @@
   const say = (n) => {
     const node = nodeEl[n.id];
     bubble.textContent = n.say;
-    if (compact) {
-      bubble.style.left = '20px';
-      bubble.style.top = `${n.y + 46}px`;
-      bubble.style.borderRadius = '3px 12px 12px 12px';
-    } else {
+    if (!compact) {
       const rightSpace = n.x < X + 60;
       bubble.style.left = `${rightSpace ? n.x + node.offsetWidth / 2 + 14 : n.x - node.offsetWidth / 2 - 234}px`;
       bubble.style.top = `${n.y + 4}px`;
@@ -605,7 +617,7 @@
       testBtn.classList.remove('press');
       status.textContent = 'Active';
       status.classList.add('is-active');
-      await moveCursor(canvas, 700, 0.92, 0.95);
+      await moveCursor(canvas, 700, 0.92, compact ? 0.45 : 0.95);
 
       for (const n of wfNodes) {
         if (n.id === 'n7') continue;
@@ -633,18 +645,27 @@
   };
 
   resetWf();
+  let wfVisible = false;
   whenVisible(wf, (v) => {
+    wfVisible = v;
     if (reduced) return wfStatic();
     if (v) playWorkflow();
     else runId++;
   }, 0.35);
+  let wfResize = 0;
   addEventListener('resize', () => {
-    if (layoutNodes()) {
-      runId++;
-      resetWf();
-      if (!reduced) playWorkflow();
-    }
-    fit();
+    cancelAnimationFrame(wfResize);
+    wfResize = requestAnimationFrame(() => {
+      if (layoutNodes()) {
+        runId++;
+        if (reduced) wfStatic();
+        else {
+          resetWf();
+          if (wfVisible) playWorkflow();
+        }
+      }
+      fit();
+    });
   });
 
   /* ---------- Board ---------- */
