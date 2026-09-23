@@ -943,10 +943,12 @@
   });
 })();
 
-/* Logo spin on click: faster than the load spin, continues from the current angle. */
+/* Logo spin on tap: the whole logo link is the target, so a finger on the
+   wordmark or the padded hit area spins it too, not just the small mark. */
 (() => {
   const mark = document.querySelector('[data-logo-spin]');
   if (!mark || !mark.animate) return;
+  const hit = mark.closest('a') ?? mark;
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const currentAngle = () => {
     const m = getComputedStyle(mark).transform;
@@ -954,7 +956,7 @@
     const [a, b] = m.slice(m.indexOf('(') + 1, -1).split(',').map(Number);
     return (Math.atan2(b, a) * 180) / Math.PI;
   };
-  mark.addEventListener('click', () => {
+  hit.addEventListener('click', () => {
     const from = currentAngle();
     mark.getAnimations().forEach((animation) => animation.cancel());
     mark.animate(

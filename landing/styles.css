@@ -609,7 +609,8 @@ svg { overflow: visible; }
   .hero-side p { font-size: 14px; margin-bottom: 0.9rem; }
   .hbtn { height: 44px; padding: 0 16px; }
   .island-cta, .island-logo { position: relative; }
-  .island-cta::after, .island-logo::after { content: ''; position: absolute; inset: -8px -4px; }
+  .island-cta::after { content: ''; position: absolute; inset: -8px -4px; }
+  .island-logo::after { content: ''; position: absolute; inset: -14px -8px; }
   .strip { flex-direction: column; align-items: center; gap: 2rem; padding: 3rem 1.25rem 2.5rem; }
   .strip-logos { gap: 0.9rem 1.5rem; }
   .strip-logo { font-size: 15px; }
@@ -709,6 +710,13 @@ svg { overflow: visible; }
   .foot-bottom { grid-template-columns: 1fr auto; gap: 1.5rem; }
   .foot-works { grid-column: 1 / -1; flex-wrap: wrap; }
   .foot-meta { flex-direction: column; align-items: flex-start; gap: 0.4rem; min-height: 0; padding: 1.75rem 4px 1rem; justify-content: flex-end; }
+  .foot-credit { display: flex; align-items: center; flex-wrap: wrap; gap: 0 0.35rem; }
+  .foot-credit a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 2px; }
+  .foot-social a { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; }
+  .founder-links a { padding: 10px 8px; margin: 0 -8px; }
+  .founder-past a { display: inline-block; padding: 4px 0; }
+  .dlabels span { font-size: 0.6875rem; }
+  .dcard small { font-size: 0.75rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -741,3 +749,17 @@ svg { overflow: visible; }
 .doc-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.75rem 1.5rem; max-width: 780px; width: 100%; margin: 0 auto; padding: 0 var(--gutter) 32px; color: #6b6b72; font-size: 14px; }
 .doc-foot nav { display: flex; gap: 1.25rem; }
 .doc-foot a { color: #45454b; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(17, 17, 17, 0.25); }
+
+/* Document pages on phones: after the base document rules so these win. */
+@media (max-width: 999px) {
+  .doc { padding: 84px var(--gutter) 32px; }
+  .doc-card { border-radius: 14px; }
+  .doc h2 { margin-top: 1.75rem; }
+  .doc p, .doc li { font-size: 16px; }
+  .doc-actions { justify-content: flex-start; }
+  .doc-404 { text-align: left; }
+  .doc-404 p { margin: 0; }
+  .doc-foot { gap: 0 1.25rem; padding-bottom: 20px; }
+  .doc-foot nav { gap: 1.25rem; }
+  .doc-foot a { display: inline-flex; align-items: center; min-height: 44px; }
+}
